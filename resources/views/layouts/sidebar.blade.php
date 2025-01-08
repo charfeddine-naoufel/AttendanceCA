@@ -69,7 +69,12 @@
                     <li>
                         <a href="{{route('eleves.index')}}">Elèves</a>
                     </li>
-                   
+                    <li>
+                        <a href="{{route('paiementsEleve.index')}}">Paiements Eleves</a>
+                    </li>
+                    <li>
+                        <a href="{{route('paiementsPack.index')}}">Paiements Pack</a>
+                    </li>
                     
                     
                 </ul>
@@ -92,6 +97,9 @@
                 <ul x-cloak="" x-show="activeDropdown === 'profs'" x-collapse="" class="sub-menu text-gray-500">
                     <li>
                         <a href="{{route('profs.index')}}">Profs</a>
+                    </li>
+                    <li>
+                        <a href="{{route('paiementsProf.index')}}">Paiements</a>
                     </li>
                    
                     

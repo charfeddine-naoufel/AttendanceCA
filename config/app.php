@@ -184,5 +184,9 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
+    'school_name' => env('SCHOOL_NAME', 'Nom de l\'école'),
+    'school_address' => env('SCHOOL_ADDRESS', 'Adresse de l\'école'),
+    'school_phone' => env('SCHOOL_PHONE', 'Téléphone de l\'école'),
+    'school_email' => env('SCHOOL_EMAIL', 'Email de l\'école'),
 
 ];

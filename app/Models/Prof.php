@@ -22,5 +22,9 @@ class Prof extends Model
     {
         return $this->hasMany(Seance::class);
     }
+    public function payments()
+    {
+        return $this->hasMany(Paymentprof::class);
+    }
 
 }

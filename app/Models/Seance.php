@@ -28,4 +28,9 @@ class Seance extends Model
     {
         return $this->belongsTo(Prof::class);
     }
+    
+    public function getProfSeances($id)
+    {
+        return Seance::where('id', $id)->first();
+    }
 }

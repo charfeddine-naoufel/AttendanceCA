@@ -17,6 +17,7 @@ return new class extends Migration
 			$table->time('heure_fin');
             $table->date('date')->useCurrent();
             $table->string('salle')->nullable();
+            $table->boolean('payprof')->default(0);
             $table->json('eleves_presents');
             $table->json('eleves_absentss');
 
