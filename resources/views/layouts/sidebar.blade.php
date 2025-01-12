@@ -1,7 +1,7 @@
 <nav x-data="sidebar" class="sidebar fixed top-0 bottom-0 z-50 h-full min-h-screen w-[260px] shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-all duration-300">
     <div class="h-full bg-white dark:bg-[#0e1726]">
         <div class="flex items-center justify-between px-4 py-3">
-            <a href="index.html" class="main-logo flex shrink-0 items-center">
+            <a href="{{route('admin.home')}}" class="main-logo flex shrink-0 items-center">
                 <img class="ml-[5px] w-8 flex-none" src="assets/images/logo.png" alt="image">
                 <span class="align-middle text-2xl font-semibold ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light lg:inline">Classy Academy</span>
             </a>
@@ -20,7 +20,7 @@
                 <svg class="hidden h-5 w-4 flex-none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
-                <span>USER INTERFACE</span>
+                <span>INTERFACE ADMIN</span>
             </h2>
 
             <li class="menu nav-item">
@@ -143,7 +143,7 @@
                 <svg class="hidden h-5 w-4 flex-none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
-                <span>TABLES AND FORMS</span>
+                <span>A venir !!!</span>
             </h2>
 
 
