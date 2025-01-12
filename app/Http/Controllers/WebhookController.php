@@ -26,7 +26,7 @@ class WebhookController extends Controller
         switch ($event) {
             case 'push':
                 // Execute your deployment script
-                shell_exec('/var/www/html/AttendanceCA/deploy.sh');
+                // shell_exec('/var/www/html/AttendanceCA/deploy.sh');
                 break;
             default:
                 // Handle other events
