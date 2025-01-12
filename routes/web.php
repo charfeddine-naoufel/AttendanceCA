@@ -45,5 +45,4 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('/paiementsProf', PaymentprofController::class);
     Route::get('/recu-pr/{id}', [PaymentprofController::class,'downloadRecu'])->name('prof.recu');
     Route::resource('/seances', SeanceController::class);
-    Route::post('/webhook', [WebhookController::class, 'handle']);
 });
