@@ -17,7 +17,22 @@
                     <div class="panel lg:col-span-2 xl:col-span-3">
                         <div class="mb-10 flex items-center justify-between">
                             <h5 class="text-lg font-semibold dark:text-white-light">Eleve</h5>
+                            <div class="relative">
+                                <!-- Formulaire de recherche -->
+                                <form action="{{ route('eleves.index') }}" method="GET" id="formsearch">
+                                    <input type="text" name="search" id="searchInput" placeholder="Rechercher par nom..."  class="peer form-input py-2 ltr:pr-11 rtl:pl-11"  >
+                                <div class="absolute top-1/2 -translate-y-1/2 peer-focus:text-primary ltr:right-[11px] rtl:left-[11px]">
+                                    <svg class="mx-auto" width="16" height="16" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5"></circle>
+                                        <path d="M18.5 18.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                    </svg>
+                                </div>
+                                    
 
+                                </form>
+                                
+                            </div>
+                            
                             <!-- Register -->
                             <div x-data="modal">
                                 <button type="button" class="btn btn-danger" @click="toggle">
@@ -151,6 +166,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
 
                         <div class="mb-5">
@@ -361,6 +377,11 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <!-- Afficher le message de pagination -->
+                                {{-- <div>
+                                    Affichage de {{ $eleves->firstItem() }} à {{ $eleves->lastItem() }} sur {{ $eleves->total() }} résultats
+                                </div> --}}
+                                {{ $eleves->links() }}
                             </div>
                         </div>
                     </div>
@@ -416,7 +437,13 @@
             
             
         });
-    
+        //search
+        // $('#searchInput').on('input', function() {
+        //     delay(function(){
+        //         $('#formsearch').submit() ;
+        //     }, 4000 );
+            
+        // });
             //edit button
             $('.editbtn').on('click', function(e) {
                 e.preventDefault();

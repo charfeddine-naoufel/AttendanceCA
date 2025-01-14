@@ -7,14 +7,20 @@ use App\Models\Groupe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+
 class EleveController extends Controller
 {
      /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $eleves = Eleve::all();
+        $search=$request->input('search');
+        
+        $eleves = Eleve::when($search, function ($query, $search) {
+            return $query->whereRaw('LOWER(nom_pr_eleve_fr) LIKE ?', ['%' . strtolower($search) . '%'])
+                                     ->orWhere('nom_pr_eleve_ar', 'like', "%{$search}%");
+        })->orderBy('classe_lycee')->paginate(20);
         $groupes= Groupe::all();
         // dd($eleves);
         return view('Admin.Eleve.index',compact('eleves','groupes'));
@@ -40,11 +46,26 @@ class EleveController extends Controller
         'nom_pr_eleve_ar'       => 'required',
         'tel'      => 'required'
     );
+
     $validator = Validator::make($request->all(), $rules);
     if ($validator->fails()) {
         return redirect()->route('eleves.index')
         ->with('Error','Vérifiez vos champs.');
     } else {
+        // Vérifier si l'élève existe déjà
+        $eleveExiste = Eleve::where('nom_pr_eleve_fr', $request->nom_pr_eleve_fr)
+            ->orWhere('nom_pr_eleve_ar', $request->nom_pr_eleve_ar)
+            ->exists();
+            if ($eleveExiste) {
+                // Retourner une erreur si l'élève existe déjà
+                
+                    $notification = array(
+                        'message' => 'Cet élève est déjà enregistré.',
+                        'alert-type' => 'Error'
+                    );
+                    return redirect()->route('eleves.index')
+                    ->with($notification);
+            }else {
         // store eleve
         $eleve = new Eleve;
         $eleve->nom_pr_eleve_fr = $request-> nom_pr_eleve_fr;
@@ -62,12 +83,12 @@ class EleveController extends Controller
 
         // redirect
         $notification = array(
-            'message' => 'Nouveau Groupe crée avec succés.',
+            'message' => 'Nouveau Elève crée avec succés.',
             'alert-type' => 'success'
         );
         return redirect()->route('eleves.index')
         ->with($notification);
-    }
+    }}
 
         
     }
