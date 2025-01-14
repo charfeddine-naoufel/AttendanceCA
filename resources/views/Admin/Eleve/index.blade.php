@@ -248,14 +248,14 @@
                                                                                 <div>
                                                                                     {{-- <label for="gridEmail">Nom et Prénom</label> --}}
                                                                                     <input id="nom_pr_eleve_fr" type="text" placeholder="Nom et prénom" name="nom_pr_eleve_fr"
-                                                                                        class="form-input" />
-                                                                                        <input type="hidden" class="form-control" id="IdEleve" >
+                                                                                        class="form-input nom_pr_eleve_fr" />
+                                                                                        <input type="hidden" class="form-control IdEleve" id="IdEleve" >
 
                                                                                 </div>
                                                                                 <div>
                                                                                     {{-- <label for="gridPassword">الاسم و اللقب</label> --}}
                                                                                     <input id="nom_pr_eleve_ar" type="text" name="nom_pr_eleve_ar"
-                                                                                        placeholder="الاسم و اللقب" class="form-input" />
+                                                                                        placeholder="الاسم و اللقب" class="form-input nom_pr_eleve_ar" />
                                                                                 </div>
                                                                             </div>
                                                                             
@@ -263,12 +263,12 @@
                                                                                 <div>
                                                                                     {{-- <label for="lycee">Lycée</label> --}}
                                                                                     <input id="lycee" type="text" placeholder="Lycée" name="lycee"
-                                                                                        class="form-input" />
+                                                                                        class="form-input lycee" />
                                                                                 </div>
                                                                                 <div>
                                                                                     {{-- <label for="gridPassword">Classe Lycée</label> --}}
                                                                                     <input id="classe_lycee" type="text" name="classe_lycee"
-                                                                                        placeholder="Classe Lycée" class="form-input" />
+                                                                                        placeholder="Classe Lycée" class="form-input classe_lycee" />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -280,7 +280,7 @@
                                                                                             <path opacity="0.5" d="M5.00655 6.93311C4.93421 8.84124 5.41713 12.0817 8.6677 15.3323C11.9183 18.5829 15.1588 19.0658 17.0669 18.9935M15.1722 12.8853C15.1722 12.8853 14.0532 14.0042 12.0245 11.9755C9.99578 9.94676 11.1147 8.82782 11.1147 8.82782" stroke="currentColor" stroke-width="1.5"></path>
                                                                                         </svg>
                                                                                     </div>
-                                                                                    <input id="tel" type="text" name="tel" placeholder="Téléphone" class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                                                    <input id="tel" type="text" name="tel" placeholder="Téléphone" class="form-input ltr:rounded-l-none rtl:rounded-r-none tel">
                                                                                 </div>
                                                                                 <div class="flex">
                                                                                     <div class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
@@ -289,7 +289,7 @@
                                                                                             <path opacity="0.5" d="M5.00655 6.93311C4.93421 8.84124 5.41713 12.0817 8.6677 15.3323C11.9183 18.5829 15.1588 19.0658 17.0669 18.9935M15.1722 12.8853C15.1722 12.8853 14.0532 14.0042 12.0245 11.9755C9.99578 9.94676 11.1147 8.82782 11.1147 8.82782" stroke="currentColor" stroke-width="1.5"></path>
                                                                                         </svg>
                                                                                     </div>
-                                                                                    <input id="tel_parent" type="text" name="tel_parent" placeholder="Téléphone Parent" class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                                                    <input id="tel_parent" type="text" name="tel_parent" placeholder="Téléphone Parent" class="form-input ltr:rounded-l-none rtl:rounded-r-none tel_parent">
                                                                                 </div>
                                                                             </div>
                                                                             
@@ -421,6 +421,7 @@
             $('.editbtn').on('click', function(e) {
                 e.preventDefault();
                 let id = $(this).data('id');
+                
 
 
                 // var action ="{{ URL::to('matieres') }}/"+id;
@@ -429,13 +430,13 @@
                 // var url = "{{ URL::to('matieres') }}";
 
                 $.get("eleves/" + id + "/edit", function(data) {
-                    // console.log(data.data);
-                    $('#nom_pr_eleve_fr').val(data.data['nom_pr_eleve_fr']);
-                    $('#nom_pr_eleve_ar').val(data.data['nom_pr_eleve_ar']);
-                    $('#lycee' ).val(data.data['lycee']);
-                    $('#classe_lycee').val(data.data['classe_lycee']);
-                    $('#tel').val(data.data['tel']);
-                    $('#tel_parent').val(data.data['tel_parent']);
+                     console.log(data.data);
+                    $('.nom_pr_eleve_fr').val(data.data['nom_pr_eleve_fr']);
+                    $('.nom_pr_eleve_ar').val(data.data['nom_pr_eleve_ar']);
+                    $('.lycee' ).val(data.data['lycee']);
+                    $('.classe_lycee').val(data.data['classe_lycee']);
+                    $('.tel').val(data.data['tel']);
+                    $('.tel_parent').val(data.data['tel_parent']);
                     $('#IdEleve').val(data.data['id']);
 
                    
