@@ -59,7 +59,7 @@
 
                                 <div class="panel lg:col-span-2 xl:col-span-3">
                                     <div class="mb-10 flex items-center justify-between">
-                                        <h5 class="text-lg font-semibold dark:text-white-light">Niveau</h5>
+                                        <h5 class="text-lg font-semibold dark:text-white-light">Groupe</h5>
 
                                         <!-- Register -->
                                         <div x-data="modal">
@@ -178,7 +178,7 @@
                                                                 </div>
 
                                                                 <button type="submit"
-                                                                    class="btn btn-primary w-full">Submit</button>
+                                                                    class="btn btn-primary w-full">Enregistrer</button>
                                                             </form>
                                                         </div>
 
@@ -241,7 +241,7 @@
                                                                                 <div
                                                                                     class="flex items-center justify-between bg-[#fbfbfb] px-5 py-3 dark:bg-[#121c2c]">
                                                                                     <h5 class="text-lg font-bold">Modifier
-                                                                                        Matière</h5>
+                                                                                        Groupe</h5>
                                                                                     <button type="button"
                                                                                         class="text-white-dark hover:text-dark"
                                                                                         @click="toggle">
@@ -298,16 +298,16 @@
                                                                                                 placeholder="Nom Groupe"
                                                                                                 name="nom_groupe"
                                                                                                 id="nom_groupe{{ $groupe->id }}"
-                                                                                                class="form-input ltr:pl-10 rtl:pr-10">
+                                                                                                class="form-input ltr:pl-10 rtl:pr-10 nom_groupe">
                                                                                             <input type="hidden"
-                                                                                                class="form-control"
+                                                                                                class="form-control IdGroupe"
                                                                                                 id="IdGroupe"
                                                                                                 name="IdGroupe">
                                                                                         </div>
                                                                                         <div class="relative mb-4">
                                                                                             <div>
                                                                                                 <select
-                                                                                                    class="form-select text-white-dark"
+                                                                                                    class="form-select text-white-dark niveau_id"
                                                                                                     name="niveau_id"
                                                                                                     id="niveau_id{{ $groupe->id }}">
                                                                                                     <option>Choisir le
@@ -322,9 +322,26 @@
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
+                                                                                        <div class="relative mb-4">
+                                                                                            <div>
+                                                                                                <select
+                                                                                                    class="form-select text-white-dark matiere_id"
+                                                                                                    name="matiere_id"
+                                                                                                    id="matiere_id{{ $groupe->id }}">
+                                                                                                    <option>Choisir la matière</option>
+                                                                                                    @foreach ($matieres as $matiere)
+                                                                                                        <option
+                                                                                                            value="{{ $matiere->id }}">
+                                                                                                            {{ $matiere->nom_mat_fr }}
+                                                                                                        </option>
+                                                                                                    @endforeach
+
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
 
                                                                                         <button type=""
-                                                                                            class="btn btn-primary w-full updatebtn">Submit</button>
+                                                                                            class="btn btn-primary w-full updatebtn">Enregister</button>
                                                                                     </form>
                                                                                 </div>
                                                                             </div>
@@ -396,80 +413,108 @@
                                 </button>
                             </div>
 
-                           
+
                             <div class="min-h-[400px] sm:min-h-[300px]">
                                 <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
                                     @foreach ($groupes as $groupe)
-                                        
-                                    <div class="panel pb-12 bg-primary-light shadow-primary"
-                                        {{-- :class="{
+                                        <div class="panel pb-12 bg-primary-light shadow-primary" {{-- :class="{
                                             'bg-primary-light shadow-primary': note.tag === 'personal',
                                             'bg-warning-light shadow-warning': note.tag === 'work',
                                             'bg-info-light shadow-info': note.tag === 'social',
                                             'bg-danger-light shadow-danger': note.tag === 'important',
                                             'dark:shadow-dark': !note.tag
-                                        }" --}}
-                                        >
-                                        <div class="min-h-[142px]">
-                                            <div class="flex justify-around">
-                                                <div class="flex w-max ">
-                                                    <div class="flex ">
-                                                        <div class="btn btn-outline-primary flex  px-2 py-1">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0">
-                                                                <path d="M4.72848 16.1369C3.18295 14.5914 2.41018 13.8186 2.12264 12.816C1.83509 11.8134 2.08083 10.7485 2.57231 8.61875L2.85574 7.39057C3.26922 5.59881 3.47597 4.70292 4.08944 4.08944C4.70292 3.47597 5.59881 3.26922 7.39057 2.85574L8.61875 2.57231C10.7485 2.08083 11.8134 1.83509 12.816 2.12264C13.8186 2.41018 14.5914 3.18295 16.1369 4.72848L17.9665 6.55812C20.6555 9.24711 22 10.5916 22 12.2623C22 13.933 20.6555 15.2775 17.9665 17.9665C15.2775 20.6555 13.933 22 12.2623 22C10.5916 22 9.24711 20.6555 6.55812 17.9665L4.72848 16.1369Z" stroke="currentColor" stroke-width="1.5"></path>
-                                                                <circle opacity="0.5" cx="8.60699" cy="8.87891" r="2" transform="rotate(-45 8.60699 8.87891)" stroke="currentColor" stroke-width="1.5"></circle>
-                                                                <path opacity="0.5" d="M11.5417 18.5L18.5208 11.5208" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                                            </svg>
-                                                            <span class="ltr:ml-2 rtl:mr-2" >Groupe: {{$groupe->nom_groupe}}</span>
+                                        }" --}}>
+                                            <div class="min-h-[142px]">
+                                                <div class="flex justify-around">
+                                                    <div class="flex w-max ">
+                                                        <div class="flex ">
+                                                            <div class="btn btn-outline-primary flex  px-2 py-1">
+                                                                <svg width="24" height="24" viewBox="0 0 24 24"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg"
+                                                                    class="h-5 w-5 shrink-0">
+                                                                    <path
+                                                                        d="M4.72848 16.1369C3.18295 14.5914 2.41018 13.8186 2.12264 12.816C1.83509 11.8134 2.08083 10.7485 2.57231 8.61875L2.85574 7.39057C3.26922 5.59881 3.47597 4.70292 4.08944 4.08944C4.70292 3.47597 5.59881 3.26922 7.39057 2.85574L8.61875 2.57231C10.7485 2.08083 11.8134 1.83509 12.816 2.12264C13.8186 2.41018 14.5914 3.18295 16.1369 4.72848L17.9665 6.55812C20.6555 9.24711 22 10.5916 22 12.2623C22 13.933 20.6555 15.2775 17.9665 17.9665C15.2775 20.6555 13.933 22 12.2623 22C10.5916 22 9.24711 20.6555 6.55812 17.9665L4.72848 16.1369Z"
+                                                                        stroke="currentColor" stroke-width="1.5"></path>
+                                                                    <circle opacity="0.5" cx="8.60699" cy="8.87891"
+                                                                        r="2" transform="rotate(-45 8.60699 8.87891)"
+                                                                        stroke="currentColor" stroke-width="1.5"></circle>
+                                                                    <path opacity="0.5" d="M11.5417 18.5L18.5208 11.5208"
+                                                                        stroke="currentColor" stroke-width="1.5"
+                                                                        stroke-linecap="round"></path>
+                                                                </svg>
+                                                                <span class="ltr:ml-2 rtl:mr-2">Groupe:
+                                                                    {{ $groupe->nom_groupe }}</span>
+                                                            </div>
+                                                            <button>
+                                                                <svg width="24" height="24" viewBox="0 0 24 24"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg"
+                                                                    class="h-5 w-5 shrink-0"
+                                                                    transform="rotate(0) scale(1, 1)">
+                                                                    <path
+                                                                        d="M18.18 8.03933L18.6435 7.57589C19.4113 6.80804 20.6563 6.80804 21.4241 7.57589C22.192 8.34374 22.192 9.58868 21.4241 10.3565L20.9607 10.82M18.18 8.03933C18.18 8.03933 18.238 9.02414 19.1069 9.89309C19.9759 10.762 20.9607 10.82 20.9607 10.82M18.18 8.03933L13.9194 12.2999C13.6308 12.5885 13.4865 12.7328 13.3624 12.8919C13.2161 13.0796 13.0906 13.2827 12.9882 13.4975C12.9014 13.6797 12.8368 13.8732 12.7078 14.2604L12.2946 15.5L12.1609 15.901M20.9607 10.82L16.7001 15.0806C16.4115 15.3692 16.2672 15.5135 16.1081 15.6376C15.9204 15.7839 15.7173 15.9094 15.5025 16.0118C15.3203 16.0986 15.1268 16.1632 14.7396 16.2922L13.5 16.7054L13.099 16.8391M13.099 16.8391L12.6979 16.9728C12.5074 17.0363 12.2973 16.9867 12.1553 16.8447C12.0133 16.7027 11.9637 16.4926 12.0272 16.3021L12.1609 15.901M13.099 16.8391L12.1609 15.901"
+                                                                        stroke="#9b1fe8" stroke-width="1.5"></path>
+                                                                    <path d="M8 13H10.5" stroke="#9b1fe8"
+                                                                        stroke-width="1.5" stroke-linecap="round"></path>
+                                                                    <path d="M8 9H14.5" stroke="#9b1fe8"
+                                                                        stroke-width="1.5" stroke-linecap="round"></path>
+                                                                    <path d="M8 17H9.5" stroke="#9b1fe8"
+                                                                        stroke-width="1.5" stroke-linecap="round"></path>
+                                                                    <path opacity="0.5"
+                                                                        d="M3 10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H13C16.7712 2 18.6569 2 19.8284 3.17157C21 4.34315 21 6.22876 21 10V14C21 17.7712 21 19.6569 19.8284 20.8284C18.6569 22 16.7712 22 13 22H11C7.22876 22 5.34315 22 4.17157 20.8284C3 19.6569 3 17.7712 3 14V10Z"
+                                                                        stroke="#9b1fe8" stroke-width="1.5"></path>
+                                                                </svg>
+                                                            </button>
+
+
+
                                                         </div>
-                                                        <button>
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" transform="rotate(0) scale(1, 1)">    <path d="M18.18 8.03933L18.6435 7.57589C19.4113 6.80804 20.6563 6.80804 21.4241 7.57589C22.192 8.34374 22.192 9.58868 21.4241 10.3565L20.9607 10.82M18.18 8.03933C18.18 8.03933 18.238 9.02414 19.1069 9.89309C19.9759 10.762 20.9607 10.82 20.9607 10.82M18.18 8.03933L13.9194 12.2999C13.6308 12.5885 13.4865 12.7328 13.3624 12.8919C13.2161 13.0796 13.0906 13.2827 12.9882 13.4975C12.9014 13.6797 12.8368 13.8732 12.7078 14.2604L12.2946 15.5L12.1609 15.901M20.9607 10.82L16.7001 15.0806C16.4115 15.3692 16.2672 15.5135 16.1081 15.6376C15.9204 15.7839 15.7173 15.9094 15.5025 16.0118C15.3203 16.0986 15.1268 16.1632 14.7396 16.2922L13.5 16.7054L13.099 16.8391M13.099 16.8391L12.6979 16.9728C12.5074 17.0363 12.2973 16.9867 12.1553 16.8447C12.0133 16.7027 11.9637 16.4926 12.0272 16.3021L12.1609 15.901M13.099 16.8391L12.1609 15.901" stroke="#9b1fe8" stroke-width="1.5" ></path>    <path d="M8 13H10.5" stroke="#9b1fe8" stroke-width="1.5" stroke-linecap="round" ></path>    <path d="M8 9H14.5" stroke="#9b1fe8" stroke-width="1.5" stroke-linecap="round" ></path>    <path d="M8 17H9.5" stroke="#9b1fe8" stroke-width="1.5" stroke-linecap="round" ></path>    <path opacity="0.5" d="M3 10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H13C16.7712 2 18.6569 2 19.8284 3.17157C21 4.34315 21 6.22876 21 10V14C21 17.7712 21 19.6569 19.8284 20.8284C18.6569 22 16.7712 22 13 22H11C7.22876 22 5.34315 22 4.17157 20.8284C3 19.6569 3 17.7712 3 14V10Z" stroke="#9b1fe8" stroke-width="1.5" ></path></svg>
-                                                        </button>
-                                                        
-                                                       
-                                                        
+
                                                     </div>
-                                                    
+
+
                                                 </div>
-                                                
-                                                
+                                                <div class="w-full max-w-xs rounded-md border border-white-dark/20 p-5">
+                                                    {{-- <h4 class="mt-4 font-semibold" >Meeting with Kelly</h4> --}}
+
+                                                    <ul class="mb-5 space-y-1 font-semibold group-hover:text-primary">
+                                                        @foreach ($groupe->eleves as $eleve)
+                                                            <li class="flex  ">
+                                                                <svg width="24" height="24" viewBox="0 0 24 24"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg"
+                                                                    class="inline h-4 w-4 text-primary ltr:mr-2 rtl:ml-2 rtl:rotate-180">
+                                                                    <path d="M4 12H20M20 12L14 6M20 12L14 18"
+                                                                        stroke="currentColor" stroke-width="1.5"
+                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                    </path>
+                                                                </svg>
+                                                                {{ $eleve->nom_pr_eleve_fr }}
+                                                            </li>
+                                                        @endforeach
+
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <div class="w-full max-w-xs rounded-md border border-white-dark/20 p-5">
-                                                {{-- <h4 class="mt-4 font-semibold" >Meeting with Kelly</h4> --}}
-                                                
-                                                <ul class="mb-5 space-y-1 font-semibold group-hover:text-primary">
-                                                    @foreach ($groupe->eleves as $eleve)
-                                                        
-                                                    <li class="flex  ">
-                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline h-4 w-4 text-primary ltr:mr-2 rtl:ml-2 rtl:rotate-180">
-                                                            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                        {{$eleve->nom_pr_eleve_fr}}
-                                                    </li>
-                                                    @endforeach
-                                                    
-                                                </ul>
+                                            <div class="absolute bottom-5 left-0 w-full px-5">
+                                                <div class="mt-2 flex items-center justify-between">
+                                                    <div>
+                                                        <span
+                                                            class="badge bg-secondary">{{ $groupe->matiere->nom_mat_fr }}</span>
+                                                    </div>
+                                                    <div class="flex items-center">
+                                                        <span
+                                                            class="badge bg-warning">{{ $groupe->niveau->nom_niv_fr }}</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="absolute bottom-5 left-0 w-full px-5">
-                                            <div class="mt-2 flex items-center justify-between">
-                                                <div>
-                                                    <span class="badge bg-secondary">{{$groupe->matiere->nom_mat_fr}}</span>
-                                                </div>
-                                                <div class="flex items-center">
-                                                    <span class="badge bg-warning">{{$groupe->niveau->nom_niv_fr}}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     @endforeach
-                                    
-                                    
-                                    
+
+
+
                                 </div>
                             </div>
 
-                           
+
                         </div>
                     </template>
 
@@ -526,7 +571,7 @@
             $('.editbtn').on('click', function(e) {
                 e.preventDefault();
                 let id = $(this).data('id');
-
+                console.log('id==',id);
 
                 // var action ="{{ URL::to('matieres') }}/"+id;
 
@@ -535,9 +580,10 @@
 
                 $.get("groupes/" + id + "/edit", function(data) {
                     console.log(data.data);
-                    $('#nom_groupe' + id).val(data.data['nom_groupe']);
-                    $('#niveau_id' + id).val(data.data['niveau_id']);
-                    $('#IdGroupe').val(data.data['id']);
+                    $('.nom_groupe').val(data.data['nom_groupe']);
+                    $('.niveau_id' ).val(data.data['niveau_id']);
+                    $('.matiere_id').val(data.data['matiere_id']);
+                    $('.IdGroupe').val(data.data['id']);
 
 
 
@@ -552,6 +598,7 @@
                 var id = $('#IdGroupe').val();
                 var nom_groupe = $('#nom_groupe' + id).val();
                 var niveau_id = $('#niveau_id' + id).val();
+                var matiere_id = $('#matiere_id' + id).val();
 
 
                 var URL = "groupes/" + id;
@@ -565,7 +612,8 @@
                     data: {
                         id: id,
                         nom_groupe: nom_groupe,
-                        niveau_id: niveau_id
+                        niveau_id: niveau_id,
+                        matiere_id: matiere_id
                     },
 
                     success: function(data) {
