@@ -342,13 +342,13 @@
                                                     </div>
                                                     {{-- edit --}}
 
-                                                    <form action="{{ route('eleves.destroy', $eleve->id) }}"
+                                                    <form action="{{ route('eleves.destroy', $eleve->id) }}" id="delete-form-{{$eleve->id}}"
                                                         method="post" class="inline-block">
                                                         @csrf
                                                         @method('DELETE')
 
-                                                        <button type="submit" x-tooltip="Delete"
-                                                            class="btn-outline-danger">
+                                                        <button type="button" x-tooltip="Delete"
+                                                            class="btn-outline-danger" onclick="confirmDelete({{$eleve->id}})">
                                                             <svg width="24" height="24" viewbox="0 0 24 24"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg"
                                                                 class="h-5 w-5">
@@ -427,6 +427,33 @@
             }
         @endif
     </script>
+    <!-- SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+        // Fonction pour confirmer la suppression
+        function confirmDelete(eleveId) {
+            Swal.fire({
+            title: "Êtes-vous sûr?",
+            text: "Vous ne pourrez pas revenir en arrière!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Oui, supprimer !"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + eleveId).submit();
+                Swal.fire({
+                title: "Supprimé!",
+                text: "L'elève est supprimé avec succés.",
+                icon: "success"
+                });
+            }
+            });
+            
+        }
+    </script>
+   
     <script >
         $(document).ready(function() {
             

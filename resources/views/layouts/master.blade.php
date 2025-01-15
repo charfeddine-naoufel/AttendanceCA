@@ -21,6 +21,7 @@
         <script defer="" src="{{asset('assets/js/tippy-bundle.umd.min.js')}}"></script>
         <script defer="" src="{{asset('assets/js/sweetalert.min.js')}}"></script>
 
+        <script defer="" src="{{asset('assets/js/sweetalert.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery.js')}}"></script>
 <script src="{{asset('assets/js/select2.min.js')}}"></script>
 @yield('styles')
