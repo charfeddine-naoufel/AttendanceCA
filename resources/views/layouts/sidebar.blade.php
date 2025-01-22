@@ -43,6 +43,9 @@
                     <li>
                         <a href="{{route('seances.index')}}">Séances</a>
                     </li>
+                    <li>
+                        <a href="{{route('seances.groupe')}}">Séances par Groupe</a>
+                    </li>
                     
                     
                 </ul>

@@ -39,8 +39,9 @@ class EleveController extends Controller
      */
     public function store(Request $request)
     {
-        
         //  dd($request);
+        
+        
     $rules = array(
         'nom_pr_eleve_fr'       => 'required',
         'nom_pr_eleve_ar'       => 'required',
@@ -96,9 +97,14 @@ class EleveController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Eleve $eleve)
+    public function show($id)
     {
-        //
+        // $eleve = Eleve::find($id);
+        $g=['1','2'];
+        $groupes = Groupe::whereIn('id', $g)->get();
+            dd($groupes);
+       
+        dd($eleve->groupes);
     }
 
     /**
@@ -138,6 +144,7 @@ class EleveController extends Controller
             } else {
                 // update
             $eleve = Eleve::findOrFail($id);
+            $ancienGroupes=$eleve['groupes'];
             $eleve->nom_pr_eleve_fr = $request-> nom_pr_eleve_fr;
             $eleve->nom_pr_eleve_ar = $request-> nom_pr_eleve_ar;
             $eleve->tel = $request-> tel;
@@ -145,13 +152,12 @@ class EleveController extends Controller
             $eleve->classe_lycee      =  $request-> classe_lycee;
             $eleve->lycee      =  $request-> lycee;
                 $eleve->save();
-            $eleve->groupes()->detach();
-            // Attacher les groupes dans la table pivot
-             $eleve->groupes()->attach($request->groupes);
-        
-                // redirect
-                // return redirect()->route('eleves.index')
-                // ->with('success','Groupe modifiée avec succés.');
+            if ($eleve->groupes->isNotEmpty()) {
+                    // Détacher tous les groupes
+                    $eleve->groupes()->detach();
+                }
+            $eleve->groupes()->attach($request->groupes);
+            
 
                 return response()->json(['success' => true,    
                        ]); 

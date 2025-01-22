@@ -143,7 +143,7 @@
                                                         <div >
                                                             <label for="id_label_single">
                                                                 Choisir les groupes
-                                                            <select   class="form-select text-white-dark groupes" name="groupes[]" multiple="multiple" style="width: 100%">
+                                                            <select   class="form-select text-white-dark groupes" id="groupes" name="groupes[]" multiple="multiple" style="width: 100%">
                                                                 
                                                                 @foreach ($groupes as $groupe)
                                                                 <option value="{{$groupe->id}}">{{$groupe->nom_groupe}}-{{$groupe->matiere->nom_mat_fr}}</option>
@@ -319,7 +319,7 @@
                                                                                 <div >
                                                                                     <label for="id_label_single">
                                                                                         Choisir les groupes
-                                                                                    <select   class="form-select text-white-dark groupes " id="groupes" multiple="multiple" style="width: 100%">
+                                                                                    <select   class="form-select text-white-dark groupes groupes-{{$eleve->id}} " id="groupes{{$eleve->id}} " multiple="multiple" style="width: 100%">
                                                                                         
                                                                                         @foreach ($groupes as $groupe)
                                                                                         <option value="{{$groupe->id}}">{{$groupe->nom_groupe}}-{{$groupe->matiere->nom_mat_fr}}</option>
@@ -491,7 +491,7 @@
                     $('.classe_lycee').val(data.data['classe_lycee']);
                     $('.tel').val(data.data['tel']);
                     $('.tel_parent').val(data.data['tel_parent']);
-                    $('#IdEleve').val(data.data['id']);
+                    $('.IdEleve').val(data.data['id']);
 
                    
                     var groupes = data.data['groupes'].map(o => o.id);
@@ -505,16 +505,16 @@
             });
             $('.updatebtn').on('click', function(e) {
                 e.preventDefault();
-                var id = $('#IdEleve').val();
+                var id = $('.IdEleve').val();
                 var nom_pr_eleve_fr = $('#nom_pr_eleve_fr').val();
                 var nom_pr_eleve_ar = $('#nom_pr_eleve_ar').val();
                 var lycee = $('#lycee').val();
                 var classe_lycee = $('#classe_lycee').val();
                 var tel = $('#tel').val();
                 var tel_parent = $('#tel_parent').val();
-                var groupes = $('#groupes').val();
+                var groupes = $('.groupes-'+id).val();
 
-
+                // alert(id+'tttt'+groupes);
                 var URL = "eleves/" + id;
                 console.log("url===", URL)
                 $.ajax({
@@ -538,6 +538,7 @@
 
                     success: function(data) {
                         // $('.modaledit').modal('hide');
+                        console.log("update data"+data);
                         window.location.reload();
                         //  alert('update done')
 

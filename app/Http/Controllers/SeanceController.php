@@ -10,6 +10,7 @@ use App\Models\Prof;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class SeanceController extends Controller
 {
@@ -24,7 +25,7 @@ class SeanceController extends Controller
             $seance->presents = Eleve::whereIn('id', $seance->eleves_presents)->get();
             $seance->absents = Eleve::whereIn('id', $seance->eleves_absentss)->get();
         });
-        // dd($seances);
+        // php artisan optimizedd($seances);
         $groupes= Groupe::all();
         $matieres= Matiere::all();
         $profs= Prof::all();
@@ -38,7 +39,24 @@ class SeanceController extends Controller
         //  dd($eleves);
         return view('Admin.Seance.index',compact('seances','groupes','matieres','profs','eleves'));
     }
-
+    
+    public function afficheseances()
+    {
+       // Récupérer toutes les séances avec leurs élèves présents
+    $seances = Seance::all();
+    // Récupérer tous les groupes
+    $groupes = Groupe::pluck('nom_groupe', 'id');
+    // dd($groupes);
+    // Organiser les séances par groupe et par mois
+    $seancesByGroupAndMonth = $seances->groupBy('groupe_id')->map(function ($groupSeances) {
+        return $groupSeances->groupBy(function ($seance) {
+            return Carbon::parse($seance->date)->format('Y-m'); // Grouper par mois (ex: "2023-10")
+        });
+    });
+   
+    // Passer les données organisées à la vue
+    return view('Admin.Seance.groupe', compact('seancesByGroupAndMonth','groupes'));
+    }
     /**
      * Show the form for creating a new resource.
      */

@@ -19,7 +19,7 @@ class Groupe extends Model
 
     public function eleves()
     {
-        return $this->belongsToMany(Eleve::class);
+    return $this->belongsToMany(Eleve::class, 'eleve_groupe', 'groupe_id', 'eleve_id')->withTimestamps();
     }
 
     public function profs()
