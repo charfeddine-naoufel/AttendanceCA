@@ -46,11 +46,11 @@ class SeanceController extends Controller
     $seances = Seance::all();
     // Récupérer tous les groupes
     $groupes = Groupe::pluck('nom_groupe', 'id');
-    // dd($groupes);
+    
     // Organiser les séances par groupe et par mois
     $seancesByGroupAndMonth = $seances->groupBy('groupe_id')->map(function ($groupSeances) {
         return $groupSeances->groupBy(function ($seance) {
-            return Carbon::parse($seance->date)->format('Y-m'); // Grouper par mois (ex: "2023-10")
+            return Carbon::parse($seance->date)->format('Y-m'); // Grouper par mois ->format('Y-m')(ex: "2023-10")
         });
     });
    

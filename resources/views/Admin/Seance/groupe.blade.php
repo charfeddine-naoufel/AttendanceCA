@@ -24,8 +24,7 @@
                                             
                                         <li>
                                             <a href="javascript:;"
-                                            class="-mb-[1px] block border border-transparent p-3.5 py-2 hover:text-primary dark:hover:border-b-black !border-white-light !border-b-white text-primary dark:!border-[#191e3a] dark:!border-b-black"
-                                            :class="{ '!border-white-light !border-b-white  text-primary dark:!border-[#191e3a] dark:!border-b-black': tab === 'home' }"
+                                            class="-mb-[1px] block border border-transparent p-3.5 py-2 hover:text-primary dark:hover:border-b-black !border-white-light !border-b-white text-primary dark:!border-[#191e3a] dark:!border-b-black {{ $loop->first ? 'active' : '' }}"
                                             @click="tab = '{{$groupes[$groupId]}}'">Groupe-{{$groupes[$groupId]}}</a>
                                         </li>
                                         
@@ -34,28 +33,68 @@
                                         
                                     </ul>
                                 </div>
-                                <div class="flex-1 pt-5 text-sm">
+                                @php
+                                    // Obtenir le mois courant au format 'Y-m'
+                                    $currentMonth = Carbon\Carbon::now()->format('Y-m');
+                                @endphp
+                                <div class="flex-1 p-3 border text-sm">
                                     @foreach ( $seancesByGroupAndMonth as $groupId => $seancesByMonth )
+                                        
+                                        <template x-if="tab === '{{$groupes[$groupId]}}'">
+                                            <div class="active">
+                                                <h4 class="mb-4 text-2xl font-semibold">Groupe-{{$groupes[$groupId]}}</h4>
+                                                <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+                                                    @if (isset($seancesByGroupAndMonth[$groupId]))
+                                                    @foreach ($seancesByGroupAndMonth[$groupId] as $month => $seances)
+                                                    <div class="max-w-[24rem] w-full  shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 {{ $month === $currentMonth ? 'bg-warning bg-gradient' : 'bg-white' }}">
+                                                        <div class="flex justify-between mb-5">
+                                                            <h6 class="text-[#0e1726] font-semibold text-base dark:text-white-light text-danger">{{ Carbon\Carbon::parse($month)->translatedFormat('F Y') }}</h6>
+                                                            {{ $month === $currentMonth ? '' : '' }}
+                                                            <span class="badge  py-1.5 dark:bg-primary dark:text-white {{ $month === $currentMonth ? 'bg-primary/10 text-primary' : 'd-none' }}">En-Cours</span>
+                                                        </div>
+                                                        <div class="table-responsive">
+                                                            <table class="table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        
+                                                                        <th>Date</th>
+                                                                        <th>Prof</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach ($seances as $seance)
+                                                                        <tr>
+                                                                            <td>{{ $seance->date->format('d/m/Y') }}</td>
+                                                                            <td>{{ $seance->prof->nom_pr_prof_fr }}</td>
+                                                                            {{-- <td>
+                                                                                @foreach ($seance->eleves as $eleve)
+                                                                                    {{ $eleve->nom }}<br>
+                                                                                @endforeach
+                                                                            </td> --}}
+                                                                        </tr>
+                                                                    @endforeach
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        {{-- <div class="text-right">
+                                                            <span class="text-primary font-semibold">60%</span>
+                                                            <div class="bg-[#ebedf2] dark:bg-[#0e1726] rounded-full w-full h-1.5 mt-1.5">
+                                                                <div class="rounded-full bg-primary h-full" style="width: 60%;"></div>
+                                                            </div>
+                                                        </div> --}}
+                                                    </div> 
+                                                    @endforeach
+                                                    @else
+                                                    <p>Aucune séance pour ce groupe</p>
+                                                    @endif
+                                                    
+                                                </div>
 
-                                    <template x-if="tab === '{{$groupes[$groupId]}}'">
-                                        <div class="active">
-                                            <h4 class="mb-4 text-2xl font-semibold">G-{{$groupes[$groupId]}}</h4>
-                                            <p class="mb-4">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor
-                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat.
-                                            </p>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor
-                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                consequat.
-                                            </p>
-                                        </div>
-                                    </template>
+
+                                            </div>
+                                        </template>
                                     @endforeach
                                    
                                     
