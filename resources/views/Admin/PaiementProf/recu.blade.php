@@ -21,9 +21,9 @@
 			</address>
 		</header>
 		<article>
-			<h1>Pour:</h1>
+			<h5 class="font-size-16 mb-3">Payé à:</h5>
 			<address contenteditable>
-				<p>Prof : {{$payment->prof->nom_pr_prof_fr}}<br>{{$payment->prof->nom_pr_prof_ar}}</p>
+				<p> {{$payment->prof->nom_pr_prof_fr}}<br>{{$payment->prof->nom_pr_prof_ar}}</p>
 			</address>
 			<table class="meta">
 				<tr>

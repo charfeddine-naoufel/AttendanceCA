@@ -82,6 +82,15 @@ class ProfController extends Controller
     {
         //
     }
+    public function groupes($id)
+    {
+        
+        $prof = Prof::find($id);
+        
+        $groupes= $prof->groupes;
+        //  dd($groupes);
+        return view('Admin.Prof.groupes',compact('groupes','prof'));
+    }
 
     /**
      * Show the form for editing the specified resource.

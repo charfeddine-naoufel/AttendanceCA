@@ -21,7 +21,8 @@
                             <!-- Register -->
                             <div x-data="modal">
                                 <button type="button" class="btn btn-danger" @click="toggle">
-                                    <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg fill="none" height="24" viewBox="0 0 24 24" width="24"
+                                        xmlns="http://www.w3.org/2000/svg">
                                         <g id="Add">
                                             <path clip-rule="evenodd"
                                                 d="M1.25 3C1.25 1.48122 2.48122 0.25 4 0.25H14C15.5188 0.25 16.75 1.48122 16.75 3V10.5C16.75 10.9142 16.4142 11.25 16 11.25C15.5858 11.25 15.25 10.9142 15.25 10.5V3C15.25 2.30964 14.6904 1.75 14 1.75H4C3.30964 1.75 2.75 2.30964 2.75 3V21C2.75 21.6904 3.30964 22.25 4 22.25H12C12.4142 22.25 12.75 22.5858 12.75 23C12.75 23.4142 12.4142 23.75 12 23.75H4C2.48122 23.75 1.25 22.5188 1.25 21V3Z"
@@ -74,49 +75,59 @@
                                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                         <div>
                                                             {{-- <label for="gridEmail">Nom et Prénom</label> --}}
-                                                            <input  type="text" placeholder="Nom et prénom" name="nom_pr_prof_fr"
-                                                                class="form-input " />
+                                                            <input type="text" placeholder="Nom et prénom"
+                                                                name="nom_pr_prof_fr" class="form-input " />
                                                         </div>
                                                         <div>
                                                             {{-- <label for="gridPassword">الاسم و اللقب</label> --}}
-                                                            <input  type="text" name="nom_pr_prof_ar"
+                                                            <input type="text" name="nom_pr_prof_ar"
                                                                 placeholder="الاسم و اللقب" class="form-input " />
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                         <div class="flex">
-                                                            <div class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
-                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-1 h-5 w-5">
-                                                                    <path d="M5.00659 6.93309C5.04956 5.7996 5.70084 4.77423 6.53785 3.93723C7.9308 2.54428 10.1532 2.73144 11.0376 4.31617L11.6866 5.4791C12.2723 6.52858 12.0372 7.90533 11.1147 8.8278M17.067 18.9934C18.2004 18.9505 19.2258 18.2992 20.0628 17.4622C21.4558 16.0692 21.2686 13.8468 19.6839 12.9624L18.5209 12.3134C17.4715 11.7277 16.0947 11.9628 15.1722 12.8853" stroke="currentColor" stroke-width="1.5"></path>
-                                                                    <path opacity="0.5" d="M5.00655 6.93311C4.93421 8.84124 5.41713 12.0817 8.6677 15.3323C11.9183 18.5829 15.1588 19.0658 17.0669 18.9935M15.1722 12.8853C15.1722 12.8853 14.0532 14.0042 12.0245 11.9755C9.99578 9.94676 11.1147 8.82782 11.1147 8.82782" stroke="currentColor" stroke-width="1.5"></path>
+                                                            <div
+                                                                class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
+                                                                <svg width="24" height="24" viewBox="0 0 24 24"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg"
+                                                                    class="mx-auto mb-1 h-5 w-5">
+                                                                    <path
+                                                                        d="M5.00659 6.93309C5.04956 5.7996 5.70084 4.77423 6.53785 3.93723C7.9308 2.54428 10.1532 2.73144 11.0376 4.31617L11.6866 5.4791C12.2723 6.52858 12.0372 7.90533 11.1147 8.8278M17.067 18.9934C18.2004 18.9505 19.2258 18.2992 20.0628 17.4622C21.4558 16.0692 21.2686 13.8468 19.6839 12.9624L18.5209 12.3134C17.4715 11.7277 16.0947 11.9628 15.1722 12.8853"
+                                                                        stroke="currentColor" stroke-width="1.5"></path>
+                                                                    <path opacity="0.5"
+                                                                        d="M5.00655 6.93311C4.93421 8.84124 5.41713 12.0817 8.6677 15.3323C11.9183 18.5829 15.1588 19.0658 17.0669 18.9935M15.1722 12.8853C15.1722 12.8853 14.0532 14.0042 12.0245 11.9755C9.99578 9.94676 11.1147 8.82782 11.1147 8.82782"
+                                                                        stroke="currentColor" stroke-width="1.5"></path>
                                                                 </svg>
                                                             </div>
-                                                            <input id="tel" type="text" name="tel_prof" placeholder="Téléphone" class=" form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                            <input id="tel" type="text" name="tel_prof"
+                                                                placeholder="Téléphone"
+                                                                class=" form-input ltr:rounded-l-none rtl:rounded-r-none">
                                                         </div>
-                                                        
-                                                        
+
+
                                                     </div>
                                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                         <div>
                                                             <label for="id_label_single">
                                                                 Choisir Matière
-                                                            <select   class="form-select text-white-dark " name="matiere_id"  style="width: 100%">
-                                                                
-                                                                @foreach ($matieres as $matiere)
-                                                                <option value="{{$matiere->id}}">{{$matiere->nom_mat_fr}}</option>
-                                                                    
-                                                                @endforeach
-                                                                
+                                                                <select class="form-select text-white-dark "
+                                                                    name="matiere_id" style="width: 100%">
+
+                                                                    @foreach ($matieres as $matiere)
+                                                                        <option value="{{ $matiere->id }}">
+                                                                            {{ $matiere->nom_mat_fr }}</option>
+                                                                    @endforeach
 
 
-                                                            </select>
+
+                                                                </select>
                                                             </label>
                                                         </div>
-                                                        
+
                                                     </div>
-                                                    
-                                                    
+
+
                                                     <div class="relative mb-4">
                                                         {{-- <span class="absolute top-1/2 -translate-y-1/2 ltr:left-3 rtl:right-3 dark:text-white-dark">
                                                             <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5">
@@ -124,24 +135,28 @@
                                                                 <path opacity="0.5" d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12Z" stroke="currentColor" stroke-width="1.5"></path>
                                                             </svg>
                                                         </span> --}}
-                                                        <div >
+                                                        <div>
                                                             <label for="id_label_single">
                                                                 Choisir les groupes
-                                                            <select   class="form-select text-white-dark groupes" name="groupes[]" multiple="multiple" style="width: 100%">
-                                                                
-                                                                @foreach ($groupes as $groupe)
-                                                                <option value="{{$groupe->id}}">{{$groupe->nom_groupe}}-{{$groupe->matiere->nom_mat_fr}}</option>
-                                                                    
-                                                                @endforeach
-                                                                
+                                                                <select class="form-select text-white-dark groupes"
+                                                                    name="groupes[]" multiple="multiple"
+                                                                    style="width: 100%">
+
+                                                                    @foreach ($groupes as $groupe)
+                                                                        <option value="{{ $groupe->id }}">
+                                                                            {{ $groupe->nom_groupe }}-{{ $groupe->matiere->nom_mat_fr }}
+                                                                        </option>
+                                                                    @endforeach
 
 
-                                                            </select>
+
+                                                                </select>
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    
-                                                    <button type="submit" class="btn btn-primary w-full">Enregistrer</button>
+
+                                                    <button type="submit"
+                                                        class="btn btn-primary w-full">Enregistrer</button>
                                                 </form>
                                             </div>
 
@@ -162,6 +177,7 @@
                                             <th>الاسم و اللقب</th>
                                             <th>Téléphone</th>
                                             <th>Matière</th>
+                                            <th>Groupes</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -173,10 +189,16 @@
                                                 <td>{{ $prof->nom_pr_prof_ar }}</td>
                                                 <td>{{ $prof->tel_prof }}</td>
                                                 <td>{{ $prof->matiere->nom_mat_fr }}</td>
-                                               
+                                                <td>
+                                                    <a href="{{route('profs.groupes',$prof->id)}} ">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M13 20V18C13 15.2386 10.7614 13 8 13C5.23858 13 3 15.2386 3 18V20H13ZM13 20H21V19C21 16.0545 18.7614 14 16 14C14.5867 14 13.3103 14.6255 12.4009 15.6311M11 7C11 8.65685 9.65685 10 8 10C6.34315 10 5 8.65685 5 7C5 5.34315 6.34315 4 8 4C9.65685 4 11 5.34315 11 7ZM18 9C18 10.1046 17.1046 11 16 11C14.8954 11 14 10.1046 14 9C14 7.89543 14.8954 7 16 7C17.1046 7 18 7.89543 18 9Z" stroke="#2196f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#2196f3"/>
+                                                            </svg>
+                                                    </a>
+                                                </td>
                                                 <td
                                                     class="border-b border-[#ebedf2] p-3 text-center dark:border-[#191e3a]">
-
+                                                    
                                                     {{-- edit --}}
                                                     <div x-data="modal" class="inline-block">
                                                         <button type="button" @click="toggle"
@@ -224,54 +246,81 @@
                                                                         <form class="space-y-5">
                                                                             @csrf
                                                                             @method('PUT')
-                                                                           
-                                                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                                                                            <div
+                                                                                class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                                                 <div>
                                                                                     {{-- <label for="gridEmail">Nom et Prénom</label> --}}
-                                                                                    <input  type="text" placeholder="Nom et prénom" id="nom_pr_prof_fr"
+                                                                                    <input type="text"
+                                                                                        placeholder="Nom et prénom"
+                                                                                        id="nom_pr_prof_fr"
                                                                                         class="form-input nom_pr_prof_fr" />
-                                                                                        <input type="hidden" class="form-control IdProf" id="IdProf" >
+                                                                                    <input type="hidden"
+                                                                                        class="form-control IdProf"
+                                                                                        id="IdProf">
                                                                                 </div>
                                                                                 <div>
                                                                                     {{-- <label for="gridPassword">الاسم و اللقب</label> --}}
-                                                                                    <input  type="text" id="nom_pr_prof_ar"
-                                                                                        placeholder="الاسم و اللقب" class="form-input nom_pr_prof_ar" />
+                                                                                    <input type="text"
+                                                                                        id="nom_pr_prof_ar"
+                                                                                        placeholder="الاسم و اللقب"
+                                                                                        class="form-input nom_pr_prof_ar" />
                                                                                 </div>
                                                                             </div>
-                                                                            
-                                                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                                                                            <div
+                                                                                class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                                                 <div class="flex">
-                                                                                    <div class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
-                                                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-1 h-5 w-5">
-                                                                                            <path d="M5.00659 6.93309C5.04956 5.7996 5.70084 4.77423 6.53785 3.93723C7.9308 2.54428 10.1532 2.73144 11.0376 4.31617L11.6866 5.4791C12.2723 6.52858 12.0372 7.90533 11.1147 8.8278M17.067 18.9934C18.2004 18.9505 19.2258 18.2992 20.0628 17.4622C21.4558 16.0692 21.2686 13.8468 19.6839 12.9624L18.5209 12.3134C17.4715 11.7277 16.0947 11.9628 15.1722 12.8853" stroke="currentColor" stroke-width="1.5"></path>
-                                                                                            <path opacity="0.5" d="M5.00655 6.93311C4.93421 8.84124 5.41713 12.0817 8.6677 15.3323C11.9183 18.5829 15.1588 19.0658 17.0669 18.9935M15.1722 12.8853C15.1722 12.8853 14.0532 14.0042 12.0245 11.9755C9.99578 9.94676 11.1147 8.82782 11.1147 8.82782" stroke="currentColor" stroke-width="1.5"></path>
+                                                                                    <div
+                                                                                        class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
+                                                                                        <svg width="24" height="24"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            fill="none"
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            class="mx-auto mb-1 h-5 w-5">
+                                                                                            <path
+                                                                                                d="M5.00659 6.93309C5.04956 5.7996 5.70084 4.77423 6.53785 3.93723C7.9308 2.54428 10.1532 2.73144 11.0376 4.31617L11.6866 5.4791C12.2723 6.52858 12.0372 7.90533 11.1147 8.8278M17.067 18.9934C18.2004 18.9505 19.2258 18.2992 20.0628 17.4622C21.4558 16.0692 21.2686 13.8468 19.6839 12.9624L18.5209 12.3134C17.4715 11.7277 16.0947 11.9628 15.1722 12.8853"
+                                                                                                stroke="currentColor"
+                                                                                                stroke-width="1.5"></path>
+                                                                                            <path opacity="0.5"
+                                                                                                d="M5.00655 6.93311C4.93421 8.84124 5.41713 12.0817 8.6677 15.3323C11.9183 18.5829 15.1588 19.0658 17.0669 18.9935M15.1722 12.8853C15.1722 12.8853 14.0532 14.0042 12.0245 11.9755C9.99578 9.94676 11.1147 8.82782 11.1147 8.82782"
+                                                                                                stroke="currentColor"
+                                                                                                stroke-width="1.5"></path>
                                                                                         </svg>
                                                                                     </div>
-                                                                                    <input  type="text" id="tel_prof" placeholder="Téléphone" class="tel_prof form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                                                    <input type="text" id="tel_prof"
+                                                                                        placeholder="Téléphone"
+                                                                                        class="tel_prof form-input ltr:rounded-l-none rtl:rounded-r-none">
                                                                                 </div>
-                                                                                
-                                                                                
+
+
                                                                             </div>
-                                                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                                            <div
+                                                                                class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                                                 <div>
                                                                                     <label for="id_label_single">
                                                                                         Choisir Matière
-                                                                                    <select   class="form-select text-white-dark matiere_id" id="matiere_id"  style="width: 100%">
-                                                                                        
-                                                                                        @foreach ($matieres as $matiere)
-                                                                                        <option value="{{$matiere->id}}">{{$matiere->nom_mat_fr}}</option>
-                                                                                            
-                                                                                        @endforeach
-                                                                                        
-                        
-                        
-                                                                                    </select>
+                                                                                        <select
+                                                                                            class="form-select text-white-dark matiere_id"
+                                                                                            id="matiere_id"
+                                                                                            style="width: 100%">
+
+                                                                                            @foreach ($matieres as $matiere)
+                                                                                                <option
+                                                                                                    value="{{ $matiere->id }}">
+                                                                                                    {{ $matiere->nom_mat_fr }}
+                                                                                                </option>
+                                                                                            @endforeach
+
+
+
+                                                                                        </select>
                                                                                     </label>
                                                                                 </div>
-                                                                                
+
                                                                             </div>
-                                                                            
-                                                                            
+
+
                                                                             <div class="relative mb-4">
                                                                                 {{-- <span class="absolute top-1/2 -translate-y-1/2 ltr:left-3 rtl:right-3 dark:text-white-dark">
                                                                                     <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5">
@@ -279,27 +328,34 @@
                                                                                         <path opacity="0.5" d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12Z" stroke="currentColor" stroke-width="1.5"></path>
                                                                                     </svg>
                                                                                 </span> --}}
-                                                                                <div >
+                                                                                <div>
                                                                                     <label for="id_label_single">
                                                                                         Choisir les groupes
-                                                                                    <select   class="form-select text-white-dark groupes" id="groupes" multiple="multiple" style="width: 100%">
-                                                                                        
-                                                                                        @foreach ($groupes as $groupe)
-                                                                                        <option value="{{$groupe->id}}">{{$groupe->nom_groupe}}-{{$groupe->matiere->nom_mat_fr}}</option>
-                                                                                            
-                                                                                        @endforeach
-                                                                                        
-                        
-                        
-                                                                                    </select>
+                                                                                        <select
+                                                                                            class="form-select text-white-dark groupes"
+                                                                                            id="groupes"
+                                                                                            multiple="multiple"
+                                                                                            style="width: 100%">
+
+                                                                                            @foreach ($groupes as $groupe)
+                                                                                                <option
+                                                                                                    value="{{ $groupe->id }}">
+                                                                                                    {{ $groupe->nom_groupe }}-{{ $groupe->matiere->nom_mat_fr }}
+                                                                                                </option>
+                                                                                            @endforeach
+
+
+
+                                                                                        </select>
                                                                                     </label>
                                                                                 </div>
                                                                             </div>
-                                                                            
-                                                                            <button type="" class="btn btn-primary w-full updatebtn">Modifier</button>
-                                                                       
-                                                                            
-                                                                            
+
+                                                                            <button type=""
+                                                                                class="btn btn-primary w-full updatebtn">Modifier</button>
+
+
+
                                                                         </form>
                                                                     </div>
                                                                 </div>
@@ -308,8 +364,8 @@
                                                     </div>
                                                     {{-- edit --}}
 
-                                                    <form action="{{ route('profs.destroy', $prof->id) }}"
-                                                        method="post" class="inline-block">
+                                                    <form action="{{ route('profs.destroy', $prof->id) }}" method="post"
+                                                        class="inline-block">
                                                         @csrf
                                                         @method('DELETE')
 
@@ -362,43 +418,43 @@
 
                     toastr.options.timeOut = 10000;
                     toastr.info("{{ Session::get('message') }}");
-                    
+
                     break;
                 case 'success':
 
                     toastr.options.timeOut = 10000;
                     toastr.success("{{ Session::get('message') }}");
-                    
+
 
                     break;
                 case 'warning':
 
                     toastr.options.timeOut = 10000;
                     toastr.warning("{{ Session::get('message') }}");
-                    
+
 
                     break;
                 case 'Error':
 
                     toastr.options.timeOut = 10000;
                     toastr.error("{{ Session::get('message') }}");
-                    
+
 
                     break;
             }
         @endif
     </script>
-    <script >
+    <script>
         $(document).ready(function() {
-            
-        // Initialize Select2
-        $('.groupes').select2({
-            multiple:'true',
-            placeholder: "Choisir les groupes",
-            
-            
-        });
-    
+
+            // Initialize Select2
+            $('.groupes').select2({
+                multiple: 'true',
+                placeholder: "Choisir les groupes",
+
+
+            });
+
             //edit button
             $('.editbtn').on('click', function(e) {
                 e.preventDefault();
@@ -411,18 +467,18 @@
                 // var url = "{{ URL::to('matieres') }}";
 
                 $.get("profs/" + id + "/edit", function(data) {
-                     console.log(data.data);
+                    console.log(data.data);
                     $('.nom_pr_prof_fr').val(data.data['nom_pr_prof_fr']);
                     $('.nom_pr_prof_ar').val(data.data['nom_pr_prof_ar']);
                     $('.tel_prof').val(data.data['tel_prof']);
                     $('.matiere_id').val(data.data['matiere_id']);
                     $('.IdProf').val(data.data['id']);
 
-                   
+
                     var groupes = data.data['groupes'].map(o => o.id);
                     // console.log("hhhh",groupes);
                     $('.groupes').val(groupes).trigger('change');
-    });
+                });
 
 
 
@@ -436,7 +492,7 @@
                 var tel_prof = $('.tel_prof').val();
                 var matiere_id = $('.matiere_id').val();
                 var groupes = $('.groupes').val();
-                console.log(id,nom_pr_prof_ar,nom_pr_prof_fr,tel_prof,matiere_id,groupes)
+                console.log(id, nom_pr_prof_ar, nom_pr_prof_fr, tel_prof, matiere_id, groupes)
 
                 var URL = "profs/" + id;
                 console.log("url===", URL)
@@ -452,10 +508,10 @@
                         nom_pr_prof_ar: nom_pr_prof_ar,
                         tel_prof: tel_prof,
                         matiere_id: matiere_id,
-                        
-                        groupes:groupes
 
-                        
+                        groupes: groupes
+
+
                     },
 
                     success: function(data) {
@@ -470,5 +526,4 @@
 
         });
     </script>
-    
 @endsection
