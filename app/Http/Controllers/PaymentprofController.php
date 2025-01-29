@@ -36,7 +36,7 @@ class PaymentprofController extends Controller
         // Ajouter le champ 'sprof' au paiement
         $payment->sprof = $seancesInfo;
         // dd($payment);
-    return view('Admin.Paiementprof.recu',compact('payment'));
+    return view('Admin.PaiementProf.recu',compact('payment'));
     }
     /**
    * Display a listing of the resource.
