@@ -3,7 +3,7 @@
         <div class="relative flex w-full items-center bg-white px-5 py-2.5 dark:bg-[#0e1726]">
             <div class="horizontal-logo flex items-center justify-between ltr:mr-2 rtl:ml-2 lg:hidden">
                 <a href="{{route('admin.home')}}" class="main-logo flex shrink-0 items-center">
-                    <img class="inline w-8 ltr:-ml-1 rtl:-mr-1" src="assets/images/logo.png" alt="image">
+                    <img class="inline w-8 ltr:-ml-1 rtl:-mr-1" src="{{asset('assets/images/logo.png')}}" alt="image">
                     <span class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light md:inline">Classy Academy</span>
                 </a>
 
@@ -246,7 +246,7 @@
                 </div>
                 <div class="dropdown flex-shrink-0" x-data="dropdown" @click.outside="open = false">
                     <a href="javascript:;" class="group relative" @click="toggle()">
-                        <span><img class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src="assets/images/user-profile.jpeg" alt="image"></span>
+                        <span><img class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src="{{asset('assets/images/user-profile.jpeg')}}" alt="image"></span>
                     </a>
                     <ul x-cloak="" x-show="open" x-transition="" x-transition.duration.300ms="" class="top-11 w-[230px] !py-0 font-semibold text-dark ltr:right-0 rtl:left-0 dark:text-white-dark dark:text-white-light/90">
                         <li>
