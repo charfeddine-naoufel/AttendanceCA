@@ -328,16 +328,16 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="index.html">Sales</a>
+                        <a href="">Sales</a>
                     </li>
                     <li>
-                        <a href="analytics.html">Analytics</a>
+                        <a href="">Analytics</a>
                     </li>
                     <li>
-                        <a href="finance.html" class="active">Finance</a>
+                        <a href="" class="active">Finance</a>
                     </li>
                     <li>
-                        <a href="crypto.html">Crypto</a>
+                        <a href="">Crypto</a>
                     </li>
                 </ul>
             </li>

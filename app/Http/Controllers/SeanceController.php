@@ -141,10 +141,14 @@ class SeanceController extends Controller
     public function edit($id)
     { 
         $seance = Seance::find($id);
-        $seance['groupes']=$seance->groupes->toArray(); 
+        $elevesPresents = Eleve::whereIn('id', $seance['eleves_presents'])->get();
+        $elevesAbsents = Eleve::whereIn('id', $seance['eleves_absentss'])->get();
+        $seance['elevesp']=$elevesPresents;
+        $seance['elevesa']=$elevesAbsents;
                 return response()->json([
                                'success' => true,
-                                'data' => $seance 
+                                'data' => $seance
+                                
                                   ]);
     }
 
@@ -155,10 +159,16 @@ class SeanceController extends Controller
     {
         
         
+        $request['user_id']=Auth::user()->first()->id;
+         
         $rules = array(
-            'nom_pr_eleve_fr'       => 'required',
-            'nom_pr_eleve_ar'       => 'required',
-            'tel'      => 'required'
+            'matiere_id'       => 'required',
+            'groupe_id'       => 'required',
+            'prof_id'      => 'required',
+            'date'      => 'required',
+            'heure_deb'      => 'required',
+            'heure_fin'      => 'required',
+            
         );
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
@@ -170,24 +180,32 @@ class SeanceController extends Controller
                 ->with($notification);
                 
             } else {
+                if (is_null($request-> presents)) {
+                    $request['presents']=[];
+                }
+                $allStudents = Groupe::whereId($request-> groupe_id)->first()->eleves->pluck('id')->toArray();
+                // dd($request['presents']);
+                $request['absents'] = array_diff($allStudents, $request-> presents); 
                 // update
             $seance = Seance::findOrFail($id);
-            $seance->nom_pr_eleve_fr = $request-> nom_pr_eleve_fr;
-            $seance->nom_pr_eleve_ar = $request-> nom_pr_eleve_ar;
-            $seance->tel = $request-> tel;
-            $seance->tel_parent = $request-> tel_parent;
-            $seance->classe_lycee      =  $request-> classe_lycee;
-            $seance->lycee      =  $request-> lycee;
+            $seance->matiere_id = $request-> matiere_id;
+            $seance->groupe_id = $request-> groupe_id;
+            $seance->prof_id = $request-> prof_id;
+            $seance->date = $request-> date;
+            $seance->heure_deb      =  $request-> heure_deb;
+            $seance->heure_fin      =  $request-> heure_fin;
+            $seance->user_id      =  $request-> user_id;
+            $seance->salle      =  $request-> salle;
+            $seance->eleves_presents      =  $request-> presents;
+            $seance->eleves_absentss      =  $request-> absents;
                 $seance->save();
-            $seance->groupes()->detach();
-            // Attacher les groupes dans la table pivot
-             $seance->groupes()->attach($request->groupes);
+            // $seance->groupes()->detach();
+            // // Attacher les groupes dans la table pivot
+            //  $seance->groupes()->attach($request->groupes);
         
-                // redirect
-                // return redirect()->route('seances.index')
-                // ->with('success','Groupe modifiée avec succés.');
+                
 
-                return response()->json(['success' => true,    
+                return response()->json(['success' => true, 'data'=>$seance   
                        ]); 
             }
     }
@@ -199,12 +217,12 @@ class SeanceController extends Controller
     {
         $seance = Seance::find($id);
         
-        $seance->groupes()->detach();
-        $seance->delete();
+        // $seance->groupes()->detach();
+        // $seance->delete();
     
         // redirect
         $notification = array(
-            'message' => 'Eleve supprimé avec succés.',
+            'message' => 'Séance supprimée avec succés.',
             'alert-type' => 'warning'
         );
         return redirect()->route('seances.index')

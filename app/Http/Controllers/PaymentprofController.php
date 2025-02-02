@@ -114,15 +114,12 @@ class PaymentprofController extends Controller
       
       $paymentprof->save();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-       // Génération du reçu PDF
-       $pdf = $this->receiptService->generateReceipt($paymentprof);
+    //    $pdf = $this->receiptService->generateReceipt($paymentprof);
         
-       // Sauvegarde du PDF dans le storage
-       $filename = 'recu-' . $payment->id . '.pdf';
-       $pdf->save(storage_path('app/public/receipts/' . $filename));
+    //    $filename = 'recu-' . $payment->id . '.pdf';
+    //    $pdf->save(storage_path('app/public/receipts/' . $filename));
        
-       // Association du chemin du reçu au paiement
-       $paymentprof->update(['document' => 'receipts/' . $filename]);      
+    //    $paymentprof->update(['document' => 'receipts/' . $filename]);      
 
       // redirect
       $notification = array(
@@ -163,13 +160,13 @@ class PaymentprofController extends Controller
   public function update(Request $request, $id)
   {
       
-      
-      $rules = array(
-          'nom_pr_Prof_fr'       => 'required',
-          'nom_pr_Prof_ar'       => 'required',
-          'tel_prof'      => 'required',
-          'matiere_id'      => 'required'
-      );
+    $request['document']='test'; 
+    $rules = array(
+        'prof_id'       => 'required',
+        'date'       => 'required',
+        'prix'      => 'required'
+        
+    );
           $validator = Validator::make($request->all(), $rules);
           if ($validator->fails()) {
               $notification = array(
@@ -180,12 +177,17 @@ class PaymentprofController extends Controller
               ->with($notification);
               
           } else {
+            if (is_null($request-> seances)) {
+                $request['seances']=[];
+            }
               // update
           $paymentprof = Prof::find($id);
-          $paymentprof->nom_pr_prof_fr = $request-> nom_pr_prof_fr;
-          $paymentprof->nom_pr_prof_ar = $request-> nom_pr_prof_ar;
-          $paymentprof->tel_prof = $request-> tel_prof;
-          $paymentprof->matiere_id = $request-> matiere_id;
+          $paymentprof->prof_id = $request-> prof_id;
+          $paymentprof->date = $request-> date;
+          $paymentprof->prix = $request-> prix;
+          $paymentprof->document = $request-> document;
+          $paymentprof->seances = json_encode(array_values($request-> seances));
+          
               $paymentprof->save();
           $paymentprof->groupes()->detach();
           // Attacher les groupes dans la table pivot
@@ -204,14 +206,14 @@ class PaymentprofController extends Controller
    */
   public function destroy($id)
   {
-      $paymentprof = Prof::find($id);
+      $paymentprof = Paymentprof::find($id);
       
-      $paymentprof->groupes()->detach();
+    //   $paymentprof->groupes()->detach();
       $paymentprof->delete();
   
       // redirect
       $notification = array(
-          'message' => 'Prof supprimé avec succés.',
+          'message' => 'Paiement supprimé avec succés.',
           'alert-type' => 'warning'
       );
       return redirect()->route('paiementsProf.index')

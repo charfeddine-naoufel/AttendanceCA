@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <div class="animate__animated p-6" :class="[$store.app.animation]">
-        <div x-data="finance">
+        <div>
             <ul class="flex space-x-2 rtl:space-x-reverse">
                 <li>
                     <a href="javascript:;" class="text-primary hover:underline">Dashboard</a>
@@ -89,43 +89,44 @@
                                                                 </div>
                                                                 <div>
                                                                     {{-- <label for="gridPassword">Classe Lycée</label> --}}
-                                                                    <input type="date" name="date" placeholder="Date" value="{{  date("Y-m-d");}}"
-                                                                        class="form-input" />
+                                                                    <input type="date" name="date" placeholder="Date"
+                                                                        value="{{ date('Y-m-d') }}" class="form-input" />
                                                                 </div>
                                                             </div>
 
                                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                                                
+
                                                                 <div>
                                                                     {{-- <label for="gridPassword">Classe Lycée</label> --}}
-                                                                    <input type="text" name="prix" placeholder="Prix/Séance"
-                                                                        class="form-input" />
+                                                                    <input type="text" name="prix"
+                                                                        placeholder="Prix/Séance" class="form-input" />
                                                                 </div>
                                                             </div>
-                                                            
 
 
-                                                           
+
+
                                                         </div>
                                                         <div>
                                                             <div class="table-responsive">
                                                                 <table id="mytable" class=" table table-sm">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th><input id="checkAll" type="checkbox" class="form-checkbox" /></th>
+                                                                            <th><input id="checkAll" type="checkbox"
+                                                                                    class="form-checkbox" /></th>
                                                                             <th>Date séance</th>
                                                                             <th>Groupe</th>
                                                                             <th>Matière</th>
-                                                                            
-                                                                            
+
+
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        
-                                                                                                                                                    
+
+
                                                                     </tbody>
                                                                 </table>
-                                                                
+
                                                             </div>
                                                             <button type="submit"
                                                                 class="btn btn-primary w-full">Enregistrer</button>
@@ -150,7 +151,7 @@
                                             <th> Nom & Prenom Prof</th>
                                             <th>Date</th>
                                             <th>Séances</th>
-                                            
+
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -162,16 +163,18 @@
                                                 <td>{{ $payment->date }}</td>
                                                 <td>
                                                     @foreach ($payment->sprof as $seance)
-                                                    <div class="flex items-center rounded bg-primary-light p-1 text-primary dark:bg-primary-dark-light">
-                                                        <span class="ltr:pr-2 rtl:pl-2"><strong class="ltr:mr-1 rtl:ml-1">{{$seance->date->format("m/d/Y")}}-</strong>{{$seance->groupe->nom_groupe}}</span>
-                                                        
-                                                    </div>
-                                                @endforeach
-                                                       
-                                                   
+                                                        <div
+                                                            class="flex items-center rounded bg-primary-light p-1 text-primary dark:bg-primary-dark-light">
+                                                            <span class="ltr:pr-2 rtl:pl-2"><strong
+                                                                    class="ltr:mr-1 rtl:ml-1">{{ $seance->date->format('m/d/Y') }}-</strong>{{ $seance->groupe->nom_groupe }}</span>
+
+                                                        </div>
+                                                    @endforeach
+
+
                                                 </td>
-                                                
-                                                
+
+
                                                 <td
                                                     class="border-b border-[#ebedf2] p-3 text-center dark:border-[#191e3a]">
                                                     <button x-tooltip="Imprimer">
@@ -232,7 +235,7 @@
                                                                     <div
                                                                         class="flex items-center justify-between bg-[#fbfbfb] px-5 py-3 dark:bg-[#121c2c]">
                                                                         <h5 class="text-lg font-bold">Modifier Elève</h5>
-                                                                        <button type="button" 
+                                                                        <button type="button"
                                                                             class="text-white-dark hover:text-dark"
                                                                             @click="toggle">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -466,32 +469,37 @@
     <script>
         $(document).ready(function() {
             //présence
-            $('.btnprof').change(function(){
-                var prof_id=$('#prof').val();
+            $('.btnprof').change(function() {
+                var prof_id = $('#prof').val();
 
-                var groupes={!!$groupes!!};
-                var matieres={!!$matieres!!};
-                var toutesseances={!!$seancesbyprof!!};
-                var seances=toutesseances[prof_id];
-                console.log('ggg',seances,' **  ');
+                var groupes = {!! $groupes !!};
+                var matieres = {!! $matieres !!};
+                var toutesseances = {!! $seancesbyprof !!};
+                var seances = toutesseances[prof_id];
+                console.log('ggg', seances, ' **  ');
                 $("#mytable > tbody").empty();
-                if (seances.length !=0)
-                {
-                seances.forEach(function(seance) {
-                    
-                // faire quelque chose avec `value` (ou `this` qui est `value` )
-                $('#mytable > tbody:last-child').append('<tr style="height: 10px;vertical-align:middle"><td><input name="seances[]" type="checkbox" class="form-checkbox" value="'+seance.id+'" /></td><td >'+seance.date+'</td><td >'+groupes[seance.groupe_id].nom_groupe+'</td><td >'+matieres[seance.matiere_id].nom_mat_fr+'</td></tr>');
-                 
-                });}
-                else{
-                    $('#mytable > tbody:last-child').append('<tr style="height: 10px;vertical-align:middle"><td colspan="3"><h2 style="text-align:center">Aucune Séance Impayée</h2></td></tr>');
+                if (seances.length != 0) {
+                    seances.forEach(function(seance) {
+
+                        // faire quelque chose avec `value` (ou `this` qui est `value` )
+                        $('#mytable > tbody:last-child').append(
+                            '<tr style="height: 10px;vertical-align:middle"><td><input name="seances[]" type="checkbox" class="form-checkbox" value="' +
+                            seance.id + '" /></td><td >' + seance.date + '</td><td >' + groupes[
+                                seance.groupe_id].nom_groupe + '</td><td >' + matieres[seance
+                                .matiere_id].nom_mat_fr + '</td></tr>');
+
+                    });
+                } else {
+                    $('#mytable > tbody:last-child').append(
+                        '<tr style="height: 10px;vertical-align:middle"><td colspan="3"><h2 style="text-align:center">Aucune Séance Impayée</h2></td></tr>'
+                        );
 
                 }
-        });
-        // checkAll
-        $("#checkAll").click(function(){
-        $('input:checkbox').not(this).prop('checked', this.checked);
-        });
+            });
+            // checkAll
+            $("#checkAll").click(function() {
+                $('input:checkbox').not(this).prop('checked', this.checked);
+            });
             // Initialize Select2
             $('.groupes').select2({
                 multiple: 'true',
