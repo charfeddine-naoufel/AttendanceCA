@@ -48,33 +48,32 @@
                                                     @foreach ($seancesByGroupAndMonth[$groupId] as $month => $seances)
                                                     <div class="max-w-[24rem] w-full  shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 {{ $month === $currentMonth ? 'bg-warning bg-gradient' : 'bg-white' }}">
                                                         <div class="flex justify-between mb-5">
-                                                            <h6 class="text-[#0e1726] font-semibold text-base dark:text-white-light text-danger">{{ Carbon\Carbon::parse($month)->translatedFormat('F Y') }}</h6>
+                                                            <h6 class="text-[#0e1726] font-semibold text-base dark:text-white-light text-danger"><strong> {{ Carbon\Carbon::parse($month)->translatedFormat('F Y') }}</strong></h6>
                                                             {{ $month === $currentMonth ? '' : '' }}
                                                             <span class="badge  py-1.5 dark:bg-primary dark:text-white {{ $month === $currentMonth ? 'bg-primary/10 text-primary' : 'd-none' }}">En-Cours</span>
                                                         </div>
                                                         <div class="table-responsive">
-                                                            <table class="table-striped">
+                                                            <table class="table table-sm table-bordered">
                                                                 <thead>
                                                                     <tr>
-                                                                        
-                                                                        <th>Date</th>
-                                                                        <th>Prof</th>
-                                                                        
+                                                                        <th>Nom et Prénom</th>
+                                                                        @foreach ($seances as $seance)
+                                                                            <th style="writing-mode: vertical-lr; text-orientation: mixed;font-size:10px;">{{ Carbon\Carbon::parse($seance->date)->format('d/m/Y') }}</th>
+                                                                        @endforeach
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @foreach ($seances as $seance)
+                                                                    @foreach ($seances->first()->groupe->eleves as $eleve)
                                                                         <tr>
-                                                                            <td>{{ $seance->date->format('d/m/Y') }}</td>
-                                                                            <td>{{ $seance->prof->nom_pr_prof_fr }}</td>
-                                                                            {{-- <td>
-                                                                                @foreach ($seance->eleves as $eleve)
-                                                                                    {{ $eleve->nom }}<br>
-                                                                                @endforeach
-                                                                            </td> --}}
+                                                                            <td>{{ $eleve->nom_pr_eleve_fr }} </td>
+                                                                            @foreach ($seances as $seance)
+                                                                                <td>
+                                                                                    <input type="checkbox" name="presence[{{ $eleve->id }}][{{ $seance->id }}]"
+                                                                                        {{ in_array($eleve->id, $seance->eleves_presents) ? 'checked' : '' }}>
+                                                                                </td>
+                                                                            @endforeach
                                                                         </tr>
                                                                     @endforeach
-                                                                    
                                                                 </tbody>
                                                             </table>
                                                         </div>

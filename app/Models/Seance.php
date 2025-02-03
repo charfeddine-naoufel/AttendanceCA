@@ -33,4 +33,5 @@ class Seance extends Model
     {
         return Seance::where('id', $id)->first();
     }
+    
 }
