@@ -48,7 +48,7 @@
                                                     @foreach ($seancesByGroupAndMonth[$groupId] as $month => $seances)
                                                     <div class="max-w-[24rem] w-full  shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 {{ $month === $currentMonth ? 'bg-warning bg-gradient' : 'bg-white' }}">
                                                         <div class="flex justify-between mb-5">
-                                                            <h6 class="text-[#0e1726] font-semibold text-base dark:text-white-light text-danger"><strong> {{ Carbon\Carbon::parse($month)->translatedFormat('F Y') }}</strong></h6>
+                                                            <h6 class="text-[#0e1726] font-semibold text-base dark:text-white-light text-danger"><strong style="-webkit-text-stroke: 1px rgb(216, 35, 35)"> {{ Carbon\Carbon::parse($month)->translatedFormat('F Y') }}</strong></h6>
                                                             {{ $month === $currentMonth ? '' : '' }}
                                                             <span class="badge  py-1.5 dark:bg-primary dark:text-white {{ $month === $currentMonth ? 'bg-primary/10 text-primary' : 'd-none' }}">En-Cours</span>
                                                         </div>

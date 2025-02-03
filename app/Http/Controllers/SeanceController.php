@@ -218,7 +218,7 @@ class SeanceController extends Controller
         $seance = Seance::find($id);
         
         // $seance->groupes()->detach();
-        // $seance->delete();
+         $seance->delete();
     
         // redirect
         $notification = array(
