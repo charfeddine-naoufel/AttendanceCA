@@ -15,7 +15,7 @@ class GroupeController extends Controller
      */
     public function index()
     {
-        $groupes = Groupe::all();
+        $groupes = Groupe::orderBy('nom_groupe')->get();
         $niveaux= Niveau::all();
         $matieres= Matiere::all();
         // dd($groupes);
