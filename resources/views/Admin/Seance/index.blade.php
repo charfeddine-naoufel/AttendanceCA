@@ -199,9 +199,21 @@
                                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                                                                 <div>
-                                                                    {{-- <label for="gridPassword">Classe Lycée</label> --}}
-                                                                    <input type="text" name="salle"
-                                                                        placeholder="Numéro salle" class="form-input" />
+                                                                    <div class="flex">
+                                                                        <div class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
+                                                                            Salle
+                                                                        </div>
+                                                                        <select name="salle" id="" class="py-2.5">
+                                                                            <option value="S1">S1</option>
+                                                                            <option value="S2">S2</option>
+                                                                            <option value="S3">S3</option>
+                                                                            <option value="S4">S4</option>
+                                                                            <option value="S5">S1</option>
+                                                                            <option value="S6">S6</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -211,7 +223,7 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th><input id="checkAll" type="checkbox"
-                                                                                    class="form-checkbox" /></th>
+                                                                                    class="form-checkbox checkAll" /></th>
                                                                             <th>الاسم و اللقب</th>
                                                                             <th>Nom et Prénom</th>
 
@@ -664,11 +676,20 @@
                                                                                         class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                                                                                         <div>
-                                                                                            {{-- <label for="gridPassword">Classe Lycée</label> --}}
-                                                                                            <input type="text"
-                                                                                                id="salle"
-                                                                                                placeholder="Numéro salle"
-                                                                                                class="form-input" />
+                                                                                            
+                                                                                            <div class="flex">
+                                                                                                <div class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee]  px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
+                                                                                                    Salle
+                                                                                                </div>
+                                                                                                <select name="salle" id="salle" class="py-2.5">
+                                                                                                    <option value="S1">S1</option>
+                                                                                                    <option value="S2">S2</option>
+                                                                                                    <option value="S3">S3</option>
+                                                                                                    <option value="S4">S4</option>
+                                                                                                    <option value="S5">S1</option>
+                                                                                                    <option value="S6">S6</option>
+                                                                                                </select>
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

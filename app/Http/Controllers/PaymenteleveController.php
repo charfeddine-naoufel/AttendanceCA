@@ -49,23 +49,33 @@ class PaymenteleveController extends Controller
       $elevesbygroupe = $groupes->mapWithKeys(function ($groupe) {
         return [$groupe->id => $groupe->eleves];})->toArray();
       
-    //   seances
-            $seances= Seance::all();
-            $eleveSeances = [];
+   // Charger tous les élèves et les indexer par leur ID
+$eleves = Eleve::all()->keyBy('id');
 
-            foreach ($seances as $seance) {
-                foreach ($seance->eleves_presents as $eleveId) {
-                    // Ajouter la séance à l'élève correspondant
-                    $eleveSeances[$eleveId][] = $seance;
-                }
+// Récupérer toutes les séances
+$seances = Seance::all();
+$eleveSeances = [];
+
+foreach ($seances as $seance) {
+    // Pour chaque séance, parcourir la liste des élèves présents (tableau d'IDs)
+    foreach ($seance->eleves_presents as $eleveId) {
+        // Vérifier que l'élève existe (pour éviter d'éventuelles erreurs)
+        if (isset($eleves[$eleveId])) {
+            $eleve = $eleves[$eleveId];
+            // On suppose ici que $eleve->paidseances contient déjà un tableau d'IDs
+            // Si la séance a déjà été payée par cet élève, on passe à l'itération suivante
+            if (in_array($seance->id, $eleve->paidseances)) {
+                continue;
             }
-        
+            // Sinon, on ajoute la séance dans le tableau de l'élève
+            $eleveSeances[$eleveId][] = $seance;
+        }
+    }
+}
       $matieres=Matiere::all()->keyBy('id');
       $groupes=Groupe::all()->keyBy('id');
     // dd($matieres);
-      $seancesbyprof = $profs->mapWithKeys(function ($prof) {
-        return [$prof->id => Seance::where([['payprof',false],['prof_id',$prof->id]])->get()];
-    });
+    
     
       
       return view('Admin.PaiementEleve.index',compact('payments','elevesbygroupe','eleveSeances','matieres','groupes'));
@@ -108,6 +118,7 @@ class PaymenteleveController extends Controller
     if (is_null($request-> seances)) {
         $request['seances']=[];
     }
+    
       // store Eleve
       $paymenteleve = new Paymenteleve;
       $paymenteleve->groupe_id = $request-> groupe_id;
@@ -118,6 +129,18 @@ class PaymenteleveController extends Controller
       $paymenteleve->seances = json_encode(array_values($request-> seances));
       
       $paymenteleve->save();
+      
+      $eleve = Eleve::find($request->eleve_id);
+      $currentPaidSeances = $eleve->paidseances ?? [];
+
+    // Ajouter les nouveaux ID de séances payées +++
+    $newPaidSeances = array_unique(array_merge($currentPaidSeances,$request->seances));
+
+    
+    $eleve->paidseances = $newPaidSeances;
+
+    // Sauvegarder les modifications
+    $eleve->save();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
              
 
@@ -201,17 +224,17 @@ class PaymenteleveController extends Controller
    */
   public function destroy($id)
   {
-      $paymenteleve = Prof::find($id);
+      $paymenteleve = Paymenteleve::find($id);
       
-      $paymenteleve->groupes()->detach();
+      
       $paymenteleve->delete();
   
       // redirect
       $notification = array(
-          'message' => 'Prof supprimé avec succés.',
+          'message' => 'Payment eleve supprimé avec succés.',
           'alert-type' => 'warning'
       );
-      return redirect()->route('paiementsProf.index')
+      return redirect()->route('paiementsEleve.index')
       ->with($notification);
   }
 }

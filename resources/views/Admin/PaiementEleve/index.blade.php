@@ -395,7 +395,7 @@
                                                     </div>
                                                     {{-- edit --}}
 
-                                                    <form action="{{ route('paiementsProf.destroy', $payment->id) }}"
+                                                    <form action="{{ route('paiementsEleve.destroy', $payment->id) }}"
                                                         method="post" class="inline-block">
                                                         @csrf
                                                         @method('DELETE')

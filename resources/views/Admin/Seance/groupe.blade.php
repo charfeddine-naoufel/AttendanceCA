@@ -1,4 +1,5 @@
 @extends('layouts.master')
+
 @section('content')
     <div class="animate__animated p-6" :class="[$store.app.animation]">
         <div>
@@ -53,25 +54,29 @@
                                                             <span class="badge  py-1.5 dark:bg-primary dark:text-white {{ $month === $currentMonth ? 'bg-primary/10 text-primary' : 'd-none' }}">En-Cours</span>
                                                         </div>
                                                         <div class="table-responsive">
-                                                            <table class="table table-sm table-bordered">
-                                                                <thead>
+                                                            <table class="table table-sm table-bordered ">
+                                                                <thead class="font-semibold text-sm">
                                                                     <tr>
                                                                         <th>Nom et Prénom</th>
                                                                         @foreach ($seances as $seance)
                                                                             <th style="writing-mode: vertical-lr; text-orientation: mixed;font-size:10px;">{{ Carbon\Carbon::parse($seance->date)->format('d/m/Y') }}</th>
                                                                         @endforeach
+                                                                        <th style="writing-mode: vertical-lr; text-orientation: mixed;font-size:10px;">Montant</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
+                                                                <tbody class="font-semibold ">
                                                                     @foreach ($seances->first()->groupe->eleves as $eleve)
-                                                                        <tr>
+                                                                        <tr >
                                                                             <td>{{ $eleve->nom_pr_eleve_fr }} </td>
                                                                             @foreach ($seances as $seance)
-                                                                                <td>
-                                                                                    <input type="checkbox" name="presence[{{ $eleve->id }}][{{ $seance->id }}]"
+                                                                                <td >
+                                                                                    <input type="checkbox" disabled name="presence[{{ $eleve->id }}][{{ $seance->id }}]"
                                                                                         {{ in_array($eleve->id, $seance->eleves_presents) ? 'checked' : '' }}>
                                                                                 </td>
+                                                                                
+
                                                                             @endforeach
+                                                                            <td>{{ count($eleve->paidseances)*10 }}</td>
                                                                         </tr>
                                                                     @endforeach
                                                                 </tbody>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Eleve;
+use App\Models\Seance;
 use App\Models\Groupe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -22,6 +23,26 @@ class EleveController extends Controller
                                      ->orWhere('nom_pr_eleve_ar', 'like', "%{$search}%");
         })->orderBy('classe_lycee')->paginate(20);
         $groupes= Groupe::all();
+        // dd($eleves);
+        $seances = Seance::all();
+
+        // Tableau pour stocker le résultat pour chaque élève
+        $resultats = [];
+
+        foreach ($eleves as $eleve) {
+            // Récupérer les séances payées de l'élève
+            $paidSeancesIds = $eleve->paidseances ?? [];
+
+            // Récupérer les séances où l'élève est présent
+            $seancesPresentIds = [];
+
+            foreach ($seances as $seance) {
+                if (in_array($eleve->id, $seance->eleves_presents)) {
+                    $seancesPresentIds[] = $seance->id;
+                }
+            }
+            $eleve['toutesPayees'] = empty(array_diff($seancesPresentIds, $paidSeancesIds));
+        }
         // dd($eleves);
         return view('Admin.Eleve.index',compact('eleves','groupes'));
     }
@@ -56,6 +77,7 @@ class EleveController extends Controller
         // Vérifier si l'élève existe déjà
         $eleveExiste = Eleve::where('nom_pr_eleve_fr', $request->nom_pr_eleve_fr)
             ->orWhere('nom_pr_eleve_ar', $request->nom_pr_eleve_ar)
+            ->where('classe_lycee', $request->classe_lycee)
             ->exists();
             if ($eleveExiste) {
                 // Retourner une erreur si l'élève existe déjà

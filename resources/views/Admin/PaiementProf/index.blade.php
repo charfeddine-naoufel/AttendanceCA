@@ -166,7 +166,7 @@
                                                         <div
                                                             class="flex items-center rounded bg-primary-light p-1 text-primary dark:bg-primary-dark-light">
                                                             <span class="ltr:pr-2 rtl:pl-2"><strong
-                                                                    class="ltr:mr-1 rtl:ml-1">{{ $seance->date->format('m/d/Y') }}-</strong>{{ $seance->groupe->nom_groupe }}</span>
+                                                                    class="ltr:mr-1 rtl:ml-1">{{ $seance->date->format('d/m/Y') }}-</strong>{{ $seance->groupe->nom_groupe }}</span>
 
                                                         </div>
                                                     @endforeach

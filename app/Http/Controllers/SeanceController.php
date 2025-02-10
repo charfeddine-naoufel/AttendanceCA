@@ -19,7 +19,7 @@ class SeanceController extends Controller
      */
     public function index()
     {
-        $seances = Seance::orderBy('date', 'DESC')->orderBy('heure_deb', 'desc')->get();
+        $seances = Seance::orderBy('date', 'DESC')->orderBy('groupe_id', 'asc')->get();
         
         $seances->each(function ($seance) {
             $seance->presents = Eleve::whereIn('id', $seance->eleves_presents)->get();

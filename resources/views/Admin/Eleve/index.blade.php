@@ -200,7 +200,7 @@
 
                         <div class="mb-5">
                             <div class="table-responsive">
-                                <table class="table-striped">
+                                <table class="">
                                     <thead class="bg-dark">
                                         <tr>
                                             <th>N°</th>
@@ -216,7 +216,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($eleves as $eleve)
-                                            <tr>
+                                            <tr class="{{ $eleve['toutesPayees'] ? 'bg-success-light ' : 'bg-warning-light ' }}">
                                                 <td class="whitespace-nowrap">{{ $loop->iteration }}</td>
                                                 <td>{{ $eleve->nom_pr_eleve_fr }}</td>
                                                 <td>{{ $eleve->nom_pr_eleve_ar }}</td>
