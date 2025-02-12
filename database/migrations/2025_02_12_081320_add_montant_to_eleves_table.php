@@ -12,7 +12,7 @@ return new class extends Migration
     public function up():void
     {
         Schema::table('eleves', function (Blueprint $table) {
-            $table->json('montant')->nullable()->default(json_encode([]))->after('paidseances');
+            $table->json('montant')->nullable()->after('paidseances');
         });
     }
 
