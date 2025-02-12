@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Eleve;
 use App\Models\Seance;
+use App\Models\Paymenteleve;
 use App\Models\Groupe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -30,6 +31,8 @@ class EleveController extends Controller
         $resultats = [];
 
         foreach ($eleves as $eleve) {
+                
+
             // Récupérer les séances payées de l'élève
             $paidSeancesIds = $eleve->paidseances ?? [];
 
@@ -43,7 +46,7 @@ class EleveController extends Controller
             }
             $eleve['toutesPayees'] = empty(array_diff($seancesPresentIds, $paidSeancesIds));
         }
-        // dd($eleves);
+        //  dd($eleves);
         return view('Admin.Eleve.index',compact('eleves','groupes'));
     }
 
@@ -89,6 +92,10 @@ class EleveController extends Controller
                     return redirect()->route('eleves.index')
                     ->with($notification);
             }else {
+                $montant = [];
+                for ($month = 1; $month <= 12; $month++) {
+                    $montant[$month] = 0;
+                }
         // store eleve
         $eleve = new Eleve;
         $eleve->nom_pr_eleve_fr = $request-> nom_pr_eleve_fr;
@@ -97,6 +104,7 @@ class EleveController extends Controller
         $eleve->tel_parent = $request-> tel_parent;
         $eleve->classe_lycee      =  $request-> classe_lycee;
         $eleve->lycee      =  $request-> lycee;
+        $eleve->montant      =  $montant;
         $eleve->save();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
         // store groupes

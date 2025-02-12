@@ -59,9 +59,9 @@
                                                                     <tr>
                                                                         <th>Nom et Prénom</th>
                                                                         @foreach ($seances as $seance)
-                                                                            <th style="writing-mode: vertical-lr; text-orientation: mixed;font-size:10px;">{{ Carbon\Carbon::parse($seance->date)->format('d/m/Y') }}</th>
+                                                                            <th style="writing-mode: vertical-lr; text-orientation: mixed;font-size:10px;font-weight:bold;" >{{ Carbon\Carbon::parse($seance->date)->format('d/m/Y') }}</th>
                                                                         @endforeach
-                                                                        <th style="writing-mode: vertical-lr; text-orientation: mixed;font-size:10px;">Montant</th>
+                                                                        <th style="writing-mode: vertical-lr; text-orientation: mixed;font-size:10px;font-weight:bold;">Montant</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody class="font-semibold ">
@@ -76,7 +76,11 @@
                                                                                 
 
                                                                             @endforeach
-                                                                            <td>{{ count($eleve->paidseances)*10 }}</td>
+                                                                            @php
+                                                                                // Utiliser Carbon pour extraire le mois
+                                                                                $m = \Carbon\Carbon::parse($month)->month;
+                                                                            @endphp
+                                                                            <td>{{ $eleve->montant[(string)$m] ?? 0}}</td>
                                                                         </tr>
                                                                     @endforeach
                                                                 </tbody>

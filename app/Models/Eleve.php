@@ -9,6 +9,7 @@ class Eleve extends Model
 {
     use HasFactory;
     protected $casts = [
+        'montant' => 'array',
         'paidseances' => 'array',
     ];
     public function groupes()

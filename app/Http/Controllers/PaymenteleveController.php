@@ -9,6 +9,7 @@ use App\Models\Seance;
 use App\Models\Matiere;
 use App\Models\Groupe;
 use App\Models\Eleve;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -130,14 +131,24 @@ foreach ($seances as $seance) {
       
       $paymenteleve->save();
       
+      
       $eleve = Eleve::find($request->eleve_id);
       $currentPaidSeances = $eleve->paidseances ?? [];
-
+      $montant = $eleve->montant ?? [];
+        for ($i = 1; $i <= 12; $i++) {
+            if (!isset($montant[$i])) {
+                $montant[$i] = 0;
+            }
+        }
+        $month = Carbon::parse($paymenteleve->date)->month;
+      $montant[$month] += $paymenteleve->prix*count($request->seances);
     // Ajouter les nouveaux ID de séances payées +++
     $newPaidSeances = array_unique(array_merge($currentPaidSeances,$request->seances));
 
     
     $eleve->paidseances = $newPaidSeances;
+    $eleve->montant = $montant;
+
 
     // Sauvegarder les modifications
     $eleve->save();
