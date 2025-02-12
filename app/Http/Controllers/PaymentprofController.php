@@ -13,20 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PaymentprofController extends Controller
 {
-    protected $receiptService;
-
-    public function __construct(ReceiptService $receiptService)
-    {
-        $this->receiptService = $receiptService;
-    }
     
-    // public function downloadReceipt(Paymentprof $payment)
-    // {   
-    //     // $payment=Paymentprof::find($id)->first();
-    //     dd($payment);
-    //     $pdf = $this->receiptService->generateReceipt($payment);
-    //     return $pdf->download('recu-' . $payment->id . '.pdf');
-    // }
     public function downloadRecu($id)
     {
         $payment = Paymentprof::find($id);
@@ -34,7 +21,7 @@ class PaymentprofController extends Controller
         $seancesInfo = Seance::whereIn('id', json_decode($payment->seances))->get();
         
         // Ajouter le champ 'sprof' au paiement
-        $payment->sprof = $seancesInfo;
+        $payment->seleve = $seancesInfo;
         // dd($payment);
     return view('Admin.PaiementProf.recu',compact('payment'));
     }
