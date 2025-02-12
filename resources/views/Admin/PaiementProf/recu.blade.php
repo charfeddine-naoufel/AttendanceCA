@@ -49,6 +49,7 @@
 					</tr>
 				</thead>
 				<tbody>
+					@if ($payment->sprof)
                     @foreach ($payment->sprof as $seance )
                         
                     
@@ -59,6 +60,9 @@
 						
 					</tr>
                     @endforeach
+					@else
+   					 <p>Aucune séance trouvée.</p>
+					@endif
 				</tbody>
 			</table>
 			<table class="balance">

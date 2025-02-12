@@ -49,16 +49,20 @@
 					</tr>
 				</thead>
 				<tbody>
-                    @foreach ($payment->seleve as $seance )
+					@if ($payment->seleve)
+                    	@foreach ($payment->seleve as $seance )
                         
                     
-					<tr>
-						<td><span contenteditable>{{$loop->iteration}}</span></td>
-						<td><span contenteditable>{{$payment->date}}</span></td>
-						<td><span contenteditable >{{$seance->groupe->nom_groupe}}-{{$seance->groupe->niveau->nom_niv_fr}}</span></td>
+						<tr>
+							<td><span contenteditable>{{$loop->iteration}}</span></td>
+							<td><span contenteditable>{{$payment->date}}</span></td>
+							<td><span contenteditable >{{$seance->groupe->nom_groupe}}-{{$seance->groupe->niveau->nom_niv_fr}}</span></td>
 						
-					</tr>
-                    @endforeach
+						</tr>
+                   		 @endforeach
+					@else
+							<p>Aucune séance trouvée.</p>
+					@endif
 				</tbody>
 			</table>
 			<table class="balance">

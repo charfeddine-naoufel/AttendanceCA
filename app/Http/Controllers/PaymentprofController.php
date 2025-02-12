@@ -21,7 +21,7 @@ class PaymentprofController extends Controller
         $seancesInfo = Seance::whereIn('id', json_decode($payment->seances))->get();
         
         // Ajouter le champ 'sprof' au paiement
-        $payment->seleve = $seancesInfo;
+        $payment->sprof = $seancesInfo;
         // dd($payment);
     return view('Admin.PaiementProf.recu',compact('payment'));
     }

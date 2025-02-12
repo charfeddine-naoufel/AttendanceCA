@@ -22,9 +22,9 @@ class PaymenteleveController extends Controller
         
         $seancesInfo = Seance::whereIn('id', json_decode($payment->seances))->get();
         
-        // Ajouter le champ 'sprof' au paiement
+        // Ajouter le champ 'seleve' au paiement
         $payment->seleve = $seancesInfo;
-        // dd($payment);
+        //  dd($payment);
     return view('Admin.Paiementeleve.recu',compact('payment'));
     }
     /**
