@@ -57,6 +57,7 @@
                                                             <table class="table table-sm table-bordered ">
                                                                 <thead class="font-semibold text-sm">
                                                                     <tr>
+                                                                        <th>N°</th>
                                                                         <th>Nom et Prénom</th>
                                                                         @foreach ($seances as $seance)
                                                                             <th style="writing-mode: vertical-lr; text-orientation: mixed;font-size:10px;font-weight:bold;" >{{ Carbon\Carbon::parse($seance->date)->format('d/m/Y') }}</th>
@@ -67,10 +68,11 @@
                                                                 <tbody class="font-semibold ">
                                                                     @foreach ($seances->first()->groupe->eleves as $eleve)
                                                                         <tr >
+                                                                            <td>{{ $loop->iteration }} </td>
                                                                             <td>{{ $eleve->nom_pr_eleve_fr }} </td>
                                                                             @foreach ($seances as $seance)
                                                                                 <td >
-                                                                                    <input type="checkbox" disabled name="presence[{{ $eleve->id }}][{{ $seance->id }}]"
+                                                                                    <input type="checkbox"  name="presence[{{ $eleve->id }}][{{ $seance->id }}]"
                                                                                         {{ in_array($eleve->id, $seance->eleves_presents) ? 'checked' : '' }}>
                                                                                 </td>
                                                                                 

@@ -23,7 +23,7 @@
 		<article>
 			<h5 class="font-size-16 mb-3">Payé à:</h5>
 			<address contenteditable>
-				<p> {{$payment->prof->nom_pr_prof_fr}}<br>{{$payment->prof->nom_pr_prof_ar}}</p>
+				<p> {{$payment->prof->nom_pr_prof_fr}}--{{$payment->prof->nom_pr_prof_ar}}</p>
 			</address>
 			<table class="meta">
 				<tr>
@@ -32,7 +32,7 @@
 				</tr>
 				<tr>
 					<th><span contenteditable>Date</span></th>
-					<td><span contenteditable>03/01/2025</span></td>
+					<td><span contenteditable>{{date('d/m/Y',strtotime($payment->date))}}</span></td>
 				</tr>
 				<tr>
 					<th><span contenteditable>Tarif Seance</span></th>

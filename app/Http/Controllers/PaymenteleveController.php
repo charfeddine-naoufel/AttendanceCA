@@ -239,6 +239,31 @@ foreach ($seances as $seance) {
       
       
       $paymenteleve->delete();
+      $eleve = Eleve::find($paymenteleve->eleve_id);
+      $month = Carbon::parse($paymenteleve->date)->month;
+      $montant = $eleve->montant ?? [];
+        for ($i = 1; $i <= 12; $i++) {
+            if (!isset($montant[$i])) {
+                $montant[$i] = 0;
+            }
+        }
+      $montant[$month] =0;
+      $eleve->montant = $montant;
+
+      $seancesToRemove = $paymenteleve->seances;
+      if (is_string($seancesToRemove)) {
+        $seancesToRemove = json_decode($seancesToRemove, true);
+    }
+      $currentPaidSeances = $eleve->paidseances ?? [];
+      $updatedPaidSeances = array_values(array_diff($currentPaidSeances, $seancesToRemove));
+        
+        // Mettre à jour le champ paidseances de l'élève
+        $eleve->paidseances = $updatedPaidSeances;
+
+
+    // Sauvegarder les modifications
+    $eleve->save();
+
   
       // redirect
       $notification = array(

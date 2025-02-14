@@ -32,7 +32,7 @@
 				</tr>
 				<tr>
 					<th><span contenteditable>Date</span></th>
-					<td><span contenteditable>03/01/2025</span></td>
+					<td><span contenteditable>{{date('d/m/Y',strtotime($payment->date))}}</span></td>
 				</tr>
 				<tr>
 					<th><span contenteditable>Tarif Seance</span></th>
