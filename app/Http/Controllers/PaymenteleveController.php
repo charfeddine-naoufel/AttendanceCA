@@ -25,7 +25,7 @@ class PaymenteleveController extends Controller
         // Ajouter le champ 'seleve' au paiement
         $payment->seleve = $seancesInfo;
         //  dd($payment);
-    return view('Admin.paiementEleve.recu',compact('payment'));
+    return view('Admin.PaiementEleve.recu',compact('payment'));
     }
     /**
    * Display a listing of the resource.
@@ -113,7 +113,7 @@ foreach ($seances as $seance) {
           'message' => 'Vérifiez vos champs.',
           'alert-type' => 'Error'
       );
-      return redirect()->route('paiementEleve.index')
+      return redirect()->route('PaiementEleve.index')
       ->with($notification);
   } else {
     if (is_null($request-> seances)) {
