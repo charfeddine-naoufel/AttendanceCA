@@ -325,7 +325,7 @@
                                                                             </ul>
 
                                                                             <div class="mb-5 h-2.5 flex justify-center ">
-                                                                                <button type="button"
+                                                                                {{-- <button type="button"
                                                                                     class="btn btn-warning rounded-full">
                                                                                     Modifier
 
@@ -342,7 +342,270 @@
                                                                                             stroke="currentColor"
                                                                                             stroke-width="1.5"></path>
                                                                                     </svg>
-                                                                                </button>
+                                                                                </button> --}}
+                                                                                <div x-data="modal" class="inline-block">
+                                                                                    <button type="button" @click="toggle"
+                                                                                        data-id="{{ $seance->id }}"
+                                                                                        class="btn btn-warning rounded-full editbtn "> Modifier
+                                                                                        <svg width="24" height="24" viewbox="0 0 24 24"
+                                                                                            fill="none" xmlns="http://www.w3.org/2000/svg"
+                                                                                            class="h-4.5 w-4.5 ltr:mr-2 rtl:ml-2">
+                                                                                            <path
+                                                                                                d="M15.2869 3.15178L14.3601 4.07866L5.83882 12.5999L5.83881 12.5999C5.26166 13.1771 4.97308 13.4656 4.7249 13.7838C4.43213 14.1592 4.18114 14.5653 3.97634 14.995C3.80273 15.3593 3.67368 15.7465 3.41556 16.5208L2.32181 19.8021L2.05445 20.6042C1.92743 20.9852 2.0266 21.4053 2.31063 21.6894C2.59466 21.9734 3.01478 22.0726 3.39584 21.9456L4.19792 21.6782L7.47918 20.5844L7.47919 20.5844C8.25353 20.3263 8.6407 20.1973 9.00498 20.0237C9.43469 19.8189 9.84082 19.5679 10.2162 19.2751C10.5344 19.0269 10.8229 18.7383 11.4001 18.1612L11.4001 18.1612L19.9213 9.63993L20.8482 8.71306C22.3839 7.17735 22.3839 4.68748 20.8482 3.15178C19.3125 1.61607 16.8226 1.61607 15.2869 3.15178Z"
+                                                                                                stroke="currentColor" stroke-width="1.5"></path>
+                                                                                            <path opacity="0.5"
+                                                                                                d="M14.36 4.07812C14.36 4.07812 14.4759 6.04774 16.2138 7.78564C17.9517 9.52354 19.9213 9.6394 19.9213 9.6394M4.19789 21.6777L2.32178 19.8015"
+                                                                                                stroke="currentColor" stroke-width="1.5"></path>
+                                                                                        </svg>
+                                                                                    </button>
+                                                                                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60"
+                                                                                        :class="open && '!block'">
+                                                                                        <div class="flex min-h-screen items-start justify-center px-4"
+                                                                                            @click.self="open = false">
+                                                                                            <div class="panel animate__animated my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 p-0"
+                                                                                                :class="$store.app.rtlClass === 'rtl' ?
+                                                                                                    'animate__rotateInDownRight' :
+                                                                                                    'animate__rotateInDownLeft'">
+                                                                                                <div
+                                                                                                    class="flex items-center justify-between bg-[#fbfbfb] px-5 py-3 dark:bg-[#121c2c]">
+                                                                                                    <h5 class="text-lg font-bold">Modifier Séance</h5>
+                                                                                                    <button type="button"
+                                                                                                        class="text-white-dark hover:text-dark"
+                                                                                                        @click="toggle">
+                                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                            width="24px" height="24px"
+                                                                                                            viewbox="0 0 24 24" fill="none"
+                                                                                                            stroke="currentColor" stroke-width="1.5"
+                                                                                                            stroke-linecap="round"
+                                                                                                            stroke-linejoin="round" class="h-6 w-6">
+                                                                                                            <line x1="18" y1="6"
+                                                                                                                x2="6" y2="18"></line>
+                                                                                                            <line x1="6" y1="6"
+                                                                                                                x2="18" y2="18"></line>
+                                                                                                        </svg>
+                                                                                                    </button>
+                                                                                                </div>
+                                                                                                <div class="p-5">
+                                                                                                    <form class="space-y-5">
+                                                                                                        @csrf
+                                                                                                        @method('PUT')
+                                                                                                        <div
+                                                                                                            class="grid grid-cols-1 gap-x-12 sm:grid-cols-2 ">
+                                                                                                            <div>
+                                                                                                                <div
+                                                                                                                    class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
+                                                                                                                    <div>
+                                                                                                                        <select
+                                                                                                                            class="form-select text-white-dark"
+                                                                                                                            id="matiere_id">
+                                                                                                                            <option value="">
+                                                                                                                                Choisir une matiere
+                                                                                                                            </option>
+                                                                                                                            @foreach ($matieres as $matiere)
+                                                                                                                                <option
+                                                                                                                                    value="{{ $matiere->id }}">
+                                                                                                                                    {{ $matiere->nom_mat_fr }}
+                                                                                                                                </option>
+                                                                                                                            @endforeach
+                            
+                                                                                                                        </select>
+                                                                                                                    </div>
+                                                                                                                    <div>
+                                                                                                                        <select
+                                                                                                                            class="form-select text-white-dark btngroupe"
+                                                                                                                            id="groupe_id"
+                                                                                                                            id="groupe">
+                                                                                                                            <option value="">
+                                                                                                                                Choisir un groupe
+                                                                                                                            </option>
+                                                                                                                            @foreach ($groupes as $groupe)
+                                                                                                                                <option
+                                                                                                                                    value="{{ $groupe->id }}">
+                                                                                                                                    {{ $groupe->nom_groupe }}-{{ $groupe->niveau->nom_niv_fr }}-{{ $groupe->matiere->nom_mat_fr }}
+                                                                                                                                </option>
+                                                                                                                            @endforeach
+                            
+                                                                                                                        </select>
+                                                                                                                    </div>
+                                                                                                                </div>
+                            
+                                                                                                                <div
+                                                                                                                    class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                                                                                    <div>
+                                                                                                                        <select
+                                                                                                                            class="form-select text-white-dark"
+                                                                                                                            id="prof_id">
+                                                                                                                            <option value="">
+                                                                                                                                Choisir un Prof</option>
+                                                                                                                            @foreach ($profs as $prof)
+                                                                                                                                <option
+                                                                                                                                    value="{{ $prof->id }}">
+                                                                                                                                    {{ $prof->nom_pr_prof_fr }}
+                                                                                                                                </option>
+                                                                                                                            @endforeach
+                            
+                                                                                                                        </select>
+                                                                                                                    </div>
+                                                                                                                    <div>
+                                                                                                                        {{-- <label for="gridPassword">Classe Lycée</label> --}}
+                                                                                                                        <input type="date"
+                                                                                                                            id="date"
+                                                                                                                            placeholder="Date"
+                                                                                                                            value="{{ date('Y-m-d') }}"
+                                                                                                                            class="form-input" />
+                                                                                                                        <input type="hidden"
+                                                                                                                            class="form-control IdSeance"
+                                                                                                                            id="IdSeance">
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div
+                                                                                                                    class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-3">
+                            
+                                                                                                                    <div class="flex">
+                                                                                                                        <div
+                                                                                                                            class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
+                                                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                                viewBox="0 0 40 40"
+                                                                                                                                width="24px"
+                                                                                                                                height="24px">
+                                                                                                                                <path fill="#8bb7f0"
+                                                                                                                                    d="M20,38.5C9.799,38.5,1.5,30.201,1.5,20S9.799,1.5,20,1.5S38.5,9.799,38.5,20S30.201,38.5,20,38.5z" />
+                                                                                                                                <path fill="#4e7ab5"
+                                                                                                                                    d="M20,2c9.925,0,18,8.075,18,18s-8.075,18-18,18S2,29.925,2,20S10.075,2,20,2 M20,1 C9.507,1,1,9.507,1,20s8.507,19,19,19s19-8.507,19-19S30.493,1,20,1L20,1z" />
+                                                                                                                                <path fill="#fff"
+                                                                                                                                    d="M20,35.5c-8.547,0-15.5-6.953-15.5-15.5S11.453,4.5,20,4.5S35.5,11.453,35.5,20S28.547,35.5,20,35.5 z" />
+                                                                                                                                <path fill="#4e7ab5"
+                                                                                                                                    d="M20,5c8.271,0,15,6.729,15,15s-6.729,15-15,15S5,28.271,5,20S11.729,5,20,5 M20,4 C11.163,4,4,11.163,4,20s7.163,16,16,16s16-7.163,16-16S28.837,4,20,4L20,4z" />
+                                                                                                                                <path fill="none"
+                                                                                                                                    stroke="#66798f"
+                                                                                                                                    stroke-linecap="round"
+                                                                                                                                    stroke-miterlimit="10"
+                                                                                                                                    stroke-width="2"
+                                                                                                                                    d="M26.995 9.665L20 20 25.846 25.846" />
+                                                                                                                                <path fill="#66798f"
+                                                                                                                                    d="M20 18.5A1.5 1.5 0 1 0 20 21.5A1.5 1.5 0 1 0 20 18.5Z" />
+                                                                                                                                <path fill="#c5d4de"
+                                                                                                                                    d="M20 6A1 1 0 1 0 20 8 1 1 0 1 0 20 6zM20 32A1 1 0 1 0 20 34 1 1 0 1 0 20 32z" />
+                                                                                                                                <g>
+                                                                                                                                    <path
+                                                                                                                                        fill="#c5d4de"
+                                                                                                                                        d="M33 19A1 1 0 1 0 33 21A1 1 0 1 0 33 19Z" />
+                                                                                                                                </g>
+                                                                                                                                <g>
+                                                                                                                                    <path
+                                                                                                                                        fill="#c5d4de"
+                                                                                                                                        d="M7 19A1 1 0 1 0 7 21A1 1 0 1 0 7 19Z" />
+                                                                                                                                </g>
+                                                                                                                            </svg>
+                                                                                                                        </div>
+                                                                                                                        <input type="time"
+                                                                                                                            id="heure_deb"
+                                                                                                                            placeholder="Heure début"
+                                                                                                                            class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                                                                                    </div>
+                                                                                                                    <div class="flex">
+                                                                                                                        <div
+                                                                                                                            class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
+                                                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                                viewBox="0 0 40 40"
+                                                                                                                                width="24px"
+                                                                                                                                height="24px">
+                                                                                                                                <path fill="#8bb7f0"
+                                                                                                                                    d="M20,38.5C9.799,38.5,1.5,30.201,1.5,20S9.799,1.5,20,1.5S38.5,9.799,38.5,20S30.201,38.5,20,38.5z" />
+                                                                                                                                <path fill="#4e7ab5"
+                                                                                                                                    d="M20,2c9.925,0,18,8.075,18,18s-8.075,18-18,18S2,29.925,2,20S10.075,2,20,2 M20,1 C9.507,1,1,9.507,1,20s8.507,19,19,19s19-8.507,19-19S30.493,1,20,1L20,1z" />
+                                                                                                                                <path fill="#fff"
+                                                                                                                                    d="M20,35.5c-8.547,0-15.5-6.953-15.5-15.5S11.453,4.5,20,4.5S35.5,11.453,35.5,20S28.547,35.5,20,35.5 z" />
+                                                                                                                                <path fill="#4e7ab5"
+                                                                                                                                    d="M20,5c8.271,0,15,6.729,15,15s-6.729,15-15,15S5,28.271,5,20S11.729,5,20,5 M20,4 C11.163,4,4,11.163,4,20s7.163,16,16,16s16-7.163,16-16S28.837,4,20,4L20,4z" />
+                                                                                                                                <path fill="none"
+                                                                                                                                    stroke="#66798f"
+                                                                                                                                    stroke-linecap="round"
+                                                                                                                                    stroke-miterlimit="10"
+                                                                                                                                    stroke-width="2"
+                                                                                                                                    d="M26.995 9.665L20 20 25.846 25.846" />
+                                                                                                                                <path fill="#66798f"
+                                                                                                                                    d="M20 18.5A1.5 1.5 0 1 0 20 21.5A1.5 1.5 0 1 0 20 18.5Z" />
+                                                                                                                                <path fill="#c5d4de"
+                                                                                                                                    d="M20 6A1 1 0 1 0 20 8 1 1 0 1 0 20 6zM20 32A1 1 0 1 0 20 34 1 1 0 1 0 20 32z" />
+                                                                                                                                <g>
+                                                                                                                                    <path
+                                                                                                                                        fill="#c5d4de"
+                                                                                                                                        d="M33 19A1 1 0 1 0 33 21A1 1 0 1 0 33 19Z" />
+                                                                                                                                </g>
+                                                                                                                                <g>
+                                                                                                                                    <path
+                                                                                                                                        fill="#c5d4de"
+                                                                                                                                        d="M7 19A1 1 0 1 0 7 21A1 1 0 1 0 7 19Z" />
+                                                                                                                                </g>
+                                                                                                                            </svg>
+                                                                                                                        </div>
+                                                                                                                        <input type="time"
+                                                                                                                            id="heure_fin"
+                                                                                                                            placeholder="Heure fin"
+                                                                                                                            class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                                                                                    </div>
+                                                                                                                </div>
+                            
+                            
+                                                                                                                <div
+                                                                                                                    class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            
+                                                                                                                    <div>
+                                                                                                                        
+                                                                                                                        <div class="flex">
+                                                                                                                            <div class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee]  px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
+                                                                                                                                Salle
+                                                                                                                            </div>
+                                                                                                                            <select name="salle" id="salle" class="py-2.5">
+                                                                                                                                <option value="S1">S1</option>
+                                                                                                                                <option value="S2">S2</option>
+                                                                                                                                <option value="S3">S3</option>
+                                                                                                                                <option value="S4">S4</option>
+                                                                                                                                <option value="S5">S1</option>
+                                                                                                                                <option value="S6">S6</option>
+                                                                                                                            </select>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <div class="table-responsive">
+                                                                                                                    <table id="mytableup"
+                                                                                                                        class=" table table-sm mytableup">
+                                                                                                                        <thead>
+                                                                                                                            <tr>
+                                                                                                                                <th><input
+                                                                                                                                        id="checkAll"
+                                                                                                                                        type="checkbox"
+                                                                                                                                        class="form-checkbox checkAll" />
+                                                                                                                                </th>
+                                                                                                                                <th>الاسم و اللقب</th>
+                                                                                                                                <th>Nom et Prénom</th>
+                            
+                            
+                                                                                                                            </tr>
+                                                                                                                        </thead>
+                                                                                                                        <tbody>
+                            
+                            
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                            
+                                                                                                                </div>
+                                                                                                                <button 
+                                                                                                                    class="btn btn-primary w-full updatebtn">Enregistrer</button>
+                                                                                                            </div>
+                                                                                                        </div>
+                            
+                            
+                            
+                                                                                                    </form>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -390,7 +653,7 @@
                                                                             class="mb-10 flex items-center justify-between">
                                                                             <h5
                                                                                 class="text-lg font-semibold dark:text-white-light">
-                                                                                Elèves Présents</h5>
+                                                                                Elèves Absents</h5>
                                                                             {{-- <a href="javascript:;" class="btn btn-primary">Renew Now</a> --}}
                                                                         </div>
                                                                         <div class="group">
@@ -410,24 +673,269 @@
                                                                             </ul>
 
                                                                             <div class="mb-5 h-2.5 flex justify-center ">
-                                                                                <button type="button"
-                                                                                    class="btn btn-warning rounded-full">
-                                                                                    Modifier
-
-                                                                                    <svg width="24" height="24"
-                                                                                        viewBox="0 0 24 24" fill="none"
-                                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                                        class="h-5 w-5 shrink-0 ltr:ml-1.5 rtl:mr-1.5">
-                                                                                        <path
-                                                                                            d="M15.2869 3.15178L14.3601 4.07866L5.83882 12.5999L5.83881 12.5999C5.26166 13.1771 4.97308 13.4656 4.7249 13.7838C4.43213 14.1592 4.18114 14.5653 3.97634 14.995C3.80273 15.3593 3.67368 15.7465 3.41556 16.5208L2.32181 19.8021L2.05445 20.6042C1.92743 20.9852 2.0266 21.4053 2.31063 21.6894C2.59466 21.9734 3.01478 22.0726 3.39584 21.9456L4.19792 21.6782L7.47918 20.5844L7.47919 20.5844C8.25353 20.3263 8.6407 20.1973 9.00498 20.0237C9.43469 19.8189 9.84082 19.5679 10.2162 19.2751C10.5344 19.0269 10.8229 18.7383 11.4001 18.1612L11.4001 18.1612L19.9213 9.63993L20.8482 8.71306C22.3839 7.17735 22.3839 4.68748 20.8482 3.15178C19.3125 1.61607 16.8226 1.61607 15.2869 3.15178Z"
-                                                                                            stroke="currentColor"
-                                                                                            stroke-width="1.5"></path>
-                                                                                        <path opacity="0.5"
-                                                                                            d="M14.36 4.07812C14.36 4.07812 14.4759 6.04774 16.2138 7.78564C17.9517 9.52354 19.9213 9.6394 19.9213 9.6394M4.19789 21.6777L2.32178 19.8015"
-                                                                                            stroke="currentColor"
-                                                                                            stroke-width="1.5"></path>
-                                                                                    </svg>
-                                                                                </button>
+                                                                                <div x-data="modal" class="inline-block">
+                                                                                    <button type="button" @click="toggle"
+                                                                                        data-id="{{ $seance->id }}"
+                                                                                        class="btn btn-warning rounded-full editbtn "> Modifier
+                                                                                        <svg width="24" height="24" viewbox="0 0 24 24"
+                                                                                            fill="none" xmlns="http://www.w3.org/2000/svg"
+                                                                                            class="h-4.5 w-4.5 ltr:mr-2 rtl:ml-2">
+                                                                                            <path
+                                                                                                d="M15.2869 3.15178L14.3601 4.07866L5.83882 12.5999L5.83881 12.5999C5.26166 13.1771 4.97308 13.4656 4.7249 13.7838C4.43213 14.1592 4.18114 14.5653 3.97634 14.995C3.80273 15.3593 3.67368 15.7465 3.41556 16.5208L2.32181 19.8021L2.05445 20.6042C1.92743 20.9852 2.0266 21.4053 2.31063 21.6894C2.59466 21.9734 3.01478 22.0726 3.39584 21.9456L4.19792 21.6782L7.47918 20.5844L7.47919 20.5844C8.25353 20.3263 8.6407 20.1973 9.00498 20.0237C9.43469 19.8189 9.84082 19.5679 10.2162 19.2751C10.5344 19.0269 10.8229 18.7383 11.4001 18.1612L11.4001 18.1612L19.9213 9.63993L20.8482 8.71306C22.3839 7.17735 22.3839 4.68748 20.8482 3.15178C19.3125 1.61607 16.8226 1.61607 15.2869 3.15178Z"
+                                                                                                stroke="currentColor" stroke-width="1.5"></path>
+                                                                                            <path opacity="0.5"
+                                                                                                d="M14.36 4.07812C14.36 4.07812 14.4759 6.04774 16.2138 7.78564C17.9517 9.52354 19.9213 9.6394 19.9213 9.6394M4.19789 21.6777L2.32178 19.8015"
+                                                                                                stroke="currentColor" stroke-width="1.5"></path>
+                                                                                        </svg>
+                                                                                    </button>
+                                                                                    <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-[black]/60"
+                                                                                        :class="open && '!block'">
+                                                                                        <div class="flex min-h-screen items-start justify-center px-4"
+                                                                                            @click.self="open = false">
+                                                                                            <div class="panel animate__animated my-8 w-full max-w-3xl overflow-hidden rounded-lg border-0 p-0"
+                                                                                                :class="$store.app.rtlClass === 'rtl' ?
+                                                                                                    'animate__rotateInDownRight' :
+                                                                                                    'animate__rotateInDownLeft'">
+                                                                                                <div
+                                                                                                    class="flex items-center justify-between bg-[#fbfbfb] px-5 py-3 dark:bg-[#121c2c]">
+                                                                                                    <h5 class="text-lg font-bold">Modifier Séance</h5>
+                                                                                                    <button type="button"
+                                                                                                        class="text-white-dark hover:text-dark"
+                                                                                                        @click="toggle">
+                                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                            width="24px" height="24px"
+                                                                                                            viewbox="0 0 24 24" fill="none"
+                                                                                                            stroke="currentColor" stroke-width="1.5"
+                                                                                                            stroke-linecap="round"
+                                                                                                            stroke-linejoin="round" class="h-6 w-6">
+                                                                                                            <line x1="18" y1="6"
+                                                                                                                x2="6" y2="18"></line>
+                                                                                                            <line x1="6" y1="6"
+                                                                                                                x2="18" y2="18"></line>
+                                                                                                        </svg>
+                                                                                                    </button>
+                                                                                                </div>
+                                                                                                <div class="p-5">
+                                                                                                    <form class="space-y-5">
+                                                                                                        @csrf
+                                                                                                        @method('PUT')
+                                                                                                        <div
+                                                                                                            class="grid grid-cols-1 gap-x-12 sm:grid-cols-2 ">
+                                                                                                            <div>
+                                                                                                                <div
+                                                                                                                    class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
+                                                                                                                    <div>
+                                                                                                                        <select
+                                                                                                                            class="form-select text-white-dark"
+                                                                                                                            id="matiere_id">
+                                                                                                                            <option value="">
+                                                                                                                                Choisir une matiere
+                                                                                                                            </option>
+                                                                                                                            @foreach ($matieres as $matiere)
+                                                                                                                                <option
+                                                                                                                                    value="{{ $matiere->id }}">
+                                                                                                                                    {{ $matiere->nom_mat_fr }}
+                                                                                                                                </option>
+                                                                                                                            @endforeach
+                            
+                                                                                                                        </select>
+                                                                                                                    </div>
+                                                                                                                    <div>
+                                                                                                                        <select
+                                                                                                                            class="form-select text-white-dark btngroupe"
+                                                                                                                            id="groupe_id"
+                                                                                                                            id="groupe">
+                                                                                                                            <option value="">
+                                                                                                                                Choisir un groupe
+                                                                                                                            </option>
+                                                                                                                            @foreach ($groupes as $groupe)
+                                                                                                                                <option
+                                                                                                                                    value="{{ $groupe->id }}">
+                                                                                                                                    {{ $groupe->nom_groupe }}-{{ $groupe->niveau->nom_niv_fr }}-{{ $groupe->matiere->nom_mat_fr }}
+                                                                                                                                </option>
+                                                                                                                            @endforeach
+                            
+                                                                                                                        </select>
+                                                                                                                    </div>
+                                                                                                                </div>
+                            
+                                                                                                                <div
+                                                                                                                    class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                                                                                    <div>
+                                                                                                                        <select
+                                                                                                                            class="form-select text-white-dark"
+                                                                                                                            id="prof_id">
+                                                                                                                            <option value="">
+                                                                                                                                Choisir un Prof</option>
+                                                                                                                            @foreach ($profs as $prof)
+                                                                                                                                <option
+                                                                                                                                    value="{{ $prof->id }}">
+                                                                                                                                    {{ $prof->nom_pr_prof_fr }}
+                                                                                                                                </option>
+                                                                                                                            @endforeach
+                            
+                                                                                                                        </select>
+                                                                                                                    </div>
+                                                                                                                    <div>
+                                                                                                                        {{-- <label for="gridPassword">Classe Lycée</label> --}}
+                                                                                                                        <input type="date"
+                                                                                                                            id="date"
+                                                                                                                            placeholder="Date"
+                                                                                                                            value="{{ date('Y-m-d') }}"
+                                                                                                                            class="form-input" />
+                                                                                                                        <input type="hidden"
+                                                                                                                            class="form-control IdSeance"
+                                                                                                                            id="IdSeance">
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div
+                                                                                                                    class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-3">
+                            
+                                                                                                                    <div class="flex">
+                                                                                                                        <div
+                                                                                                                            class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
+                                                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                                viewBox="0 0 40 40"
+                                                                                                                                width="24px"
+                                                                                                                                height="24px">
+                                                                                                                                <path fill="#8bb7f0"
+                                                                                                                                    d="M20,38.5C9.799,38.5,1.5,30.201,1.5,20S9.799,1.5,20,1.5S38.5,9.799,38.5,20S30.201,38.5,20,38.5z" />
+                                                                                                                                <path fill="#4e7ab5"
+                                                                                                                                    d="M20,2c9.925,0,18,8.075,18,18s-8.075,18-18,18S2,29.925,2,20S10.075,2,20,2 M20,1 C9.507,1,1,9.507,1,20s8.507,19,19,19s19-8.507,19-19S30.493,1,20,1L20,1z" />
+                                                                                                                                <path fill="#fff"
+                                                                                                                                    d="M20,35.5c-8.547,0-15.5-6.953-15.5-15.5S11.453,4.5,20,4.5S35.5,11.453,35.5,20S28.547,35.5,20,35.5 z" />
+                                                                                                                                <path fill="#4e7ab5"
+                                                                                                                                    d="M20,5c8.271,0,15,6.729,15,15s-6.729,15-15,15S5,28.271,5,20S11.729,5,20,5 M20,4 C11.163,4,4,11.163,4,20s7.163,16,16,16s16-7.163,16-16S28.837,4,20,4L20,4z" />
+                                                                                                                                <path fill="none"
+                                                                                                                                    stroke="#66798f"
+                                                                                                                                    stroke-linecap="round"
+                                                                                                                                    stroke-miterlimit="10"
+                                                                                                                                    stroke-width="2"
+                                                                                                                                    d="M26.995 9.665L20 20 25.846 25.846" />
+                                                                                                                                <path fill="#66798f"
+                                                                                                                                    d="M20 18.5A1.5 1.5 0 1 0 20 21.5A1.5 1.5 0 1 0 20 18.5Z" />
+                                                                                                                                <path fill="#c5d4de"
+                                                                                                                                    d="M20 6A1 1 0 1 0 20 8 1 1 0 1 0 20 6zM20 32A1 1 0 1 0 20 34 1 1 0 1 0 20 32z" />
+                                                                                                                                <g>
+                                                                                                                                    <path
+                                                                                                                                        fill="#c5d4de"
+                                                                                                                                        d="M33 19A1 1 0 1 0 33 21A1 1 0 1 0 33 19Z" />
+                                                                                                                                </g>
+                                                                                                                                <g>
+                                                                                                                                    <path
+                                                                                                                                        fill="#c5d4de"
+                                                                                                                                        d="M7 19A1 1 0 1 0 7 21A1 1 0 1 0 7 19Z" />
+                                                                                                                                </g>
+                                                                                                                            </svg>
+                                                                                                                        </div>
+                                                                                                                        <input type="time"
+                                                                                                                            id="heure_deb"
+                                                                                                                            placeholder="Heure début"
+                                                                                                                            class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                                                                                    </div>
+                                                                                                                    <div class="flex">
+                                                                                                                        <div
+                                                                                                                            class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
+                                                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                                viewBox="0 0 40 40"
+                                                                                                                                width="24px"
+                                                                                                                                height="24px">
+                                                                                                                                <path fill="#8bb7f0"
+                                                                                                                                    d="M20,38.5C9.799,38.5,1.5,30.201,1.5,20S9.799,1.5,20,1.5S38.5,9.799,38.5,20S30.201,38.5,20,38.5z" />
+                                                                                                                                <path fill="#4e7ab5"
+                                                                                                                                    d="M20,2c9.925,0,18,8.075,18,18s-8.075,18-18,18S2,29.925,2,20S10.075,2,20,2 M20,1 C9.507,1,1,9.507,1,20s8.507,19,19,19s19-8.507,19-19S30.493,1,20,1L20,1z" />
+                                                                                                                                <path fill="#fff"
+                                                                                                                                    d="M20,35.5c-8.547,0-15.5-6.953-15.5-15.5S11.453,4.5,20,4.5S35.5,11.453,35.5,20S28.547,35.5,20,35.5 z" />
+                                                                                                                                <path fill="#4e7ab5"
+                                                                                                                                    d="M20,5c8.271,0,15,6.729,15,15s-6.729,15-15,15S5,28.271,5,20S11.729,5,20,5 M20,4 C11.163,4,4,11.163,4,20s7.163,16,16,16s16-7.163,16-16S28.837,4,20,4L20,4z" />
+                                                                                                                                <path fill="none"
+                                                                                                                                    stroke="#66798f"
+                                                                                                                                    stroke-linecap="round"
+                                                                                                                                    stroke-miterlimit="10"
+                                                                                                                                    stroke-width="2"
+                                                                                                                                    d="M26.995 9.665L20 20 25.846 25.846" />
+                                                                                                                                <path fill="#66798f"
+                                                                                                                                    d="M20 18.5A1.5 1.5 0 1 0 20 21.5A1.5 1.5 0 1 0 20 18.5Z" />
+                                                                                                                                <path fill="#c5d4de"
+                                                                                                                                    d="M20 6A1 1 0 1 0 20 8 1 1 0 1 0 20 6zM20 32A1 1 0 1 0 20 34 1 1 0 1 0 20 32z" />
+                                                                                                                                <g>
+                                                                                                                                    <path
+                                                                                                                                        fill="#c5d4de"
+                                                                                                                                        d="M33 19A1 1 0 1 0 33 21A1 1 0 1 0 33 19Z" />
+                                                                                                                                </g>
+                                                                                                                                <g>
+                                                                                                                                    <path
+                                                                                                                                        fill="#c5d4de"
+                                                                                                                                        d="M7 19A1 1 0 1 0 7 21A1 1 0 1 0 7 19Z" />
+                                                                                                                                </g>
+                                                                                                                            </svg>
+                                                                                                                        </div>
+                                                                                                                        <input type="time"
+                                                                                                                            id="heure_fin"
+                                                                                                                            placeholder="Heure fin"
+                                                                                                                            class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                                                                                    </div>
+                                                                                                                </div>
+                            
+                            
+                                                                                                                <div
+                                                                                                                    class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            
+                                                                                                                    <div>
+                                                                                                                        
+                                                                                                                        <div class="flex">
+                                                                                                                            <div class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee]  px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
+                                                                                                                                Salle
+                                                                                                                            </div>
+                                                                                                                            <select name="salle" id="salle" class="py-2.5">
+                                                                                                                                <option value="S1">S1</option>
+                                                                                                                                <option value="S2">S2</option>
+                                                                                                                                <option value="S3">S3</option>
+                                                                                                                                <option value="S4">S4</option>
+                                                                                                                                <option value="S5">S1</option>
+                                                                                                                                <option value="S6">S6</option>
+                                                                                                                            </select>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <div class="table-responsive">
+                                                                                                                    <table id="mytableup"
+                                                                                                                        class=" table table-sm mytableup">
+                                                                                                                        <thead>
+                                                                                                                            <tr>
+                                                                                                                                <th><input
+                                                                                                                                        id="checkAll"
+                                                                                                                                        type="checkbox"
+                                                                                                                                        class="form-checkbox checkAll" />
+                                                                                                                                </th>
+                                                                                                                                <th>الاسم و اللقب</th>
+                                                                                                                                <th>Nom et Prénom</th>
+                            
+                            
+                                                                                                                            </tr>
+                                                                                                                        </thead>
+                                                                                                                        <tbody>
+                            
+                            
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                            
+                                                                                                                </div>
+                                                                                                                <button 
+                                                                                                                    class="btn btn-primary w-full updatebtn">Enregistrer</button>
+                                                                                                            </div>
+                                                                                                        </div>
+                            
+                            
+                            
+                                                                                                    </form>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
