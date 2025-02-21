@@ -102,6 +102,7 @@ class EleveController extends Controller
         $eleve->nom_pr_eleve_ar = $request-> nom_pr_eleve_ar;
         $eleve->tel = $request-> tel;
         $eleve->tel_parent = $request-> tel_parent;
+        $eleve->type = $request-> type;
         $eleve->classe_lycee      =  $request-> classe_lycee;
         $eleve->lycee      =  $request-> lycee;
         $eleve->montant      =  $montant;
@@ -179,6 +180,7 @@ class EleveController extends Controller
             $eleve->nom_pr_eleve_ar = $request-> nom_pr_eleve_ar;
             $eleve->tel = $request-> tel;
             $eleve->tel_parent = $request-> tel_parent;
+            $eleve->type = $request-> type;
             $eleve->classe_lycee      =  $request-> classe_lycee;
             $eleve->lycee      =  $request-> lycee;
                 $eleve->save();

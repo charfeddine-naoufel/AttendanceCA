@@ -7,7 +7,7 @@
                     <a href="javascript:;" class="text-primary hover:underline">Dashboard</a>
                 </li>
                 <li class="before:content-['/'] ltr:before:mr-1 rtl:before:ml-1">
-                    <span>Paiement Prof</span>
+                    <span>Paiement Pack</span>
                 </li>
             </ul>
             {{-- start --}}
@@ -54,7 +54,7 @@
                                             class="panel my-8 w-full max-w-5xl overflow-hidden rounded-lg border-0 py-1 px-4">
                                             <div
                                                 class="flex items-center justify-between p-5 text-lg font-semibold dark:text-white">
-                                                Nouvelle Séance
+                                                Nouveau paiement
                                                 <button type="button" @click="toggle"
                                                     class="text-white-dark hover:text-dark">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
@@ -71,35 +71,47 @@
 
                                             <div class="p-5">
                                                 <form class="space-y-5" method="post"
-                                                    action="{{ route('paiementsProf.store') }}">
+                                                    action="{{ route('paiementsPack.store') }}">
                                                     @csrf
                                                     <div class="grid grid-cols-1 gap-x-12 sm:grid-cols-2 ">
                                                         <div>
                                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
                                                                 <div>
-                                                                    <select class="form-select text-white-dark btnprof"
-                                                                        name="prof_id" id="prof">
-                                                                        <option value="">Choisir Prof</option>
-                                                                        @foreach ($profs as $prof)
-                                                                            <option value="{{ $prof->id }}">
-                                                                                {{ $prof->nom_pr_prof_fr }}</option>
+                                                                    <select class="form-select text-white-dark btngroupe groupe"
+                                                                        name="groupe_id" id="groupe">
+                                                                        <option value="">Choisir Groupe</option>
+                                                                        @foreach ($groupes as $groupe)
+                                                                            <option value="{{ $groupe->id }}">
+                                                                                {{ $groupe->nom_groupe }}</option>
                                                                         @endforeach
 
                                                                     </select>
                                                                 </div>
                                                                 <div>
+                                                                    <select class="form-select text-white-dark btneleve eleve"
+                                                                        name="eleve_id" id="eleve">
+                                                                        <option value="">Choisir eleve</option>
+
+
+                                                                    </select>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                                <div>
                                                                     {{-- <label for="gridPassword">Classe Lycée</label> --}}
                                                                     <input type="date" name="date" placeholder="Date"
                                                                         value="{{ date('Y-m-d') }}" class="form-input" />
                                                                 </div>
-                                                            </div>
-
-                                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
                                                                 <div>
-                                                                    {{-- <label for="gridPassword">Classe Lycée</label> --}}
-                                                                    <input type="text" name="prix"
-                                                                        placeholder="Prix/Séance" class="form-input" />
+                                                                    <select class="form-select text-white-dark btneleve"
+                                                                        name="montant" id="">
+                                                                        <option value="80">80 DT</option>
+                                                                        <option value="60">60 DT</option>
+
+
+                                                                    </select>
                                                                 </div>
                                                             </div>
 
@@ -109,23 +121,89 @@
                                                         </div>
                                                         <div>
                                                             <div class="table-responsive">
-                                                                <table id="mytable" class=" table table-sm">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th><input id="checkAll" type="checkbox"
-                                                                                    class="form-checkbox" /></th>
-                                                                            <th>Date séance</th>
-                                                                            <th>Groupe</th>
-                                                                            <th>Matière</th>
-
-
-                                                                        </tr>
-                                                                    </thead>
+                                                                <table class="table table-bordered text-center mb-3">
+                                                                    
                                                                     <tbody>
-
-
+                                                                      <tr>
+                                                                        <td>
+                                                                          <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="mois" id="month1" value="1">
+                                                                            <label class="form-check-label" for="month1">Janvier</label>
+                                                                          </div>
+                                                                        </td>
+                                                                        <td>
+                                                                          <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="mois" id="month2" value="2">
+                                                                            <label class="form-check-label" for="month2">Février</label>
+                                                                          </div>
+                                                                        </td>
+                                                                        <td>
+                                                                          <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="mois" id="month3" value="3">
+                                                                            <label class="form-check-label" for="month3">Mars</label>
+                                                                          </div>
+                                                                        </td>
+                                                                        <td>
+                                                                          <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="mois" id="month4" value="4">
+                                                                            <label class="form-check-label" for="month4">Avril</label>
+                                                                          </div>
+                                                                        </td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                        <td>
+                                                                          <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="mois" id="month5" value="5">
+                                                                            <label class="form-check-label" for="month5">Mai</label>
+                                                                          </div>
+                                                                        </td>
+                                                                        <td>
+                                                                          <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="mois" id="month6" value="6">
+                                                                            <label class="form-check-label" for="month6">Juin</label>
+                                                                          </div>
+                                                                        </td>
+                                                                        <td>
+                                                                          <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="mois" id="month7" value="7">
+                                                                            <label class="form-check-label" for="month7">Juillet</label>
+                                                                          </div>
+                                                                        </td>
+                                                                        <td>
+                                                                          <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="mois" id="month8" value="8">
+                                                                            <label class="form-check-label" for="month8">Août</label>
+                                                                          </div>
+                                                                        </td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                        <td>
+                                                                          <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="mois" id="month9" value="9">
+                                                                            <label class="form-check-label" for="month9">Septembre</label>
+                                                                          </div>
+                                                                        </td>
+                                                                        <td>
+                                                                          <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="mois" id="month10" value="10">
+                                                                            <label class="form-check-label" for="month10">Octobre</label>
+                                                                          </div>
+                                                                        </td>
+                                                                        <td>
+                                                                          <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="mois" id="month11" value="11">
+                                                                            <label class="form-check-label" for="month11">Novembre</label>
+                                                                          </div>
+                                                                        </td>
+                                                                        <td>
+                                                                          <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="mois" id="month12" value="12">
+                                                                            <label class="form-check-label" for="month12">Décembre</label>
+                                                                          </div>
+                                                                        </td>
+                                                                      </tr>
                                                                     </tbody>
-                                                                </table>
+                                                                  </table>
 
                                                             </div>
                                                             <button type="submit"
@@ -148,7 +226,7 @@
                                     <thead class="bg-dark">
                                         <tr>
                                             <th>N°</th>
-                                            <th> Nom & Prenom Prof</th>
+                                            <th> Nom & Prenom Elève</th>
                                             <th>Date</th>
                                             <th>Séances</th>
 
@@ -159,10 +237,10 @@
                                         @foreach ($payments as $payment)
                                             <tr>
                                                 <td class="whitespace-nowrap">{{ $loop->iteration }}</td>
-                                                <td>{{ $payment->prof->nom_pr_prof_fr }}</td>
+                                                <td>{{ $payment->eleve->nom_pr_eleve_fr }}</td>
                                                 <td>{{ $payment->date }}</td>
                                                 <td>
-                                                    @foreach ($payment->sprof as $seance)
+                                                    @foreach ($payment->seleve as $seance)
                                                         <div
                                                             class="flex items-center rounded bg-primary-light p-1 text-primary dark:bg-primary-dark-light">
                                                             <span class="ltr:pr-2 rtl:pl-2"><strong
@@ -177,7 +255,8 @@
 
                                                 <td
                                                     class="border-b border-[#ebedf2] p-3 text-center dark:border-[#191e3a]">
-                                                    <button x-tooltip="Imprimer">
+                                                    <a x-tooltip="Imprimer" href="{{ route('pack.recu', $payment->id) }}"
+                                                        target="_blank" style="display:inline-block;">
                                                         <svg width="24px" height="24px" viewBox="0 0 1024 1024"
                                                             class="icon" version="1.1"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -207,7 +286,7 @@
                                                                 d="M341.333333 704h362.666667v42.666667H341.333333zM341.333333 789.333333h277.333334v42.666667H341.333333z"
                                                                 fill="#1976D2" />
                                                         </svg>
-                                                    </button>
+                                                    </a>
                                                     {{-- edit --}}
                                                     <div x-data="modal" class="inline-block">
                                                         <button type="button" @click="toggle" x-tooltip="Modifier"
@@ -234,7 +313,7 @@
                                                                         'animate__rotateInDownLeft'">
                                                                     <div
                                                                         class="flex items-center justify-between bg-[#fbfbfb] px-5 py-3 dark:bg-[#121c2c]">
-                                                                        <h5 class="text-lg font-bold">Modifier Elève</h5>
+                                                                        <h5 class="text-lg font-bold">Modifier Paiement</h5>
                                                                         <button type="button"
                                                                             class="text-white-dark hover:text-dark"
                                                                             @click="toggle">
@@ -255,129 +334,150 @@
                                                                         <form class="space-y-5">
                                                                             @csrf
                                                                             @method('PUT')
-                                                                            <div
-                                                                                class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                                            <div class="grid grid-cols-1 gap-x-12 sm:grid-cols-2 ">
                                                                                 <div>
-                                                                                    {{-- <label for="gridEmail">Nom et Prénom</label> --}}
-                                                                                    <input id="nom_pr_eleve_fr"
-                                                                                        type="text"
-                                                                                        placeholder="Nom et prénom"
-                                                                                        name="nom_pr_eleve_fr"
-                                                                                        class="form-input" />
-                                                                                    <input type="hidden"
-                                                                                        class="form-control"
-                                                                                        id="IdEleve">
-
-                                                                                </div>
-                                                                                <div>
-                                                                                    {{-- <label for="gridPassword">الاسم و اللقب</label> --}}
-                                                                                    <input id="nom_pr_eleve_ar"
-                                                                                        type="text"
-                                                                                        name="nom_pr_eleve_ar"
-                                                                                        placeholder="الاسم و اللقب"
-                                                                                        class="form-input" />
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div
-                                                                                class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                                                                <div>
-                                                                                    {{-- <label for="lycee">Lycée</label> --}}
-                                                                                    <input id="lycee" type="text"
-                                                                                        placeholder="Lycée" name="lycee"
-                                                                                        class="form-input" />
-                                                                                </div>
-                                                                                <div>
-                                                                                    {{-- <label for="gridPassword">Classe Lycée</label> --}}
-                                                                                    <input id="classe_lycee"
-                                                                                        type="text" name="classe_lycee"
-                                                                                        placeholder="Classe Lycée"
-                                                                                        class="form-input" />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div
-                                                                                class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-                                                                                <div class="flex">
-                                                                                    <div
-                                                                                        class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
-                                                                                        <svg width="24" height="24"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            fill="none"
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            class="mx-auto mb-1 h-5 w-5">
-                                                                                            <path
-                                                                                                d="M5.00659 6.93309C5.04956 5.7996 5.70084 4.77423 6.53785 3.93723C7.9308 2.54428 10.1532 2.73144 11.0376 4.31617L11.6866 5.4791C12.2723 6.52858 12.0372 7.90533 11.1147 8.8278M17.067 18.9934C18.2004 18.9505 19.2258 18.2992 20.0628 17.4622C21.4558 16.0692 21.2686 13.8468 19.6839 12.9624L18.5209 12.3134C17.4715 11.7277 16.0947 11.9628 15.1722 12.8853"
-                                                                                                stroke="currentColor"
-                                                                                                stroke-width="1.5"></path>
-                                                                                            <path opacity="0.5"
-                                                                                                d="M5.00655 6.93311C4.93421 8.84124 5.41713 12.0817 8.6677 15.3323C11.9183 18.5829 15.1588 19.0658 17.0669 18.9935M15.1722 12.8853C15.1722 12.8853 14.0532 14.0042 12.0245 11.9755C9.99578 9.94676 11.1147 8.82782 11.1147 8.82782"
-                                                                                                stroke="currentColor"
-                                                                                                stroke-width="1.5"></path>
-                                                                                        </svg>
+                                                                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
+                                                                                        <div>
+                                                                                            <select class="form-select text-white-dark btngroupeup groupe_id groupe" 
+                                                                                                name="groupe_id" id="groupe_up">
+                                                                                                <option value="">Choisir Groupe</option>
+                                                                                                    @foreach ($groupes as $groupe)
+                                                                                                        <option value="{{ $groupe->id }}">
+                                                                                                            {{ $groupe->nom_groupe }}</option>
+                                                                                                    @endforeach
+                        
+                                                                                            </select>
+                                                                                            <input type="hidden" id="IdPayment">
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <select class="form-select text-white-dark btneleve eleve_id " 
+                                                                                                 id="eleve_up">
+                                                                                                <option value="">Choisir eleve</option>
+                        
+                        
+                                                                                            </select>
+                                                                                        </div>
+                        
                                                                                     </div>
-                                                                                    <input id="tel" type="text"
-                                                                                        name="tel"
-                                                                                        placeholder="Téléphone"
-                                                                                        class="form-input ltr:rounded-l-none rtl:rounded-r-none">
-                                                                                </div>
-                                                                                <div class="flex">
-                                                                                    <div
-                                                                                        class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
-                                                                                        <svg width="24" height="24"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            fill="none"
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            class="mx-auto mb-1 h-5 w-5">
-                                                                                            <path
-                                                                                                d="M5.00659 6.93309C5.04956 5.7996 5.70084 4.77423 6.53785 3.93723C7.9308 2.54428 10.1532 2.73144 11.0376 4.31617L11.6866 5.4791C12.2723 6.52858 12.0372 7.90533 11.1147 8.8278M17.067 18.9934C18.2004 18.9505 19.2258 18.2992 20.0628 17.4622C21.4558 16.0692 21.2686 13.8468 19.6839 12.9624L18.5209 12.3134C17.4715 11.7277 16.0947 11.9628 15.1722 12.8853"
-                                                                                                stroke="currentColor"
-                                                                                                stroke-width="1.5"></path>
-                                                                                            <path opacity="0.5"
-                                                                                                d="M5.00655 6.93311C4.93421 8.84124 5.41713 12.0817 8.6677 15.3323C11.9183 18.5829 15.1588 19.0658 17.0669 18.9935M15.1722 12.8853C15.1722 12.8853 14.0532 14.0042 12.0245 11.9755C9.99578 9.94676 11.1147 8.82782 11.1147 8.82782"
-                                                                                                stroke="currentColor"
-                                                                                                stroke-width="1.5"></path>
-                                                                                        </svg>
+                        
+                                                                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                                                        <div>
+                                                                                            {{-- <label for="gridPassword">Classe Lycée</label> --}}
+                                                                                            <input type="date" name="date" placeholder="Date" id="date"
+                                                                                                 class="form-input" />
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <select class="form-select text-white-dark "
+                                                                                                name="montant" id="montant">
+                                                                                                <option value="80">80 DT</option>
+                                                                                                <option value="60">60 DT</option>
+                        
+                        
+                                                                                            </select>
+                                                                                        </div>
                                                                                     </div>
-                                                                                    <input id="tel_parent" type="text"
-                                                                                        name="tel_parent"
-                                                                                        placeholder="Téléphone Parent"
-                                                                                        class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                        
+                        
+                        
+                        
                                                                                 </div>
-                                                                            </div>
-
-                                                                            <div class="relative mb-4">
-                                                                                {{-- <span class="absolute top-1/2 -translate-y-1/2 ltr:left-3 rtl:right-3 dark:text-white-dark">
-                                                                                    <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5">
-                                                                                        <path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 12.7215 17.8726 13.4133 17.6392 14.054C17.5551 14.285 17.4075 14.4861 17.2268 14.6527L17.1463 14.727C16.591 15.2392 15.7573 15.3049 15.1288 14.8858C14.6735 14.5823 14.4 14.0713 14.4 13.5241V12M14.4 12C14.4 13.3255 13.3255 14.4 12 14.4C10.6745 14.4 9.6 13.3255 9.6 12C9.6 10.6745 10.6745 9.6 12 9.6C13.3255 9.6 14.4 10.6745 14.4 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                                                                        <path opacity="0.5" d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12Z" stroke="currentColor" stroke-width="1.5"></path>
-                                                                                    </svg>
-                                                                                </span> --}}
                                                                                 <div>
-                                                                                    <label for="id_label_single">
-                                                                                        Choisir les groupes
-                                                                                        <select
-                                                                                            class="form-select text-white-dark groupes "
-                                                                                            id="groupes"
-                                                                                            multiple="multiple"
-                                                                                            style="width: 100%">
-
-                                                                                            @foreach ($groupes as $groupe)
-                                                                                                <option
-                                                                                                    value="{{ $groupe->id }}">
-                                                                                                    {{ $groupe->nom_groupe }}-{{ $groupe->matiere->nom_mat_fr }}
-                                                                                                </option>
-                                                                                            @endforeach
-
-
-
-                                                                                        </select>
-                                                                                    </label>
+                                                                                    <div class="table-responsive up">
+                                                                                        <table class="table table-bordered text-center">
+                                                                                            <tbody>
+                                                                                              <tr>
+                                                                                                <td>
+                                                                                                  <div class="form-check">
+                                                                                                    <input class="form-check-input" type="radio"  name="mois" id="month1" value="1">
+                                                                                                    <label class="form-check-label" for="month1">Janvier</label>
+                                                                                                  </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                  <div class="form-check">
+                                                                                                    <input class="form-check-input" type="radio"  name="mois" id="month2" value="2">
+                                                                                                    <label class="form-check-label" for="month2">Février</label>
+                                                                                                  </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                  <div class="form-check">
+                                                                                                    <input class="form-check-input" type="radio"  name="mois" id="month3" value="3">
+                                                                                                    <label class="form-check-label" for="month3">Mars</label>
+                                                                                                  </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                  <div class="form-check">
+                                                                                                    <input class="form-check-input" type="radio"  name="mois" id="month4" value="4">
+                                                                                                    <label class="form-check-label" for="month4">Avril</label>
+                                                                                                  </div>
+                                                                                                </td>
+                                                                                              </tr>
+                                                                                              <tr>
+                                                                                                <td>
+                                                                                                  <div class="form-check">
+                                                                                                    <input class="form-check-input" type="radio"  name="mois" id="month5" value="5">
+                                                                                                    <label class="form-check-label" for="month5">Mai</label>
+                                                                                                  </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                  <div class="form-check">
+                                                                                                    <input class="form-check-input" type="radio"  name="mois" id="month6" value="6">
+                                                                                                    <label class="form-check-label" for="month6">Juin</label>
+                                                                                                  </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                  <div class="form-check">
+                                                                                                    <input class="form-check-input" type="radio"  name="mois" id="month7" value="7">
+                                                                                                    <label class="form-check-label" for="month7">Juillet</label>
+                                                                                                  </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                  <div class="form-check">
+                                                                                                    <input class="form-check-input" type="radio"  name="mois" id="month8" value="8">
+                                                                                                    <label class="form-check-label" for="month8">Août</label>
+                                                                                                  </div>
+                                                                                                </td>
+                                                                                              </tr>
+                                                                                              <tr>
+                                                                                                <td>
+                                                                                                  <div class="form-check">
+                                                                                                    <input class="form-check-input" type="radio"  name="mois" id="month9" value="9">
+                                                                                                    <label class="form-check-label" for="month9">Septembre</label>
+                                                                                                  </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                  <div class="form-check">
+                                                                                                    <input class="form-check-input" type="radio"  name="mois" id="month10" value="10">
+                                                                                                    <label class="form-check-label" for="month10">Octobre</label>
+                                                                                                  </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                  <div class="form-check">
+                                                                                                    <input class="form-check-input" type="radio"  name="mois" id="month11" value="11">
+                                                                                                    <label class="form-check-label" for="month11">Novembre</label>
+                                                                                                  </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                  <div class="form-check">
+                                                                                                    <input class="form-check-input" type="radio"  name="mois" id="month12" value="12">
+                                                                                                    <label class="form-check-label" for="month12">Décembre</label>
+                                                                                                  </div>
+                                                                                                </td>
+                                                                                              </tr>
+                                                                                            </tbody>
+                                                                                          </table>
+                        
+                                                                                    </div>
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-primary w-full btnupdate">Enregistrer</button>
                                                                                 </div>
                                                                             </div>
 
-                                                                            <button type="submit"
-                                                                                class="btn btn-primary w-full updatebtn">Modifier</button>
+                                                                            
+                                                                            
+
+                                                                            
+
+                                                                           
                                                                         </form>
                                                                     </div>
                                                                 </div>
@@ -386,7 +486,7 @@
                                                     </div>
                                                     {{-- edit --}}
 
-                                                    <form action="{{ route('paiementsProf.destroy', $payment->id) }}"
+                                                    <form action="{{ route('paiementsEleve.destroy', $payment->id) }}"
                                                         method="post" class="inline-block">
                                                         @csrf
                                                         @method('DELETE')
@@ -469,37 +569,57 @@
     <script>
         $(document).ready(function() {
             //présence
-            $('.btnprof').change(function() {
-                var prof_id = $('#prof').val();
+            var eleves;
+            var elevesbygroupe = {!! json_encode($elevesbygroupe) !!};
+            $('.btngroupe').change(function() {
+                var groupe_id = $('.groupe').val();
+                console.log(groupe_id);
+                // ****
 
-                var groupes = {!! $groupes !!};
+
+                 eleves = elevesbygroupe[groupe_id];
+                console.log('*****',eleves);
+                eleves.forEach(function(eleve) {
+
+                    $("#eleve").append(new Option(eleve.nom_pr_eleve_ar, eleve.id));
+                    
+                    
+
+                });
+
+            });
+            $('.btngroupeup').change(function() {
+                var groupe_id = $('#groupe_up').val();
+                console.log(groupe_id);
+                // ****
+
+
+                 eleves = elevesbygroupe[groupe_id];
+                console.log('*****',eleves);
+                eleves.forEach(function(eleve) {
+
+                    
+                    $("#eleve_up").append(new Option(eleve.nom_pr_eleve_ar, eleve.id));
+                    
+
+                });
+
+            });
+            $('.btneleve').change(function() {
+                // $('.btngroupe').prop('disabled', 'disabled');
+                // $('.btngroupe option').remove();
+                var eleve_id = $('#eleve').val();
                 var matieres = {!! $matieres !!};
-                var toutesseances = {!! $seancesbyprof !!};
-                var seances = toutesseances[prof_id];
-                console.log('ggg', seances, ' **  ');
-                $("#mytable > tbody").empty();
-                if (seances.length != 0) {
-                    seances.forEach(function(seance) {
+                var eleveSeances = {!! json_encode($eleveSeances) !!};
 
-                        // faire quelque chose avec `value` (ou `this` qui est `value` )
-                        $('#mytable > tbody:last-child').append(
-                            '<tr style="height: 10px;vertical-align:middle"><td><input name="seances[]" type="checkbox" class="form-checkbox" value="' +
-                            seance.id + '" /></td><td >' + seance.date + '</td><td >' + groupes[
-                                seance.groupe_id].nom_groupe + '</td><td >' + matieres[seance
-                                .matiere_id].nom_mat_fr + '</td></tr>');
 
-                    });
-                } else {
-                    $('#mytable > tbody:last-child').append(
-                        '<tr style="height: 10px;vertical-align:middle"><td colspan="3"><h2 style="text-align:center">Aucune Séance Impayée</h2></td></tr>'
-                        );
+                var seances = eleveSeances[eleve_id];
 
-                }
+                
+
             });
             // checkAll
-            $("#checkAll").click(function() {
-                $('input:checkbox').not(this).prop('checked', this.checked);
-            });
+            
             // Initialize Select2
             $('.groupes').select2({
                 multiple: 'true',
@@ -514,45 +634,40 @@
                 let id = $(this).data('id');
 
 
-                // var action ="{{ URL::to('matieres') }}/"+id;
+                
+                $.get("paiementsPack/" + id + "/edit", function(data) {
+                     
+                    
+                            
+                    $('#date').val(data.data['date']);
+                    $('#montant').val(data.data['montant']);
+                    $('.eleve_id').val(data.data['eleve_id']);
+                    // $('.groupe_id').val(data.data['groupe_id']);
+                    $('input[name="mois"][value="'+data.data['mois']+'"]').prop('checked', true);
+                    
+                    $('#IdPayment').val(data.data['id']);
 
 
-                // var url = "{{ URL::to('matieres') }}";
-
-                $.get("eleves/" + id + "/edit", function(data) {
-                    // console.log(data.data);
-                    $('#nom_pr_eleve_fr').val(data.data['nom_pr_eleve_fr']);
-                    $('#nom_pr_eleve_ar').val(data.data['nom_pr_eleve_ar']);
-                    $('#lycee').val(data.data['lycee']);
-                    $('#classe_lycee').val(data.data['classe_lycee']);
-                    $('#tel').val(data.data['tel']);
-                    $('#tel_parent').val(data.data['tel_parent']);
-                    $('#IdEleve').val(data.data['id']);
-
-
-                    var groupes = data.data['groupes'].map(o => o.id);
-                    // console.log("hhhh",groupes);
-                    $('.groupes').val(groupes).trigger('change');
+                    
                 });
 
 
 
 
             });
-            $('.updatebtn').on('click', function(e) {
+            $('.btnupdate').on('click', function(e) {
                 e.preventDefault();
-                var id = $('#IdEleve').val();
-                var nom_pr_eleve_fr = $('#nom_pr_eleve_fr').val();
-                var nom_pr_eleve_ar = $('#nom_pr_eleve_ar').val();
-                var lycee = $('#lycee').val();
-                var classe_lycee = $('#classe_lycee').val();
-                var tel = $('#tel').val();
-                var tel_parent = $('#tel_parent').val();
-                var groupes = $('#groupes').val();
+                
+                var id = $('#IdPayment').val();
+                var date = $('#date').val();
+                var montant = $('#montant').val();
+                var mois = $('input[name="mois"]:checked').val();
+                var eleve_id = $('#eleve_up').val();
+               
 
 
-                var URL = "eleves/" + id;
-                console.log("url===", URL)
+                var URL = "paiementsPack/" + id;
+                console.log("url===", URL,'id',id,'date',date,'montant',montant,'mois',mois,'eleve_id',eleve_id)
                 $.ajax({
                     method: "PUT",
                     url: URL,
@@ -561,13 +676,11 @@
                     },
                     data: {
                         id: id,
-                        nom_pr_eleve_fr: nom_pr_eleve_fr,
-                        nom_pr_eleve_ar: nom_pr_eleve_ar,
-                        tel: tel,
-                        tel_parent: tel_parent,
-                        lycee: lycee,
-                        classe_lycee: classe_lycee,
-                        groupes: groupes
+                        date: date,
+                        montant: montant,
+                        mois: mois,
+                        eleve_id: eleve_id
+                        
 
 
                     },

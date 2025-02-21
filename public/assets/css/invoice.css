@@ -215,7 +215,13 @@
     clear: both;
     width: 100%;
   }
-  table.inventory th {
+  table.title {
+    clear: both;
+    margin: auto;
+    width: 50%;
+    font-size: 18px;
+  }
+  table.inventory th, table.title th {
     font-weight: bold;
     text-align: center;
   }

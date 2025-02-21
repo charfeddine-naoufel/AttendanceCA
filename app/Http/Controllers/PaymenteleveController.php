@@ -44,15 +44,14 @@ class PaymenteleveController extends Controller
     });
     //    dd($payments);
         $matieres=Matiere::all()->keyBy('id');
-      $groupes= Groupe::all();
-      $profs= Prof::all();
-      
+      $groupes= Groupe::whereType('seance')->get();
+            
       $elevesbygroupe = $groupes->mapWithKeys(function ($groupe) {
         return [$groupe->id => $groupe->eleves];})->toArray();
       
    // Charger tous les élèves et les indexer par leur ID
-$eleves = Eleve::all()->keyBy('id');
-
+   $eleves = Eleve::whereType('seance')->get()->keyBy('id');
+        
 // Récupérer toutes les séances
 $seances = Seance::all();
 $eleveSeances = [];
@@ -74,7 +73,7 @@ foreach ($seances as $seance) {
     }
 }
       $matieres=Matiere::all()->keyBy('id');
-      $groupes=Groupe::all()->keyBy('id');
+      $groupes=Groupe::whereType('seance')->get()->keyBy('id');
     // dd($matieres);
     
     
@@ -113,7 +112,7 @@ foreach ($seances as $seance) {
           'message' => 'Vérifiez vos champs.',
           'alert-type' => 'Error'
       );
-      return redirect()->route('PaiementEleve.index')
+      return redirect()->route('PaiementsEleve.index')
       ->with($notification);
   } else {
     if (is_null($request-> seances)) {

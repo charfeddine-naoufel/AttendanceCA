@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('/paiementsEleve', PaymenteleveController::class);
     Route::get('/recu-el/{id}', [PaymenteleveController::class,'downloadRecu'])->name('eleve.recu');
     Route::resource('/paiementsPack', PaymentpackController::class);
+    Route::get('/recu-pack/{id}', [PaymentpackController::class,'downloadRecu'])->name('pack.recu');
     Route::resource('/profs', ProfController::class);
     Route::get('/profs/{id}/groupes', [ProfController::class,'groupes'])->name('profs.groupes');
     Route::resource('/paiementsProf', PaymentprofController::class);

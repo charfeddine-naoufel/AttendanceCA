@@ -157,7 +157,16 @@
                                                                 class="form-input ltr:rounded-l-none rtl:rounded-r-none">
                                                         </div>
                                                     </div>
-
+                                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                        <div>
+                                                            {{-- <label for="lycee">Lycée</label> --}}
+                                                            <select name="type" id="" class="form-select text-white-dark type">
+                                                                <option value="pack">Pack</option>
+                                                                <option value="seance">Par Séance</option>
+                                                            </select>
+                                                        </div>
+                                                        
+                                                    </div>
                                                     <div class="relative mb-4">
                                                         {{-- <span class="absolute top-1/2 -translate-y-1/2 ltr:left-3 rtl:right-3 dark:text-white-dark">
                                                             <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5">
@@ -390,7 +399,16 @@
                                                                                         class="form-input ltr:rounded-l-none rtl:rounded-r-none tel_parent">
                                                                                 </div>
                                                                             </div>
-
+                                                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                                                <div>
+                                                                                    {{-- <label for="lycee">Lycée</label> --}}
+                                                                                    <select name="type" id="" class="form-select text-white-dark type">
+                                                                                        <option value="pack">Pack</option>
+                                                                                        <option value="seance">Par Séance</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                
+                                                                            </div>
                                                                             <div class="relative mb-4">
                                                                                 {{-- <span class="absolute top-1/2 -translate-y-1/2 ltr:left-3 rtl:right-3 dark:text-white-dark">
                                                                                     <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5">
@@ -582,6 +600,7 @@
                     $('.classe_lycee').val(data.data['classe_lycee']);
                     $('.tel').val(data.data['tel']);
                     $('.tel_parent').val(data.data['tel_parent']);
+                    $('.type').val(data.data['type']);
                     $('.IdEleve').val(data.data['id']);
 
 
@@ -603,6 +622,7 @@
                 var classe_lycee = $('#classe_lycee').val();
                 var tel = $('#tel').val();
                 var tel_parent = $('#tel_parent').val();
+                var type = $('#type').val();
                 var groupes = $('.groupes-' + id).val();
 
                 // alert(id+'tttt'+groupes);
@@ -620,6 +640,7 @@
                         nom_pr_eleve_ar: nom_pr_eleve_ar,
                         tel: tel,
                         tel_parent: tel_parent,
+                        type: type,
                         lycee: lycee,
                         classe_lycee: classe_lycee,
                         groupes: groupes
