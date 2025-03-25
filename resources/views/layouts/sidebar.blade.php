@@ -78,6 +78,9 @@
                     <li>
                         <a href="{{route('paiementsPack.index')}}">Paiements Pack</a>
                     </li>
+                    <li>
+                        <a href="{{route('paiementsAnticipe.index')}}">Paiements Avance</a>
+                    </li>
                     
                     
                 </ul>

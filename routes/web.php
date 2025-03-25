@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfController;
 use App\Http\Controllers\PaymentprofController;
 use App\Http\Controllers\PaymenteleveController;
 use App\Http\Controllers\PaymentpackController;
+use App\Http\Controllers\PaiementAnticipeController;
 use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\WebhookController;
 
@@ -42,6 +43,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/recu-el/{id}', [PaymenteleveController::class,'downloadRecu'])->name('eleve.recu');
     Route::resource('/paiementsPack', PaymentpackController::class);
     Route::get('/recu-pack/{id}', [PaymentpackController::class,'downloadRecu'])->name('pack.recu');
+    Route::resource('/paiementsAnticipe', PaiementAnticipeController::class);
     Route::resource('/profs', ProfController::class);
     Route::get('/profs/{id}/groupes', [ProfController::class,'groupes'])->name('profs.groupes');
     Route::resource('/paiementsProf', PaymentprofController::class);
