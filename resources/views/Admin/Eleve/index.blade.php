@@ -616,13 +616,13 @@
             $('.updatebtn').on('click', function(e) {
                 e.preventDefault();
                 var id = $('.IdEleve').val();
-                var nom_pr_eleve_fr = $('#nom_pr_eleve_fr').val();
-                var nom_pr_eleve_ar = $('#nom_pr_eleve_ar').val();
-                var lycee = $('#lycee').val();
-                var classe_lycee = $('#classe_lycee').val();
-                var tel = $('#tel').val();
-                var tel_parent = $('#tel_parent').val();
-                var type = $('#type').val();
+                var nom_pr_eleve_fr = $('.nom_pr_eleve_fr').val();
+                var nom_pr_eleve_ar = $('.nom_pr_eleve_ar').val();
+                var lycee = $('.lycee').val();
+                var classe_lycee = $('.classe_lycee').val();
+                var tel = $('.tel').val();
+                var tel_parent = $('.tel_parent').val();
+                var type = $('.type').val();
                 var groupes = $('.groupes-' + id).val();
 
                 // alert(id+'tttt'+groupes);

@@ -264,129 +264,79 @@
                                                                         <form class="space-y-5">
                                                                             @csrf
                                                                             @method('PUT')
-                                                                            <div
-                                                                                class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                                            <div class="grid grid-cols-1 gap-x-12 sm:grid-cols-2 ">
                                                                                 <div>
-                                                                                    {{-- <label for="gridEmail">Nom et Prénom</label> --}}
-                                                                                    <input id="nom_pr_eleve_fr"
-                                                                                        type="text"
-                                                                                        placeholder="Nom et prénom"
-                                                                                        name="nom_pr_eleve_fr"
-                                                                                        class="form-input" />
-                                                                                    <input type="hidden"
-                                                                                        class="form-control"
-                                                                                        id="IdEleve">
-
-                                                                                </div>
-                                                                                <div>
-                                                                                    {{-- <label for="gridPassword">الاسم و اللقب</label> --}}
-                                                                                    <input id="nom_pr_eleve_ar"
-                                                                                        type="text"
-                                                                                        name="nom_pr_eleve_ar"
-                                                                                        placeholder="الاسم و اللقب"
-                                                                                        class="form-input" />
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div
-                                                                                class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                                                                <div>
-                                                                                    {{-- <label for="lycee">Lycée</label> --}}
-                                                                                    <input id="lycee" type="text"
-                                                                                        placeholder="Lycée" name="lycee"
-                                                                                        class="form-input" />
-                                                                                </div>
-                                                                                <div>
-                                                                                    {{-- <label for="gridPassword">Classe Lycée</label> --}}
-                                                                                    <input id="classe_lycee"
-                                                                                        type="text" name="classe_lycee"
-                                                                                        placeholder="Classe Lycée"
-                                                                                        class="form-input" />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div
-                                                                                class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-                                                                                <div class="flex">
-                                                                                    <div
-                                                                                        class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
-                                                                                        <svg width="24" height="24"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            fill="none"
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            class="mx-auto mb-1 h-5 w-5">
-                                                                                            <path
-                                                                                                d="M5.00659 6.93309C5.04956 5.7996 5.70084 4.77423 6.53785 3.93723C7.9308 2.54428 10.1532 2.73144 11.0376 4.31617L11.6866 5.4791C12.2723 6.52858 12.0372 7.90533 11.1147 8.8278M17.067 18.9934C18.2004 18.9505 19.2258 18.2992 20.0628 17.4622C21.4558 16.0692 21.2686 13.8468 19.6839 12.9624L18.5209 12.3134C17.4715 11.7277 16.0947 11.9628 15.1722 12.8853"
-                                                                                                stroke="currentColor"
-                                                                                                stroke-width="1.5"></path>
-                                                                                            <path opacity="0.5"
-                                                                                                d="M5.00655 6.93311C4.93421 8.84124 5.41713 12.0817 8.6677 15.3323C11.9183 18.5829 15.1588 19.0658 17.0669 18.9935M15.1722 12.8853C15.1722 12.8853 14.0532 14.0042 12.0245 11.9755C9.99578 9.94676 11.1147 8.82782 11.1147 8.82782"
-                                                                                                stroke="currentColor"
-                                                                                                stroke-width="1.5"></path>
-                                                                                        </svg>
+                                                                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
+                                                                                        <div>
+                                                                                            <select class="form-select text-white-dark btngroupeup"
+                                                                                                name="groupe_id" id="groupeup">
+                                                                                                <option value="">Choisir Groupe</option>
+                                                                                                @foreach ($groupes as $groupe)
+                                                                                                    <option value="{{ $groupe->id }}">
+                                                                                                        {{ $groupe->nom_groupe }}</option>
+                                                                                                @endforeach
+                        
+                                                                                            </select>
+                                                                                            <input type="hidden" name="" id="IdPayment">
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <select class="form-select text-white-dark btneleveup"
+                                                                                                name="eleve_id" id="eleveup">
+                                                                                                <option value="">Choisir eleve</option>
+                        
+                        
+                                                                                            </select>
+                                                                                        </div>
+                        
                                                                                     </div>
-                                                                                    <input id="tel" type="text"
-                                                                                        name="tel"
-                                                                                        placeholder="Téléphone"
-                                                                                        class="form-input ltr:rounded-l-none rtl:rounded-r-none">
-                                                                                </div>
-                                                                                <div class="flex">
-                                                                                    <div
-                                                                                        class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
-                                                                                        <svg width="24" height="24"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            fill="none"
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            class="mx-auto mb-1 h-5 w-5">
-                                                                                            <path
-                                                                                                d="M5.00659 6.93309C5.04956 5.7996 5.70084 4.77423 6.53785 3.93723C7.9308 2.54428 10.1532 2.73144 11.0376 4.31617L11.6866 5.4791C12.2723 6.52858 12.0372 7.90533 11.1147 8.8278M17.067 18.9934C18.2004 18.9505 19.2258 18.2992 20.0628 17.4622C21.4558 16.0692 21.2686 13.8468 19.6839 12.9624L18.5209 12.3134C17.4715 11.7277 16.0947 11.9628 15.1722 12.8853"
-                                                                                                stroke="currentColor"
-                                                                                                stroke-width="1.5"></path>
-                                                                                            <path opacity="0.5"
-                                                                                                d="M5.00655 6.93311C4.93421 8.84124 5.41713 12.0817 8.6677 15.3323C11.9183 18.5829 15.1588 19.0658 17.0669 18.9935M15.1722 12.8853C15.1722 12.8853 14.0532 14.0042 12.0245 11.9755C9.99578 9.94676 11.1147 8.82782 11.1147 8.82782"
-                                                                                                stroke="currentColor"
-                                                                                                stroke-width="1.5"></path>
-                                                                                        </svg>
+                        
+                                                                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                                                        <div>
+                                                                                            {{-- <label for="gridPassword">Classe Lycée</label> --}}
+                                                                                            <input type="date" name="date" placeholder="Date"
+                                                                                                id="date" class="form-input" />
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            {{-- <label for="gridPassword">Classe Lycée</label> --}}
+                                                                                            <input type="text" id="prix"
+                                                                                                placeholder="Prix/Séance" class="form-input" />
+                                                                                        </div>
                                                                                     </div>
-                                                                                    <input id="tel_parent" type="text"
-                                                                                        name="tel_parent"
-                                                                                        placeholder="Téléphone Parent"
-                                                                                        class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                        
+                        
+                        
+                        
                                                                                 </div>
-                                                                            </div>
-
-                                                                            <div class="relative mb-4">
-                                                                                {{-- <span class="absolute top-1/2 -translate-y-1/2 ltr:left-3 rtl:right-3 dark:text-white-dark">
-                                                                                    <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5">
-                                                                                        <path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 12.7215 17.8726 13.4133 17.6392 14.054C17.5551 14.285 17.4075 14.4861 17.2268 14.6527L17.1463 14.727C16.591 15.2392 15.7573 15.3049 15.1288 14.8858C14.6735 14.5823 14.4 14.0713 14.4 13.5241V12M14.4 12C14.4 13.3255 13.3255 14.4 12 14.4C10.6745 14.4 9.6 13.3255 9.6 12C9.6 10.6745 10.6745 9.6 12 9.6C13.3255 9.6 14.4 10.6745 14.4 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                                                                        <path opacity="0.5" d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12Z" stroke="currentColor" stroke-width="1.5"></path>
-                                                                                    </svg>
-                                                                                </span> --}}
                                                                                 <div>
-                                                                                    <label for="id_label_single">
-                                                                                        Choisir les groupes
-                                                                                        <select
-                                                                                            class="form-select text-white-dark groupes "
-                                                                                            id="groupes"
-                                                                                            multiple="multiple"
-                                                                                            style="width: 100%">
-
-                                                                                            @foreach ($groupes as $groupe)
-                                                                                                <option
-                                                                                                    value="{{ $groupe->id }}">
-                                                                                                    {{ $groupe->nom_groupe }}-{{ $groupe->matiere->nom_mat_fr }}
-                                                                                                </option>
-                                                                                            @endforeach
-
-
-
-                                                                                        </select>
-                                                                                    </label>
+                                                                                    <div class="table-responsive">
+                                                                                        <table id="mytableup" class=" table table-sm">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th><input id="checkAll" type="checkbox"
+                                                                                                            class="form-checkbox" /></th>
+                                                                                                    <th>Date séance</th>
+                        
+                                                                                                    <th>Matière</th>
+                        
+                        
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                        
+                        
+                                                                                            </tbody>
+                                                                                        </table>
+                        
+                                                                                    </div>
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-primary w-full btnupdate">Enregistrer</button>
                                                                                 </div>
                                                                             </div>
 
-                                                                            <button type="submit"
-                                                                                class="btn btn-primary w-full updatebtn">Modifier</button>
+                                                                            
+                                                                            
+
+                                                                            
                                                                         </form>
                                                                     </div>
                                                                 </div>
@@ -478,17 +428,34 @@
     <script>
         $(document).ready(function() {
             //présence
+            var eleves;
+            var elevesbygroupe = {!! json_encode($elevesbygroupe) !!};
             $('.btngroupe').change(function() {
                 var groupe_id = $('#groupe').val();
                 console.log(groupe_id);
-                var elevesbygroupe = {!! json_encode($elevesbygroupe) !!};
+                
 
 
-                var eleves = elevesbygroupe[groupe_id];
+                eleves = elevesbygroupe[groupe_id];
                 console.log(eleves);
                 eleves.forEach(function(eleve) {
 
                     $("#eleve").append(new Option(eleve.nom_pr_eleve_ar, eleve.id));
+
+                });
+
+            });
+            $('.btngroupeup').change(function() {
+                var groupe_id = $('#groupeup').val();
+                console.log(groupe_id);
+                
+
+
+                eleves = elevesbygroupe[groupe_id];
+                console.log(eleves);
+                eleves.forEach(function(eleve) {
+
+                    $("#eleveup").append(new Option(eleve.nom_pr_eleve_ar, eleve.id));
 
                 });
 
@@ -538,27 +505,19 @@
             $('.editbtn').on('click', function(e) {
                 e.preventDefault();
                 let id = $(this).data('id');
+                console.log('id=',id);
+
+                $.get("paiementsEleve/" + id + "/edit", function(data) {
+                     console.log(data.data);
+                    $('#eleve_id').val(data.data['eleve_id']);
+                    $('#groupe_id').val(data.data['groupe_id']);
+                    $('#date').val(data.data['date']);
+                    $('#prix').val(data.data['prix']);
+                    
+                    $('#IdPayment').val(data.data['id']);
 
 
-                // var action ="{{ URL::to('matieres') }}/"+id;
-
-
-                // var url = "{{ URL::to('matieres') }}";
-
-                $.get("eleves/" + id + "/edit", function(data) {
-                    // console.log(data.data);
-                    $('#nom_pr_eleve_fr').val(data.data['nom_pr_eleve_fr']);
-                    $('#nom_pr_eleve_ar').val(data.data['nom_pr_eleve_ar']);
-                    $('#lycee').val(data.data['lycee']);
-                    $('#classe_lycee').val(data.data['classe_lycee']);
-                    $('#tel').val(data.data['tel']);
-                    $('#tel_parent').val(data.data['tel_parent']);
-                    $('#IdEleve').val(data.data['id']);
-
-
-                    var groupes = data.data['groupes'].map(o => o.id);
-                    // console.log("hhhh",groupes);
-                    $('.groupes').val(groupes).trigger('change');
+                   
                 });
 
 

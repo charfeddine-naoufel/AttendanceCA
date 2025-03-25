@@ -396,10 +396,10 @@
                                                                                                                     class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
                                                                                                                     <div>
                                                                                                                         <select
-                                                                                                                            class="form-select text-white-dark"
+                                                                                                                            class="form-select text-white-dark matiere_id"
                                                                                                                             id="matiere_id">
                                                                                                                             <option value="">
-                                                                                                                                Choisir une matiere
+                                                                                                                                Choisir une matiere ss
                                                                                                                             </option>
                                                                                                                             @foreach ($matieres as $matiere)
                                                                                                                                 <option
@@ -412,7 +412,7 @@
                                                                                                                     </div>
                                                                                                                     <div>
                                                                                                                         <select
-                                                                                                                            class="form-select text-white-dark btngroupe"
+                                                                                                                            class="form-select text-white-dark btngroupe groupe_id"
                                                                                                                             id="groupe_id"
                                                                                                                             id="groupe">
                                                                                                                             <option value="">
@@ -433,7 +433,7 @@
                                                                                                                     class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                                                                                     <div>
                                                                                                                         <select
-                                                                                                                            class="form-select text-white-dark"
+                                                                                                                            class="form-select text-white-dark prof_id"
                                                                                                                             id="prof_id">
                                                                                                                             <option value="">
                                                                                                                                 Choisir un Prof</option>
@@ -452,10 +452,10 @@
                                                                                                                             id="date"
                                                                                                                             placeholder="Date"
                                                                                                                             value="{{ date('Y-m-d') }}"
-                                                                                                                            class="form-input" />
+                                                                                                                            class="form-input date" />
                                                                                                                         <input type="hidden"
                                                                                                                             class="form-control IdSeance"
-                                                                                                                            id="IdSeance">
+                                                                                                                            id="IdSeance1">
                                                                                                                     </div>
                                                                                                                 </div>
                                                                                                                 <div
@@ -501,7 +501,7 @@
                                                                                                                         <input type="time"
                                                                                                                             id="heure_deb"
                                                                                                                             placeholder="Heure début"
-                                                                                                                            class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                                                                                            class="form-input ltr:rounded-l-none rtl:rounded-r-none heure_deb">
                                                                                                                     </div>
                                                                                                                     <div class="flex">
                                                                                                                         <div
@@ -543,7 +543,7 @@
                                                                                                                         <input type="time"
                                                                                                                             id="heure_fin"
                                                                                                                             placeholder="Heure fin"
-                                                                                                                            class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                                                                                            class="form-input ltr:rounded-l-none rtl:rounded-r-none heure_fin">
                                                                                                                     </div>
                                                                                                                 </div>
                             
@@ -557,7 +557,7 @@
                                                                                                                             <div class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee]  px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
                                                                                                                                 Salle
                                                                                                                             </div>
-                                                                                                                            <select name="salle" id="salle" class="py-2.5">
+                                                                                                                            <select name="salle" id="salle" class="py-2.5 salle">
                                                                                                                                 <option value="S1">S1</option>
                                                                                                                                 <option value="S2">S2</option>
                                                                                                                                 <option value="S3">S3</option>
@@ -726,7 +726,7 @@
                                                                                                                     class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
                                                                                                                     <div>
                                                                                                                         <select
-                                                                                                                            class="form-select text-white-dark"
+                                                                                                                            class="form-select text-white-dark matiere_id"
                                                                                                                             id="matiere_id">
                                                                                                                             <option value="">
                                                                                                                                 Choisir une matiere
@@ -742,7 +742,7 @@
                                                                                                                     </div>
                                                                                                                     <div>
                                                                                                                         <select
-                                                                                                                            class="form-select text-white-dark btngroupe"
+                                                                                                                            class="form-select text-white-dark btngroupe groupe_id"
                                                                                                                             id="groupe_id"
                                                                                                                             id="groupe">
                                                                                                                             <option value="">
@@ -763,7 +763,7 @@
                                                                                                                     class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                                                                                     <div>
                                                                                                                         <select
-                                                                                                                            class="form-select text-white-dark"
+                                                                                                                            class="form-select text-white-dark prof_id"
                                                                                                                             id="prof_id">
                                                                                                                             <option value="">
                                                                                                                                 Choisir un Prof</option>
@@ -831,7 +831,7 @@
                                                                                                                         <input type="time"
                                                                                                                             id="heure_deb"
                                                                                                                             placeholder="Heure début"
-                                                                                                                            class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                                                                                            class="form-input ltr:rounded-l-none rtl:rounded-r-none heure_deb">
                                                                                                                     </div>
                                                                                                                     <div class="flex">
                                                                                                                         <div
@@ -873,7 +873,7 @@
                                                                                                                         <input type="time"
                                                                                                                             id="heure_fin"
                                                                                                                             placeholder="Heure fin"
-                                                                                                                            class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                                                                                            class="form-input ltr:rounded-l-none rtl:rounded-r-none heure_fin">
                                                                                                                     </div>
                                                                                                                 </div>
                             
@@ -887,7 +887,7 @@
                                                                                                                             <div class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee]  px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
                                                                                                                                 Salle
                                                                                                                             </div>
-                                                                                                                            <select name="salle" id="salle" class="py-2.5">
+                                                                                                                            <select name="salle" id="salle" class="py-2.5 salle" >
                                                                                                                                 <option value="S1">S1</option>
                                                                                                                                 <option value="S2">S2</option>
                                                                                                                                 <option value="S3">S3</option>
@@ -1028,7 +1028,7 @@
                                                                                         class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
                                                                                         <div>
                                                                                             <select
-                                                                                                class="form-select text-white-dark"
+                                                                                                class="form-select text-white-dark matiere_id"
                                                                                                 id="matiere_id">
                                                                                                 <option value="">
                                                                                                     Choisir une matiere
@@ -1044,7 +1044,7 @@
                                                                                         </div>
                                                                                         <div>
                                                                                             <select
-                                                                                                class="form-select text-white-dark btngroupe"
+                                                                                                class="form-select text-white-dark btngroupe groupe_id"
                                                                                                 id="groupe_id"
                                                                                                 id="groupe">
                                                                                                 <option value="">
@@ -1065,7 +1065,7 @@
                                                                                         class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                                                         <div>
                                                                                             <select
-                                                                                                class="form-select text-white-dark"
+                                                                                                class="form-select text-white-dark prof_id"
                                                                                                 id="prof_id">
                                                                                                 <option value="">
                                                                                                     Choisir un Prof</option>
@@ -1084,7 +1084,7 @@
                                                                                                 id="date"
                                                                                                 placeholder="Date"
                                                                                                 value="{{ date('Y-m-d') }}"
-                                                                                                class="form-input" />
+                                                                                                class="form-input date" />
                                                                                             <input type="hidden"
                                                                                                 class="form-control IdSeance"
                                                                                                 id="IdSeance">
@@ -1133,7 +1133,7 @@
                                                                                             <input type="time"
                                                                                                 id="heure_deb"
                                                                                                 placeholder="Heure début"
-                                                                                                class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                                                                class="form-input ltr:rounded-l-none rtl:rounded-r-none heure_deb">
                                                                                         </div>
                                                                                         <div class="flex">
                                                                                             <div
@@ -1175,7 +1175,7 @@
                                                                                             <input type="time"
                                                                                                 id="heure_fin"
                                                                                                 placeholder="Heure fin"
-                                                                                                class="form-input ltr:rounded-l-none rtl:rounded-r-none">
+                                                                                                class="form-input ltr:rounded-l-none rtl:rounded-r-none heure_fin">
                                                                                         </div>
                                                                                     </div>
 
@@ -1187,9 +1187,9 @@
                                                                                             
                                                                                             <div class="flex">
                                                                                                 <div class="flex items-center justify-center border border-[#e0e6ed] bg-[#eee]  px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
-                                                                                                    Salle
+                                                                                                    Salle 
                                                                                                 </div>
-                                                                                                <select name="salle" id="salle" class="py-2.5">
+                                                                                                <select name="salle" id="salle" class="py-2.5 salle" >
                                                                                                     <option value="S1">S1</option>
                                                                                                     <option value="S2">S2</option>
                                                                                                     <option value="S3">S3</option>
@@ -1365,14 +1365,14 @@
 
                 $.get("seances/" + id + "/edit", function(data) {
                     console.log(data.data);
-                    $('#matiere_id').val(data.data['matiere_id']);
-                    $('#groupe_id').val(data.data['groupe_id']);
-                    $('#prof_id').val(data.data['prof_id']);
-                    $('#date').val(data.data['date']);
-                    $('#heure_deb').val(data.data['heure_deb']);
-                    $('#heure_fin').val(data.data['heure_fin']);
-                    $('#salle').val(data.data['salle']);
-                    $('#IdSeance').val(data.data['id']);
+                    $('.matiere_id').val(data.data['matiere_id']);
+                    $('.groupe_id').val(data.data['groupe_id']);
+                    $('.prof_id').val(data.data['prof_id']);
+                    $('.date').val(data.data['date']);
+                    $('.heure_deb').val(data.data['heure_deb']);
+                    $('.heure_fin').val(data.data['heure_fin']);
+                    $('.salle').val(data.data['salle']);
+                    $('.IdSeance').val(data.data['id']);
 
                     var elevesp = data.data['elevesp'];
                     var elevesa = data.data['elevesa'];
@@ -1407,17 +1407,18 @@
             });
             $('.updatebtn').on('click', function(e) {
                 e.preventDefault();
-                var id = $('#IdSeance').val();
-                var matiere_id = $('#matiere_id').val();
-                var groupe_id = $('#groupe_id').val();
-                var prof_id = $('#prof_id').val();
-                var date = $('#date').val();
-                var heure_deb = $('#heure_deb').val();
-                var heure_fin = $('#heure_fin').val();
-                var salle = $('#salle').val();
+                var id = $(this).closest('form').find('.IdSeance').val();
+                var matiere_id = $(this).closest('form').find('.matiere_id').val();
+                var groupe_id = $(this).closest('form').find('.groupe_id').val();
+                var prof_id = $(this).closest('form').find('.prof_id').val();
+                var date =$(this).closest('form').find('.date').val();
+                var heure_deb = $(this).closest('form').find('.heure_deb').val();
+                var heure_fin = $(this).closest('form').find('.heure_fin').val();
+                var salle = $(this).closest('form').find('.salle').val();
+                // var salle = $('.salle').val();
                 
                 var presents = [];
-        
+        console.log('sall=',salle);
         // Parcourir toutes les checkboxes cochées
         $('input[name="presents[]"]:checked').each(function() {
             presents.push($(this).val());
@@ -1451,7 +1452,7 @@
                         //  alert('update done')
 
                     },
-                    error:function(date){
+                    error:function(data){
                         console.log(data);
                     }
                 });
