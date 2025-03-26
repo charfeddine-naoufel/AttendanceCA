@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\PaiementAnticipe;
+use App\Models\Groupe;
+use App\Models\Eleve;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -21,11 +23,17 @@ class PaiementAnticipeController extends Controller
   public function index()
   {
       $payments = PaiementAnticipe::all();
+      $groupes= Groupe::whereType('pack')->get();
+
+      $elevesbygroupe = $groupes->mapWithKeys(function ($groupe) {
+        return [$groupe->id => $groupe->eleves];})->toArray();
+      
+      $eleves = Eleve::whereType('pack')->get()->keyBy('id');
      
     
     
       
-      return view('Admin.PaiementAnticipe.index',compact('payments'));
+      return view('Admin.PaiementAnticipe.index',compact('payments','groupes','elevesbygroupe'));
   }
 
   /**
@@ -47,6 +55,7 @@ class PaiementAnticipeController extends Controller
     'eleve_id' => 'required|exists:eleves,id',
     'groupe_id' => 'required|exists:groupes,id',
     'montant' => 'required|numeric|min:0',
+    'date_paiement' => 'required',
     'mois' => 'required|array',
     'mois.*' => 'integer|min:1|max:12',
       
@@ -60,18 +69,19 @@ class PaiementAnticipeController extends Controller
           'message' => 'Vérifiez vos champs.',
           'alert-type' => 'Error'
       );
-      return redirect()->route('paiementsPack.index')
+      return redirect()->route('paiementsAnticipe.index')
       ->with($notification);
   } else {
     
     
       // store Eleve
-      $paymentanticipe = new PaymentAnticipe;
+      $paymentanticipe = new PaiementAnticipe;
       $paymentanticipe->eleve_id = $request-> eleve_id;
       $paymentanticipe->groupe_id = $request-> groupe_id;
       $paymentanticipe->montant = $request-> montant;
+      $paymentanticipe->date_paiement = $request-> date_paiement;
       $paymentanticipe->mois = $request-> mois;
-      $paymentanticipe->utilise = $request->utilise;
+      $paymentanticipe->utilise = false;
       
       $paymentanticipe->save();
       
@@ -92,7 +102,7 @@ class PaiementAnticipeController extends Controller
           'message' => 'Paiement effectué avec succés.',
           'alert-type' => 'success'
       );
-      return redirect()->route('paiementsPack.index')
+      return redirect()->route('paiementsAnticipe.index')
       ->with($notification);
   }
 

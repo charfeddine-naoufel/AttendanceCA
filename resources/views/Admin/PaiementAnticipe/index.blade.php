@@ -7,7 +7,7 @@
                     <a href="javascript:;" class="text-primary hover:underline">Dashboard</a>
                 </li>
                 <li class="before:content-['/'] ltr:before:mr-1 rtl:before:ml-1">
-                    <span>Paiement Pack</span>
+                    <span>Paiement En Avance</span>
                 </li>
             </ul>
             {{-- start --}}
@@ -80,6 +80,10 @@
                                                                     <select class="form-select text-white-dark btngroupe groupe"
                                                                         name="groupe_id" id="groupe">
                                                                         <option value="">Choisir Groupe</option>
+                                                                        @foreach ($groupes as $groupe)
+                                                                            <option value="{{ $groupe->id }}">
+                                                                                {{ $groupe->nom_groupe }}</option>
+                                                                        @endforeach
                                                                         
 
                                                                     </select>
@@ -98,17 +102,12 @@
                                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                                 <div>
                                                                     {{-- <label for="gridPassword">Classe Lycée</label> --}}
-                                                                    <input type="date" name="date" placeholder="Date"
+                                                                    <input type="date" name="date_paiement" placeholder="Date"
                                                                         value="{{ date('Y-m-d') }}" class="form-input" />
                                                                 </div>
                                                                 <div>
-                                                                    <select class="form-select text-white-dark btneleve"
-                                                                        name="montant" id="">
-                                                                        <option value="80">80 DT</option>
-                                                                        <option value="60">60 DT</option>
-
-
-                                                                    </select>
+                                                                    <input type="number" name="montant" placeholder="Montant en DT"
+                                                                         class="form-input" />
                                                                 </div>
                                                             </div>
 
@@ -119,88 +118,87 @@
                                                         <div>
                                                             <div class="table-responsive">
                                                                 <table class="table table-bordered text-center mb-3">
-                                                                    
                                                                     <tbody>
-                                                                      <tr>
-                                                                        <td>
-                                                                          <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="mois" id="month1" value="1">
-                                                                            <label class="form-check-label" for="month1">Janvier</label>
-                                                                          </div>
-                                                                        </td>
-                                                                        <td>
-                                                                          <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="mois" id="month2" value="2">
-                                                                            <label class="form-check-label" for="month2">Février</label>
-                                                                          </div>
-                                                                        </td>
-                                                                        <td>
-                                                                          <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="mois" id="month3" value="3">
-                                                                            <label class="form-check-label" for="month3">Mars</label>
-                                                                          </div>
-                                                                        </td>
-                                                                        <td>
-                                                                          <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="mois" id="month4" value="4">
-                                                                            <label class="form-check-label" for="month4">Avril</label>
-                                                                          </div>
-                                                                        </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td>
-                                                                          <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="mois" id="month5" value="5">
-                                                                            <label class="form-check-label" for="month5">Mai</label>
-                                                                          </div>
-                                                                        </td>
-                                                                        <td>
-                                                                          <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="mois" id="month6" value="6">
-                                                                            <label class="form-check-label" for="month6">Juin</label>
-                                                                          </div>
-                                                                        </td>
-                                                                        <td>
-                                                                          <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="mois" id="month7" value="7">
-                                                                            <label class="form-check-label" for="month7">Juillet</label>
-                                                                          </div>
-                                                                        </td>
-                                                                        <td>
-                                                                          <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="mois" id="month8" value="8">
-                                                                            <label class="form-check-label" for="month8">Août</label>
-                                                                          </div>
-                                                                        </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td>
-                                                                          <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="mois" id="month9" value="9">
-                                                                            <label class="form-check-label" for="month9">Septembre</label>
-                                                                          </div>
-                                                                        </td>
-                                                                        <td>
-                                                                          <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="mois" id="month10" value="10">
-                                                                            <label class="form-check-label" for="month10">Octobre</label>
-                                                                          </div>
-                                                                        </td>
-                                                                        <td>
-                                                                          <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="mois" id="month11" value="11">
-                                                                            <label class="form-check-label" for="month11">Novembre</label>
-                                                                          </div>
-                                                                        </td>
-                                                                        <td>
-                                                                          <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="mois" id="month12" value="12">
-                                                                            <label class="form-check-label" for="month12">Décembre</label>
-                                                                          </div>
-                                                                        </td>
-                                                                      </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" name="mois[]" id="month1" value="1">
+                                                                                    <label class="form-check-label" for="month1">Janvier</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" name="mois[]" id="month2" value="2">
+                                                                                    <label class="form-check-label" for="month2">Février</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" name="mois[]" id="month3" value="3">
+                                                                                    <label class="form-check-label" for="month3">Mars</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" name="mois[]" id="month4" value="4">
+                                                                                    <label class="form-check-label" for="month4">Avril</label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" name="mois[]" id="month5" value="5">
+                                                                                    <label class="form-check-label" for="month5">Mai</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" name="mois[]" id="month6" value="6">
+                                                                                    <label class="form-check-label" for="month6">Juin</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" name="mois[]" id="month7" value="7">
+                                                                                    <label class="form-check-label" for="month7">Juillet</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" name="mois[]" id="month8" value="8">
+                                                                                    <label class="form-check-label" for="month8">Août</label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" name="mois[]" id="month9" value="9">
+                                                                                    <label class="form-check-label" for="month9">Septembre</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" name="mois[]" id="month10" value="10">
+                                                                                    <label class="form-check-label" for="month10">Octobre</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" name="mois[]" id="month11" value="11">
+                                                                                    <label class="form-check-label" for="month11">Novembre</label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" name="mois[]" id="month12" value="12">
+                                                                                    <label class="form-check-label" for="month12">Décembre</label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
                                                                     </tbody>
-                                                                  </table>
+                                                                </table>
 
                                                             </div>
                                                             <button type="submit"
@@ -223,33 +221,27 @@
                                     <thead class="bg-dark">
                                         <tr>
                                             <th>N°</th>
-                                            <th> Nom & Prenom Elève</th>
+                                            <th>Groupe</th>
+                                            <th>Elève</th>
                                             <th>Date</th>
-                                            <th>Séances</th>
-
+                                            <th>Montant</th>
+                                            <th>Statut</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($payments as $payment)
                                             <tr>
-                                                <td class="whitespace-nowrap">{{ $loop->iteration }}</td>
+                                                <td >{{ $loop->iteration }}</td>
+                                                <td>{{ $payment->groupe->nom_groupe }}</td>
                                                 <td>{{ $payment->eleve->nom_pr_eleve_fr }}</td>
-                                                <td>{{ $payment->date }}</td>
-                                                <td>
-                                                    @foreach ($payment->seleve as $seance)
-                                                        <div
-                                                            class="flex items-center rounded bg-primary-light p-1 text-primary dark:bg-primary-dark-light">
-                                                            <span class="ltr:pr-2 rtl:pl-2"><strong
-                                                                    class="ltr:mr-1 rtl:ml-1">{{ $seance->date->format('m/d/Y') }}-</strong>{{ $seance->groupe->nom_groupe }}</span>
-
-                                                        </div>
-                                                    @endforeach
-
-
+                                                <td>{{ $payment->date_paiement }}</td>
+                                                <td>{{ $payment->montant }}</td>
+                                                <td><span class="badge {{ $payment->utilise ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ $payment->utilise ? 'Utilisé' : 'Non utilisé' }}
+                                                </span>
                                                 </td>
-
-
+                                                
                                                 <td
                                                     class="border-b border-[#ebedf2] p-3 text-center dark:border-[#191e3a]">
                                                     <a x-tooltip="Imprimer" href="{{ route('pack.recu', $payment->id) }}"
@@ -564,7 +556,7 @@
         $(document).ready(function() {
             //présence
             var eleves;
-            var elevesbygroupe = []
+            var elevesbygroupe = {!! json_encode($elevesbygroupe) !!};
             $('.btngroupe').change(function() {
                 var groupe_id = $('.groupe').val();
                 console.log(groupe_id);
