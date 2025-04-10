@@ -1395,7 +1395,7 @@
                         // faire quelque chose avec `value` (ou `this` qui est `value` )
                         $('#mytableup > tbody:last-child').append(
                             '<tr style="height: 10px;vertical-align:middle"><td><input name="presents[]" type="checkbox" class="form-checkbox presents" value="' +
-                            eleve + '"  /></td><td >' + eleve.nom_pr_eleve_ar +
+                            eleve.id + '"  /></td><td >' + eleve.nom_pr_eleve_ar +
                             '</td><td >' + eleve.nom_pr_eleve_fr + '</td></tr>');
 
                     });
@@ -1423,7 +1423,7 @@
         $('input[name="presents[]"]:checked').each(function() {
             presents.push($(this).val());
         });
-
+        // alert('presents=',presents[0]);
                 var URL = "seances/" + id;
                 console.log("url===", URL)
                 $.ajax({
