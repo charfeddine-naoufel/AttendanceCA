@@ -67,7 +67,7 @@ foreach ($seances as $seance) {
             $eleve = $eleves[$eleveId];
             // On suppose ici que $eleve->paidseances contient déjà un tableau d'IDs
             // Si la séance a déjà été payée par cet élève, on passe à l'itération suivante
-            if (in_array($seance->id, $eleve->paidseances)) {
+            if (in_array($seance->id, $eleve->paidseances ?? [])) {
                 continue;
             }
             // Sinon, on ajoute la séance dans le tableau de l'élève
